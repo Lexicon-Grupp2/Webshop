@@ -26,15 +26,22 @@ namespace Webshop.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            //All relevant models need to be added
+            //All relationships need to be defined
+
+            //Customer 1toMany Receipts
+            //Recepits 1toMany Products?
+            //Category 1toMany Products
+
+            modelBuilder.Entity<Customer>()
+                .HasMany(receipt => receipt.Receipts);
 
             modelBuilder.Entity<ProductCategory>()
                 .HasKey(productCategory => new { productCategory.ProductId, productCategory.CategoryId });
 
             modelBuilder.Entity<ProductCategory>()
-                .HasOne<Product>(productCategory => productCategory.Product)
+                .HasOne<Category>(productCategory => productCategory.Category)
                 .WithMany(product => product.ProductCategories)
-                .HasForeignKey(productCategory => productCategory.ProductId)
+                .HasForeignKey(productCategory => productCategory.CategoryId)
                 .OnDelete(DeleteBehavior.Cascade);
 
 
@@ -68,6 +75,17 @@ namespace Webshop.Data
 
             });
 
+
+            modelBuilder.Entity<Category>().HasData(new List<Category>
+            {
+                new Category
+                    {Id = 1, CategoryName = "Grain" },
+                new Category
+                    {Id = 2, CategoryName = "Seedlings" },
+                new Category
+                    {Id = 3, CategoryName = "Nutritious product" },
+
+            });
 
 
             //Identity needs to be added
