@@ -14,6 +14,8 @@ namespace Webshop.Models
         public DateTime OrderDate { get; set; }
         [Required]
         public int CustomerId { get; set; }
+        public Customer Customer { get; set; }
+
 
         public List<OrderContents> orderContents { get; set; }
 
