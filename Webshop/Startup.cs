@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Webshop.Data;
+using Webshop.Models;
 
 namespace Webshop
 {
@@ -36,12 +37,12 @@ namespace Webshop
             services.AddMvc();
 
             services.AddRazorPages();
-            /*
+            
             services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddDefaultUI()
                 .AddDefaultTokenProviders()
-                .AddEntityFrameworkStores<PersonContext>();
-            */
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+            
 
         }
 
