@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Webshop.Models
 {
-    public class ApplicationUser: IdentityUser
+    public class ApplicationUser : IdentityUser
     {
         [Required]
         [Display(Name = "First name")]
@@ -16,5 +16,7 @@ namespace Webshop.Models
         [Display(Name = "Last name")]
         public string LastName { get; set; }
 
+        public Customer Customer { get; set; }
+    
     }
 }

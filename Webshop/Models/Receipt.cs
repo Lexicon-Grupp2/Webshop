@@ -12,12 +12,10 @@ namespace Webshop.Models
         public int OrderId { get; set; }
         [Required]
         public DateTime OrderDate { get; set; }
-        [Required]
+        public int TotalCost { get; set; }
+        public List<Product> Products { get; set; }
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
-
-
-        public List<OrderContents> orderContents { get; set; }
 
     }
 }
