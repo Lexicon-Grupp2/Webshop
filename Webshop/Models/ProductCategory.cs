@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Webshop.Models
 {
+    //Inte säker på att denna behövs, kan ligga kvar tills vidare (RL)
+
     public class ProductCategory
     {
         public int ProductId { get; set; }

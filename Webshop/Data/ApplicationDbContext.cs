@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Webshop.Models;
 
 namespace Webshop.Data
@@ -27,26 +25,23 @@ namespace Webshop.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            //All relationships need to be defined
+            modelBuilder.Entity<ApplicationUser>()  //Connecting Customer to Applicationuser
+                .HasOne(user => user.Customer)
+                .WithOne(user => user.ApplicationUser)
+                .HasForeignKey<Customer>(user => user.CustomerId);
 
-            //Customer 1toMany Receipts
-            //Recepits 1toMany Products?
-            //Category 1toMany Products
+             modelBuilder.Entity<Product>()
+                .HasOne<Category>(product => product.Category)
+                .WithMany(category => category.Products)
+                .HasForeignKey(product => product.CategoryId);
 
-            modelBuilder.Entity<Customer>()
-                .HasMany(receipt => receipt.Receipts);
+            modelBuilder.Entity<Receipt>()
+                .HasOne<Customer>(receipt => receipt.Customer)
+                .WithMany(customer => customer.Receipts);
 
-            modelBuilder.Entity<ProductCategory>()
-                .HasKey(productCategory => new { productCategory.ProductId, productCategory.CategoryId });
+            modelBuilder.Entity<Receipt>()
+                .HasMany<Product>(receipt => receipt.Products);
 
-            modelBuilder.Entity<ProductCategory>()
-                .HasOne<Category>(productCategory => productCategory.Category)
-                .WithMany(product => product.ProductCategories)
-                .HasForeignKey(productCategory => productCategory.CategoryId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-
-            //All relevant categories need to be populated
 
             modelBuilder.Entity<Customer>().HasData(new List<Customer>
             {
@@ -55,9 +50,9 @@ namespace Webshop.Data
                 new Customer
                     {Id=2, FirstName = "Kenneth", LastName="Svenzon", Address="Rimbo torg 1", PhoneNumber = "0721453456", PostalCode="44565", City="Skövde", Country="Sweden", Email="stekarn@gmail.com" },
                 new Customer
-                    {Id=3, FirstName = "Angela", LastName="Merkel", Address="Kungsgatan 4", PhoneNumber = "0771242424", PostalCode="32344", City="Arboga", Country = "Sweden", Email="lucky@hotmail.com"},
+                    {Id=3, FirstName = "Angela", LastName="Melodi", Address="Kungsgatan 4", PhoneNumber = "0771242424", PostalCode="32344", City="Arboga", Country = "Sweden", Email="lucky@hotmail.com"},
                 new Customer
-                    {Id=4, FirstName = "Kaj", LastName="Fridell", Address="Royal Carnac Hotel 1", PhoneNumber = "031184698", PostalCode="33467", City="Cairo", Country="Egypt", Email="mubarak@egypt.gov" },
+                    {Id=4, FirstName = "Kaj", LastName="Fridell", Address="Royal Carnac Hotel 1", PhoneNumber = "031184698", PostalCode="33467", City="Cairo", Country="Egypt", Email="kafr@egypt.gov" },
                 new Customer
                     {Id=5, FirstName = "Molly", LastName="Sundkvist", Address="Vedgatan 3", PhoneNumber = "0443346723", PostalCode="46723", City="Oslo", Country="Norway", Email="tavlan@gmail.com" },
                 new Customer
@@ -66,30 +61,28 @@ namespace Webshop.Data
                     {Id=6, FirstName = "Sofia", LastName="Bosch", Address="Avenyn 1", PhoneNumber = "0543768798", PostalCode="67823", City="Berlin", Country="Germany", Email="raj@goteborg.se" },
             });
 
+
             modelBuilder.Entity<Product>().HasData(new List<Product>
             {
                 new Product
-                    {Id = 1, Name = "Wheat", Description="A perfect grain for baking bread", Price=2 },
+                    {Id = 1, Name = "Chocolate Dream", Description="A delicious chocolate cupcake with belgian chocolate", CategoryId = 101, Price = 29 },
                 new Product
-                    {Id = 2, Name = "Rye", Description="A perfect grain for the course bread", Price=15 },
+                    {Id = 2, Name = "Pink surprise", Description="A frosted strawberry cupcake, filled with strawberry jam", CategoryId = 102, Price = 22 },
                 new Product
-                    {Id = 3, Name = "Barley", Description="A perfect grain for making beer", Price=2 },
-
-
+                    {Id = 3, Name = "Plain delight", Description="A gluten free cupcake packed with flavor", CategoryId = 103, Price = 34 },
             });
 
 
             modelBuilder.Entity<Category>().HasData(new List<Category>
             {
                 new Category
-                    {Id = 1, CategoryName = "Grain" },
+                    {Id = 101, CategoryName = "Chocolate" },
                 new Category
-                    {Id = 2, CategoryName = "Seedlings" },
+                    {Id = 102, CategoryName = "Frosted" },
                 new Category
-                    {Id = 3, CategoryName = "Nutritious product" },
+                    {Id = 103, CategoryName = "Gluten free" },
+            });
 
-
-    });
 
             string roleId = Guid.NewGuid().ToString();
             string userRoleId = Guid.NewGuid().ToString();
