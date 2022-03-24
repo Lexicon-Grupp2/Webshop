@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Webshop.Data;
 
 namespace Webshop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220324093702_identity added")]
+    partial class identityadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,15 +50,15 @@ namespace Webshop.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ebe50e96-17a9-4c79-b25f-8792370d278d",
-                            ConcurrencyStamp = "ff375b2e-a4f9-4385-aa56-ad3168c00c79",
+                            Id = "4feeca24-0bf7-4343-9ceb-9cf68f20dfa4",
+                            ConcurrencyStamp = "0fbe93cd-b97c-4d90-9c69-f1019a457975",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "a6358af3-a7da-407f-a9f1-b55a35a426ed",
-                            ConcurrencyStamp = "ebdf4e28-d104-4bf6-b187-cb607e691d11",
+                            Id = "f3ec7347-324c-4e28-a4ed-a1919c479c23",
+                            ConcurrencyStamp = "c4c1a46c-9285-4eb1-880c-4ab016511013",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -149,8 +151,8 @@ namespace Webshop.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "726e0dfb-50fb-4e74-95f2-e4c829b72368",
-                            RoleId = "ebe50e96-17a9-4c79-b25f-8792370d278d"
+                            UserId = "2ab4357a-9a38-4534-8e93-26c1d5569979",
+                            RoleId = "4feeca24-0bf7-4343-9ceb-9cf68f20dfa4"
                         });
                 });
 
@@ -248,9 +250,9 @@ namespace Webshop.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "726e0dfb-50fb-4e74-95f2-e4c829b72368",
+                            Id = "2ab4357a-9a38-4534-8e93-26c1d5569979",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3668c059-eb87-4f3b-aca5-aaae5717b4ed",
+                            ConcurrencyStamp = "4cafbdfc-b545-448e-81ad-3db0cfa4794b",
                             Email = "admin@admin.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -258,9 +260,9 @@ namespace Webshop.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEL9KoiypoSFhofv16Nu7KxqpMNoKMM+QV+1BZTLiQp+tjF+5rxujbNIuRyPWmKgoew==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEI03ZIIz3qlTTzoWPPaKPUwD2D+jR4d1i/hCXmUEA4X60voIFmTb1RMmSjhqJyOxCg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "44025c22-9580-4256-8f28-d7478cc0f6b6",
+                            SecurityStamp = "9ef20d66-fde9-40a8-bbe9-4864e9a1e72c",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         });
@@ -347,92 +349,6 @@ namespace Webshop.Migrations
                         .HasFilter("[CustomerId] IS NOT NULL");
 
                     b.ToTable("Customers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "Kanelgatan 3",
-                            City = "Visby",
-                            Country = "Sweden",
-                            Email = "bling@gmail.com",
-                            FirstName = "Arne",
-                            LastName = "Karat",
-                            PhoneNumber = "043016624",
-                            PostalCode = "23445"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "Rimbo torg 1",
-                            City = "Skövde",
-                            Country = "Sweden",
-                            Email = "stekarn@gmail.com",
-                            FirstName = "Kenneth",
-                            LastName = "Svenzon",
-                            PhoneNumber = "0721453456",
-                            PostalCode = "44565"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Address = "Kungsgatan 4",
-                            City = "Arboga",
-                            Country = "Sweden",
-                            Email = "lucky@hotmail.com",
-                            FirstName = "Angela",
-                            LastName = "Melodi",
-                            PhoneNumber = "0771242424",
-                            PostalCode = "32344"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Address = "Royal Carnac Hotel 1",
-                            City = "Cairo",
-                            Country = "Egypt",
-                            Email = "kafr@egypt.gov",
-                            FirstName = "Kaj",
-                            LastName = "Fridell",
-                            PhoneNumber = "031184698",
-                            PostalCode = "33467"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Address = "Vedgatan 3",
-                            City = "Oslo",
-                            Country = "Norway",
-                            Email = "tavlan@gmail.com",
-                            FirstName = "Molly",
-                            LastName = "Sundkvist",
-                            PhoneNumber = "0443346723",
-                            PostalCode = "46723"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Address = "Gatgatan 2",
-                            City = "Göteborg",
-                            Country = "Sweden",
-                            Email = "test@gmail.com",
-                            FirstName = "Jan",
-                            LastName = "Andersson",
-                            PhoneNumber = "04422723",
-                            PostalCode = "46723"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Address = "Avenyn 1",
-                            City = "Berlin",
-                            Country = "Germany",
-                            Email = "raj@goteborg.se",
-                            FirstName = "Sofia",
-                            LastName = "Bosch",
-                            PhoneNumber = "0543768798",
-                            PostalCode = "67823"
-                        });
                 });
 
             modelBuilder.Entity("Webshop.Models.Product", b =>

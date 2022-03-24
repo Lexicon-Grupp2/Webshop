@@ -30,10 +30,18 @@ namespace Webshop.Data
                 .WithOne(user => user.ApplicationUser)
                 .HasForeignKey<Customer>(user => user.CustomerId);
 
-             modelBuilder.Entity<Product>()
-                .HasOne<Category>(product => product.Category)
-                .WithMany(category => category.Products)
-                .HasForeignKey(product => product.CategoryId);
+            modelBuilder.Entity<ProductCategory>()
+                .HasKey(productCategory => new { productCategory.ProductId, productCategory.CategoryId });
+
+            modelBuilder.Entity<ProductCategory>()
+                .HasOne<Category>(productCategory => productCategory.Category)
+                .WithMany(category => category.ProductCategories)
+                .HasForeignKey(productCategory => productCategory.CategoryId);
+
+            modelBuilder.Entity<ProductCategory>()
+                .HasOne<Product>(productCategory => productCategory.Product)
+                .WithMany(product => product.ProductCategories)
+                .HasForeignKey(productCategory => productCategory.ProductId);
 
             modelBuilder.Entity<Receipt>()
                 .HasOne<Customer>(receipt => receipt.Customer)
@@ -42,6 +50,7 @@ namespace Webshop.Data
             modelBuilder.Entity<Receipt>()
                 .HasMany<Product>(receipt => receipt.Products);
 
+            
 
             modelBuilder.Entity<Customer>().HasData(new List<Customer>
             {
@@ -56,20 +65,21 @@ namespace Webshop.Data
                 new Customer
                     {Id=5, FirstName = "Molly", LastName="Sundkvist", Address="Vedgatan 3", PhoneNumber = "0443346723", PostalCode="46723", City="Oslo", Country="Norway", Email="tavlan@gmail.com" },
                 new Customer
-                    {Id=5, FirstName = "Jan", LastName="Andersson", Address="Gatgatan 2", PhoneNumber = "04422723", PostalCode="46723", City="Göteborg", Country="Sweden", Email="test@gmail.com" },
+                    {Id=6, FirstName = "Jan", LastName="Andersson", Address="Gatgatan 2", PhoneNumber = "04422723", PostalCode="46723", City="Göteborg", Country="Sweden", Email="test@gmail.com" },
                 new Customer
-                    {Id=6, FirstName = "Sofia", LastName="Bosch", Address="Avenyn 1", PhoneNumber = "0543768798", PostalCode="67823", City="Berlin", Country="Germany", Email="raj@goteborg.se" },
+                    {Id=7, FirstName = "Sofia", LastName="Bosch", Address="Avenyn 1", PhoneNumber = "0543768798", PostalCode="67823", City="Berlin", Country="Germany", Email="raj@goteborg.se" },
             });
 
+            
 
             modelBuilder.Entity<Product>().HasData(new List<Product>
             {
                 new Product
-                    {Id = 1, Name = "Chocolate Dream", Description="A delicious chocolate cupcake with belgian chocolate", CategoryId = 101, Price = 29 },
+                    {Id = 1001, Name = "Chocolate Dream", Description="A delicious chocolate cupcake with belgian chocolate", CategoryId = 101, Price = 29 },
                 new Product
-                    {Id = 2, Name = "Pink surprise", Description="A frosted strawberry cupcake, filled with strawberry jam", CategoryId = 102, Price = 22 },
+                    {Id = 1002, Name = "Pink surprise", Description="A frosted strawberry cupcake, filled with strawberry jam", CategoryId = 102, Price = 22 },
                 new Product
-                    {Id = 3, Name = "Plain delight", Description="A gluten free cupcake packed with flavor", CategoryId = 103, Price = 34 },
+                    {Id = 1003, Name = "Plain delight", Description="A gluten free cupcake packed with flavor", CategoryId = 103, Price = 34 },
             });
 
 
