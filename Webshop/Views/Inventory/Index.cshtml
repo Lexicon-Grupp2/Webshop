@@ -1,0 +1,53 @@
+﻿@model Webshop.Viewmodels.InventoryViewModel
+
+<h1>List of products</h1>
+
+<div>
+    <h3>List of cupcakes</h3>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+                        @if (User.IsInRole("Admin"))
+            {
+                <th>Edit</th>
+                <th>Delete</th>
+
+            }
+        </tr>
+
+        <tbody>
+            @foreach (var product in Model.Inventory)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => product.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => product.Category.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => product.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => product.Price)
+                </td>
+                <td>
+                    <a asp-action="Buy" asp-route-id="product.Id">Buy</a>
+                </td>
+                @if (User.IsInRole("Admin"))
+                {
+
+                    <td>
+                        <a asp-action="Edit" asp-route-id="product.Id">Edit</a>
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="product.Id">Delete</a>
+                    </td>
+                }
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
