@@ -14,6 +14,7 @@ namespace Webshop.Data
         public DbSet<Product> Inventory { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<Receipt> Receipts { get; set; }
         public DbSet<ApplicationUser> Users { get; set; }
 
