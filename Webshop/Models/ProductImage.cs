@@ -10,7 +10,12 @@ namespace Webshop.Models
     {
         [Key]
         public int ImageId { get; set; }
+
+        [Display(Name = "Image Title")]
         public string ImageTitle { get; set; }
+
+        [Display(Name = "Image Title")]
         public string ImageName { get; set; }
+        public string ImageThumbName { get; set; }
     }
 }
