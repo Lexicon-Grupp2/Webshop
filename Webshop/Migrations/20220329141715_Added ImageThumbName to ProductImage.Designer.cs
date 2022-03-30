@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Webshop.Data;
 
 namespace Webshop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220329141715_Added ImageThumbName to ProductImage")]
+    partial class AddedImageThumbNametoProductImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,15 +50,15 @@ namespace Webshop.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "81a8c182-4ab5-44b2-ba6c-c81c2cffd91a",
-                            ConcurrencyStamp = "b782391d-4f55-478d-8d9e-6960b44f7843",
+                            Id = "8d4c439e-3470-4332-87a7-d4d4c8374742",
+                            ConcurrencyStamp = "855e00f9-4c97-426a-8d32-f6f153b0e49f",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "6feb0c3a-cf96-4e8c-9e19-e1d7b54782d7",
-                            ConcurrencyStamp = "d5ebeeff-85ca-4883-92cd-72e65e48ce13",
+                            Id = "cb6278d0-26ca-47c5-94b7-dad5d170a912",
+                            ConcurrencyStamp = "f8a4ba43-ef12-426e-a9ec-1f553f2efd6a",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -149,8 +151,8 @@ namespace Webshop.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "b3c9a2d0-8b98-4a21-a77c-a7afa2bc7ace",
-                            RoleId = "81a8c182-4ab5-44b2-ba6c-c81c2cffd91a"
+                            UserId = "5ccb5a12-77ba-469f-82bc-bd4af2b4ef28",
+                            RoleId = "8d4c439e-3470-4332-87a7-d4d4c8374742"
                         });
                 });
 
@@ -248,9 +250,9 @@ namespace Webshop.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b3c9a2d0-8b98-4a21-a77c-a7afa2bc7ace",
+                            Id = "5ccb5a12-77ba-469f-82bc-bd4af2b4ef28",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8ea07928-acb9-4009-b616-1d28dbe24bbf",
+                            ConcurrencyStamp = "110ae147-e6e8-49d1-aa99-4ac6e8cdbc26",
                             Email = "admin@admin.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -258,9 +260,9 @@ namespace Webshop.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMYCia2e4SPOngd3WASPfZfnAXO8H2ZOwpNkrHmDxzDK97rSCPIQ6Pg9/Q23tDVNzw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENFDANarq38QImEu6AU/Z6uazf7ia2JTlkllaxtQZRaVj4/eI5bt0ZUGaSuBraw7fA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "acfafd8f-4087-4ef4-a6b0-40637ba9a1ca",
+                            SecurityStamp = "06500670-258e-497c-b660-62cb386d0525",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         });
@@ -454,17 +456,12 @@ namespace Webshop.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductImageId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("ReceiptOrderId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("ProductImageId");
 
                     b.HasIndex("ReceiptOrderId");
 
@@ -477,8 +474,7 @@ namespace Webshop.Migrations
                             CategoryId = 101,
                             Description = "A delicious chocolate cupcake with belgian chocolate",
                             Name = "Chocolate Dream",
-                            Price = 29,
-                            ProductImageId = 1
+                            Price = 29
                         },
                         new
                         {
@@ -486,8 +482,7 @@ namespace Webshop.Migrations
                             CategoryId = 102,
                             Description = "A frosted strawberry cupcake, filled with strawberry jam",
                             Name = "Pink surprise",
-                            Price = 22,
-                            ProductImageId = 1
+                            Price = 22
                         },
                         new
                         {
@@ -495,8 +490,7 @@ namespace Webshop.Migrations
                             CategoryId = 103,
                             Description = "A gluten free cupcake packed with flavor",
                             Name = "Plain delight",
-                            Price = 34,
-                            ProductImageId = 1
+                            Price = 34
                         });
                 });
 
@@ -537,15 +531,6 @@ namespace Webshop.Migrations
                     b.HasKey("ImageId");
 
                     b.ToTable("ProductImages");
-
-                    b.HasData(
-                        new
-                        {
-                            ImageId = 1,
-                            ImageName = "chokladtest.jpg",
-                            ImageThumbName = "chokladtestth.jpg",
-                            ImageTitle = "Chocolate Dream"
-                        });
                 });
 
             modelBuilder.Entity("Webshop.Models.Receipt", b =>
@@ -634,10 +619,6 @@ namespace Webshop.Migrations
                     b.HasOne("Webshop.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId");
-
-                    b.HasOne("Webshop.Models.ProductImage", "ProductImage")
-                        .WithMany("Products")
-                        .HasForeignKey("ProductImageId");
 
                     b.HasOne("Webshop.Models.Receipt", null)
                         .WithMany("Products")

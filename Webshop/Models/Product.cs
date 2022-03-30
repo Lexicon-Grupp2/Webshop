@@ -17,5 +17,7 @@ namespace Webshop.Models
 
         public List<ProductCategory> ProductCategories { get; set; }
 
+        public int? ProductImageId { get; set; }
+        public ProductImage ProductImage { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace Webshop.Viewmodels
         public string Description { get; set; }
         public int Price { get; set; }
         public Category Category { get; set; }
-
+        public ProductImage ProductImage { get; set; }
         public ProductViewModel() { }
 
     }
