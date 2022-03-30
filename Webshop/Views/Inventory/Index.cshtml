@@ -19,30 +19,33 @@
         </tr>
 
         <tbody>
-            @foreach (var product in Model.Inventory)
+                @foreach (var product in Model.Inventory)
             {
-            <tr>
-                @if (product.ProductImage != null)
-                {
+                 <tr>
                     <td>
-                        <img src="@("~/images/ProductImages/"+product.ProductImage.ImageThumbName)" asp-append-version="true" />
-                    </td>
-                }
-                <td>
+                        <img class="card" src="~/Images/example.jpg">
+                     </td>
+                 <td>
                     @Html.DisplayFor(modelItem => product.Name)
-                </td>
-                <td>
+                 </td>
+                 <td>
                     @Html.DisplayFor(modelItem => product.Category.CategoryName)
-                </td>
-                <td>
+                 </td>
+                 <td>
                     @Html.DisplayFor(modelItem => product.Description)
-                </td>
-                <td>
+                 </td>
+                 <td>
                     @Html.DisplayFor(modelItem => product.Price)
-                </td>
-                <td>
-                    <a asp-action="Buy" asp-route-id="product.Id">Buy</a>
-                </td>
+                 </td>
+                 <td>
+                    <p>
+                        <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToCart"
+                           asp-route-id="@product.Id">Buy</a>
+                    </p>
+                 </td>
+
+
+
                 @if (User.IsInRole("Admin"))
                 {
 
@@ -58,3 +61,5 @@
         </tbody>
     </table>
 </div>
+
+<partial name="_AddToCart" />

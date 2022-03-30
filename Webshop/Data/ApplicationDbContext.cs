@@ -14,6 +14,9 @@ namespace Webshop.Data
         public DbSet<Product> Inventory { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
+        
+        //Tänker att allt innehåll i kundkorgen sparas här, så man kan komma åt den när man ska skapa kvittot sen (RL)
+        public DbSet<CustomerCart> CustomerCarts { get; set; }     
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<Receipt> Receipts { get; set; }
         public DbSet<ApplicationUser> Users { get; set; }
