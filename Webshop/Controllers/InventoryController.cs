@@ -33,6 +33,38 @@ namespace Webshop.Controllers
 
         }
 
+        // GET: Inventory/CreateProduct
+        public IActionResult CreateProduct()
+        {
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "CategoryName");
+
+            return View();
+        }
+
+        // POST: Inventory/CreateProduct
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateProduct([Bind("Name,Price,Description,CategoryId")] CreateProductViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Product product = new Product();
+                product.Name = model.Name;
+                product.Price = model.Price;
+                product.Description = model.Description;
+                product.CategoryId = model.CategoryId;
+
+                //Insert record
+                _context.Inventory.Add(product);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+            return View(model);
+        }
+
         private ProductViewModel CreateProductViewModel(Product product)
         {
             ProductViewModel model = new ProductViewModel();
@@ -41,6 +73,7 @@ namespace Webshop.Controllers
             model.Description = product.Description;
             model.Price = product.Price;
             model.ProductImage = product.ProductImage;
+            model.Category = product.Category;
             return model;
         }
     }

@@ -2,6 +2,13 @@
 
 <h1>List of products</h1>
 
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="CreateProduct">Create New</a>
+    </p>
+}
+
 <div>
     <h3>List of cupcakes</h3>
     <table>
@@ -10,7 +17,7 @@
             <th>Name</th>
             <th>Description</th>
             <th>Price</th>
-                        @if (User.IsInRole("Admin"))
+            @if (User.IsInRole("Admin"))
             {
                 <th>Edit</th>
                 <th>Delete</th>
@@ -19,50 +26,50 @@
         </tr>
 
         <tbody>
-                @foreach (var product in Model.Inventory)
+            @foreach (var product in Model.Inventory)
             {
-            <tr>
-                <td>
-                    @if (product.ProductImage != null && product.Id < 1002)
-                    {
-                        <img src="@("~/images/ProductImages/"+product.ProductImage.ImageThumbName)" asp-append-version="true" /> }
-                    else
-                    {
-                        <img class="card" src="~/Images/example.jpg">}
-                </td>
-                <td>
-                <td>
-                    @Html.DisplayFor(modelItem => product.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => product.Category.CategoryName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => product.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => product.Price)
-                </td>
-                <td>
-                    <p>
-                        <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToCart"
-                           asp-route-id="@product.Id">Buy</a>
-                    </p>
-                </td>
-
-
-
-                @if (User.IsInRole("Admin"))
-                {
-
+                <tr>
                     <td>
-                        <a asp-action="Edit" asp-route-id="product.Id">Edit</a>
+                        @if (product.ProductImage != null && product.Id < 1002)
+                        {
+                            <img src="@("~/images/ProductImages/"+product.ProductImage.ImageThumbName)" asp-append-version="true" /> }
+                        else
+                        {
+                            <img class="card" src="~/Images/example.jpg">}
                     </td>
                     <td>
-                        <a asp-action="Delete" asp-route-id="product.Id">Delete</a>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.Name)
                     </td>
-                }
-            </tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.Category.CategoryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.Price)
+                    </td>
+                    <td>
+                        <p>
+                            <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToCart"
+                               asp-route-id="@product.Id">Buy</a>
+                        </p>
+                    </td>
+
+
+
+                    @if (User.IsInRole("Admin"))
+                    {
+
+                        <td>
+                            <a asp-action="Edit" asp-route-id="product.Id">Edit</a>
+                        </td>
+                        <td>
+                            <a asp-action="Delete" asp-route-id="product.Id">Delete</a>
+                        </td>
+                    }
+                </tr>
             }
         </tbody>
     </table>
