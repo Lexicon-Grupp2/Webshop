@@ -51,7 +51,17 @@ namespace Webshop.Data
             modelBuilder.Entity<Receipt>()
                 .HasMany<Product>(receipt => receipt.Products);
 
-            
+            modelBuilder.Entity<Product>()
+                .HasOne<ProductImage>(product => product.ProductImage)
+                .WithMany(productImage => productImage.Products)
+                .HasForeignKey(product => product.ProductImageId);
+
+
+            modelBuilder.Entity<ProductImage>().HasData(new List<ProductImage>
+            {
+                new ProductImage
+                    {ImageId = 1, ImageTitle = "Chocolate Dream", ImageName = "chokladtest.jpg", ImageThumbName = "chokladtestth.jpg"}
+            });
 
             modelBuilder.Entity<Customer>().HasData(new List<Customer>
             {
@@ -76,11 +86,11 @@ namespace Webshop.Data
             modelBuilder.Entity<Product>().HasData(new List<Product>
             {
                 new Product
-                    {Id = 1001, Name = "Chocolate Dream", Description="A delicious chocolate cupcake with belgian chocolate", CategoryId = 101, Price = 29 },
+                    {Id = 1001, Name = "Chocolate Dream", Description="A delicious chocolate cupcake with belgian chocolate", CategoryId = 101, Price = 29, ProductImageId = 1 },
                 new Product
-                    {Id = 1002, Name = "Pink surprise", Description="A frosted strawberry cupcake, filled with strawberry jam", CategoryId = 102, Price = 22 },
+                    {Id = 1002, Name = "Pink surprise", Description="A frosted strawberry cupcake, filled with strawberry jam", CategoryId = 102, Price = 22, ProductImageId = 1 },
                 new Product
-                    {Id = 1003, Name = "Plain delight", Description="A gluten free cupcake packed with flavor", CategoryId = 103, Price = 34 },
+                    {Id = 1003, Name = "Plain delight", Description="A gluten free cupcake packed with flavor", CategoryId = 103, Price = 34, ProductImageId = 1 },
             });
 
 

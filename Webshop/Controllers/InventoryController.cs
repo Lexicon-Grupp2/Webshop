@@ -25,6 +25,7 @@ namespace Webshop.Controllers
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "CategoryName");
             return View(new InventoryViewModel(_context.Inventory
                              .Include(product => product.Category)
+                             .Include(product => product.ProductImage)
                              .ToList()
                              .Select(product => CreateProductViewModel(product))
                              .ToList()
@@ -39,6 +40,7 @@ namespace Webshop.Controllers
             model.Name = product.Name;
             model.Description = product.Description;
             model.Price = product.Price;
+            model.ProductImage = product.ProductImage;
             return model;
         }
     }

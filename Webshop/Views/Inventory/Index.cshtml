@@ -6,6 +6,7 @@
     <h3>List of cupcakes</h3>
     <table>
         <tr>
+            <th>Image</th>
             <th>Name</th>
             <th>Description</th>
             <th>Price</th>
@@ -21,6 +22,12 @@
             @foreach (var product in Model.Inventory)
             {
             <tr>
+                @if (product.ProductImage != null)
+                {
+                    <td>
+                        <img src="@("~/images/ProductImages/"+product.ProductImage.ImageThumbName)" asp-append-version="true" />
+                    </td>
+                }
                 <td>
                     @Html.DisplayFor(modelItem => product.Name)
                 </td>
