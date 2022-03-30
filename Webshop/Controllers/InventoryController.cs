@@ -65,6 +65,32 @@ namespace Webshop.Controllers
             return View(model);
         }
 
+        public IActionResult Delete(int? Id)
+        {
+            var product = _context.Inventory
+                .Include(p => p.Category)
+                .Include(p => p.ProductImage)
+                .FirstOrDefault(p => p.Id == Id);
+
+            ProductViewModel model = this.CreateProductViewModel(product);
+
+            return View(model);
+        }
+
+        // POST: Inventory/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var prod = await _context.Inventory.FindAsync(id);
+         
+            //delete the record
+            _context.Inventory.Remove(prod);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
         private ProductViewModel CreateProductViewModel(Product product)
         {
             ProductViewModel model = new ProductViewModel();
