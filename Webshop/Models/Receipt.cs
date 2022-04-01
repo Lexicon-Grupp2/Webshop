@@ -17,5 +17,8 @@ namespace Webshop.Models
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
 
+
+        //public List<OrderContents> orderContents { get; set; }
+
     }
 }

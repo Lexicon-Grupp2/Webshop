@@ -13,8 +13,11 @@ namespace Webshop.Viewmodels
         public string Description { get; set; }
         public int Price { get; set; }
         public Category Category { get; set; }
+        public List<Category> Categories { get; set; }
         public ProductImage ProductImage { get; set; }
         public ProductViewModel() { }
+        public List<Product> Products { get; set; }
+        public Product Product { get; set; }
 
     }
 }

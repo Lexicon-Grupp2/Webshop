@@ -1,0 +1,38 @@
+﻿@model Webshop.Viewmodels.ShoppingCartViewModel
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Shopping Cart</h2>
+
+<div>
+
+    <h4>Products in the shopping cart</h4>
+
+    <table>
+        <tr>
+            <th>Quantity</th>
+            <th>Product name</th>
+        </tr>
+
+        <tbody>
+            @foreach (var item in Model.ShoppingCart.CartContents)
+            {
+                
+            <tr>
+                <td>@item.Quantity</td>
+                <td>@item.Product.Name</td>
+            </tr>
+                
+            }
+
+        </tbody>
+    </table>
+
+    <div>
+        <h4>Total cost:</h4>
+        @Model.ShoppingCartTotal
+    </div>
+</div>

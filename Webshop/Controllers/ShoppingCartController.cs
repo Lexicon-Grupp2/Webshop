@@ -4,39 +4,48 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Webshop.Data;
+using Webshop.Viewmodels;
 using Webshop.Models;
+using Webshop.Interfaces;
 
 namespace Webshop.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        private readonly ApplicationDbContext _context;
 
-        public ShoppingCartController(ApplicationDbContext context)
+        private readonly IProductRepo _productRepo;
+        private readonly ShoppingCart _shoppingCart;
+
+        public ShoppingCartController(IProductRepo productRepo, ShoppingCart shoppingCart)
         {
-            _context = context;
+            _productRepo = productRepo;
+            _shoppingCart = shoppingCart;
         }
 
-        public IActionResult AddToCart(int Id)
+        public ViewResult Index()
         {
-            var addedCupCake = _context.Inventory.FirstOrDefault(cupCake => cupCake.Id == Id);
+            var items = _shoppingCart.GetShoppingCartItems();
+            _shoppingCart.CartContents = items;
 
-            int cupCakePrice = addedCupCake.Price;
+            var shoppingCartViewModel = new ShoppingCartViewModel
+            {
+                ShoppingCart = _shoppingCart,
+                ShoppingCartTotal = _shoppingCart.GetShoppingCartTotal()
+            };
 
+            return View(shoppingCartViewModel);
+        }
 
-            //_shoppingCart.AddProduct(addedCupCake);
-            //Funkar inte i nuläget
+        public RedirectToActionResult AddToCart(int Id)
+        {
+            var addedCupCake = _productRepo.AllProducts.FirstOrDefault(item => item.Id == Id);
 
+            if (addedCupCake != null)
+            {
+                _shoppingCart.AddProduct(addedCupCake, 1);
+            }
 
-            //Uppdatera en shoppingcartItem som partialviewn hämtar
-
-            
-
-            ViewBag.Response = "Grattis, din cupcake kostar: " + cupCakePrice;
-
-            //Bara ett test för att se korrekt värde
-            return PartialView("_AddToCart", cupCakePrice);
-           
+            return RedirectToAction("Index");
         }
     }
 }
