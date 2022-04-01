@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Webshop.Data;
 
 namespace Webshop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220330191043_Changed to CartContents")]
+    partial class ChangedtoCartContents
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,15 +50,15 @@ namespace Webshop.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7a89a1d9-8d96-4124-a8e1-ede10da8df64",
-                            ConcurrencyStamp = "c83a248f-b60b-4c07-b916-77234359ee21",
+                            Id = "f93e5397-7d00-44a4-b7a5-574e76b85eb2",
+                            ConcurrencyStamp = "c7a72ac8-3d01-438b-a045-496d97ce7dee",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "d727e25c-20d5-4ef7-9088-453c472c1567",
-                            ConcurrencyStamp = "a9cd6169-9e5f-4d9a-a3c6-51212d1533b2",
+                            Id = "9f6bedd2-ea1d-4088-8bf1-18ac870741b0",
+                            ConcurrencyStamp = "f7b171a0-8602-46da-b224-346dbb855add",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -149,8 +151,8 @@ namespace Webshop.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "9c9cfcd0-3a4a-4930-b1ca-fc293f426997",
-                            RoleId = "7a89a1d9-8d96-4124-a8e1-ede10da8df64"
+                            UserId = "341b538d-02b2-4435-ac15-f6e0350d4ab0",
+                            RoleId = "f93e5397-7d00-44a4-b7a5-574e76b85eb2"
                         });
                 });
 
@@ -248,9 +250,9 @@ namespace Webshop.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9c9cfcd0-3a4a-4930-b1ca-fc293f426997",
+                            Id = "341b538d-02b2-4435-ac15-f6e0350d4ab0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "846de2e9-2e59-4d8f-bf2b-362034e406d2",
+                            ConcurrencyStamp = "c6a27a7e-69d9-4eb6-932f-b4cd9b039bb7",
                             Email = "admin@admin.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -258,9 +260,9 @@ namespace Webshop.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDE8H9y20BMSEsk7W/GRm6nBOVNjQa4ZV8St4Sm0DzjMzyjiazvh8JB0tSORJNrF6Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEG/eGlyk7ZCCPHW+E02Mv6h7vICwoiVQjfjVwO+Wvi6ndH1du3+AK42NF0akxMGkgA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f59d6c2e-b274-46db-bcae-8d237ea15f47",
+                            SecurityStamp = "e3c799dc-2525-412a-9432-60e8a17920ce",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         });
@@ -274,9 +276,6 @@ namespace Webshop.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.Property<string>("ShoppingCartId")
@@ -494,7 +493,7 @@ namespace Webshop.Migrations
 
                     b.HasIndex("ReceiptOrderId");
 
-                    b.ToTable("Product");
+                    b.ToTable("Inventory");
 
                     b.HasData(
                         new

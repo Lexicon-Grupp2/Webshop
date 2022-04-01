@@ -26,11 +26,8 @@ namespace Webshop.Models
         public string City { get; set; }
         [Required]
         public string Country { get; set; }
-
-        //Historical receipts show shoppinghistory to the customer
         public List<Receipt> Receipts { get; set; }
         public string CustomerId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
-
     }
 }

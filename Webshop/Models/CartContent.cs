@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 
 namespace Webshop.Models
 {
-    public class CustomerCart
+    public class CartContent
     {
-        //Osäker om det behövs en särskild klass som representerar varje unik kundkorg(RL)
 
-        public int CustomerCartId { get; set; }
+        public int CartContentId { get; set; }
         public int TotalCost { get; set; }
         public Product Product { get; set; }
+        public int Quantity { get; set; }
         public string ShoppingCartId { get; set; }
+
     }
 }

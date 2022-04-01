@@ -14,9 +14,7 @@ namespace Webshop.Models
         public int Price { get; set; }
         public Category Category { get; set; }
         public int? CategoryId { get; set; }
-
         public List<ProductCategory> ProductCategories { get; set; }
-
         public int? ProductImageId { get; set; }
         public ProductImage ProductImage { get; set; }
     }

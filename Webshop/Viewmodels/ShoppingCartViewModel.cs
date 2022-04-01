@@ -6,9 +6,9 @@ using Webshop.Models;
 
 namespace Webshop.Viewmodels
 {
-    public class CustomerCartViewModel
+    public class ShoppingCartViewModel
     {
-        public CustomerCart CustomerCart { get; set; }
-        public int CustomerCartTotal { get; set; }
+        public ShoppingCart ShoppingCart { get; set; }
+        public int ShoppingCartTotal { get; set; }
     }
 }
