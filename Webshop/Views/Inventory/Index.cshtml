@@ -30,7 +30,7 @@
             {
                 <tr>
                     <td>
-                        @if (product.ProductImage != null && product.Id < 1002)
+                        @if (product.ProductImage != null)
                         {
                             <img src="@("~/images/ProductImages/"+product.ProductImage.ImageThumbName)" asp-append-version="true" /> }
                         else

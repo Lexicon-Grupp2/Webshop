@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -63,42 +64,10 @@ namespace Webshop.Controllers
         {
             if (ModelState.IsValid)
             {
-                //create database object
-                ProductImage productImage = new ProductImage();
-                productImage.ImageTitle = imageModel.ImageTitle;
+                string imageName = await ImageSaver.SaveImage(_context, _hostEnvironment, imageModel);
 
-                //Save image to wwwroot/image
-                string wwwRootPath = _hostEnvironment.WebRootPath;
-                string fileName = Path.GetFileNameWithoutExtension(imageModel.ImageFile.FileName);
-                string extension = Path.GetExtension(imageModel.ImageFile.FileName);
-                productImage.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                string path = Path.Combine(wwwRootPath + "/Images/ProductImages/", fileName);
-                using (var fileStream = new FileStream(path, FileMode.Create))
-                {
-                    await imageModel.ImageFile.CopyToAsync(fileStream);
-
-                    //thumb test
-                    int twidth = 100;
-                    int theight = 100;
-                    string thumbFilename = Path.GetFileNameWithoutExtension(productImage.ImageName) + "th" + extension;
-                    productImage.ImageThumbName = thumbFilename;
-
-                    string tpath = wwwRootPath + "/images/ProductImages/" + thumbFilename;
-                    Image image = Image.FromStream(imageModel.ImageFile.OpenReadStream(), true, true);
-                    var newimage = new Bitmap(twidth, theight);
-
-                    using (var a = Graphics.FromImage(newimage))
-                    {
-                        a.DrawImage(image, 0, 0, twidth, theight);
-                        newimage.Save(tpath);
-                    }
-                }
-
-                //Insert record
-                _context.ProductImages.Add(productImage);
-                await _context.SaveChangesAsync();
-
-                return RedirectToAction(nameof(Index));
+                if(imageName != "empty")
+                    return RedirectToAction(nameof(Index));
             }
             return View(imageModel);
         }
@@ -115,20 +84,33 @@ namespace Webshop.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var imageModel = await _context.ProductImages.FindAsync(id);
+            #region old
+            //var imageModel = await _context.ProductImages.FindAsync(id);
 
-            //delete image from wwwroot/image/productimages
-            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images/productimages", imageModel.ImageName);
-            if (System.IO.File.Exists(imagePath))
-                System.IO.File.Delete(imagePath);
-            //delete thumbimage from wwwroot/image/productimages
-            imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images/productimages", imageModel.ImageThumbName);
-            if (System.IO.File.Exists(imagePath))
-                System.IO.File.Delete(imagePath);
+            ////detta istället
+            //var imageToRemove = _context.ProductImages.Include(p => p.Products)
+            //    .FirstOrDefault(p => p.ImageId == id);
 
-            //delete the record
-            _context.ProductImages.Remove(imageModel);
-            await _context.SaveChangesAsync();
+            ////ändra bättre (set to null?)
+            //if (imageToRemove.Products == null)
+            //{
+            //    //delete image from wwwroot/image/productimages
+            //    var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images/productimages", imageModel.ImageName);
+            //    if (System.IO.File.Exists(imagePath))
+            //        System.IO.File.Delete(imagePath);
+            //    //delete thumbimage from wwwroot/image/productimages
+            //    imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images/productimages", imageModel.ImageThumbName);
+            //    if (System.IO.File.Exists(imagePath))
+            //        System.IO.File.Delete(imagePath);
+
+            //    //delete the record
+            //    _context.ProductImages.Remove(imageModel);
+            //    await _context.SaveChangesAsync();
+            //}
+            #endregion
+
+            bool wasDeleted = await ImageSaver.DeleteImageAsync(_context, _hostEnvironment, id);
+
             return RedirectToAction(nameof(Index));
         }
 

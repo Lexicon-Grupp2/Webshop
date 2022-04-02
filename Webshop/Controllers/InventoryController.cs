@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Webshop.Data;
@@ -16,9 +19,12 @@ namespace Webshop.Controllers
         private static readonly InventoryViewModel inventoryViewModel = new InventoryViewModel();
 
         private readonly ApplicationDbContext _context;
-        public InventoryController(ApplicationDbContext context)
+        private readonly IWebHostEnvironment _hostEnvironment;
+
+        public InventoryController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
+            _hostEnvironment = hostEnvironment;
         }
         public IActionResult Index()
         {
@@ -30,7 +36,6 @@ namespace Webshop.Controllers
                              .Select(product => CreateProductViewModel(product))
                              .ToList()
             )) ;
-
         }
 
         // GET: Inventory/CreateProduct
@@ -46,19 +51,46 @@ namespace Webshop.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateProduct([Bind("Name,Price,Description,CategoryId")] CreateProductViewModel model)
+        public async Task<IActionResult> CreateProduct([Bind("Name,Price,Description,CategoryId,ImageTitle,ImageFile")] CreateProductViewModel model)
         {
             if (ModelState.IsValid)
             {
-                Product product = new Product();
-                product.Name = model.Name;
-                product.Price = model.Price;
-                product.Description = model.Description;
-                product.CategoryId = model.CategoryId;
+                Product product = new Product
+                {
+                    Name = model.Name,
+                    Price = model.Price,
+                    Description = model.Description,
+                    CategoryId = model.CategoryId
+                };
 
-                //Insert record
-                _context.Inventory.Add(product);
-                await _context.SaveChangesAsync();
+                if (model.ImageFile != null)
+                {
+                    ProductImageViewModel productImageToSend = new ProductImageViewModel();
+                    productImageToSend.ImageFile = model.ImageFile;
+                    productImageToSend.ImageTitle = model.ImageTitle;
+
+                    string imageName = await ImageSaver.SaveImage(_context, _hostEnvironment, productImageToSend);
+
+                    if (imageName != "empty")
+                    {
+                        var pr = _context.ProductImages
+                        .Where(p => p.ImageName == imageName)
+                        .FirstOrDefault();
+
+                        if (pr != null)
+                        {
+                            product.ProductImageId = pr.ImageId;
+                            _context.Inventory.Add(product);
+                            await _context.SaveChangesAsync();
+                        }
+                    }
+                }
+                else
+                {
+                    //Insert record
+                    _context.Inventory.Add(product);
+                    await _context.SaveChangesAsync();
+                }
 
                 return RedirectToAction(nameof(Index));
             }
