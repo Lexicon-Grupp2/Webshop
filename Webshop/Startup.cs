@@ -43,7 +43,7 @@ namespace Webshop
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
            );
 
-            
+
             services.AddScoped<IProductRepo, ProductRepo>();
             services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
 
@@ -53,12 +53,12 @@ namespace Webshop
             services.AddMvc();
 
             services.AddRazorPages();
-            
+
             services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddDefaultUI()
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            
+
 
         }
 
@@ -76,7 +76,7 @@ namespace Webshop
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
-            
+
             // Initialise ReactJS.NET. Must be before static files.
             app.UseReact(config =>
             {
@@ -96,7 +96,7 @@ namespace Webshop
                 //  .SetLoadBabel(false)
                 //  .AddScriptWithoutTransform("~/js/bundle.server.js");
             });
-            
+
             app.UseStaticFiles();
 
             app.UseSession();

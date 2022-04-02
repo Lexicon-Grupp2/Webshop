@@ -11,20 +11,20 @@
 
 <div>
     <h3>List of cupcakes</h3>
-    <table>
-        <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-            @if (User.IsInRole("Admin"))
-            {
+    <table class="table table-striped">
+        <thead class="thead-light">
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                @if (User.IsInRole("Admin"))
+                {
                 <th>Edit</th>
                 <th>Delete</th>
-
-            }
-        </tr>
-
+                }
+            </tr>
+        </thead>
         <tbody>
             @foreach (var product in Model.Inventory)
             {
@@ -51,10 +51,10 @@
                         @Html.DisplayFor(modelItem => product.Price)
                     </td>
                     <td>
-                        <p>
-                            <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToCart"
-                               asp-route-id="@product.Id">Buy</a>
-                        </p>
+                        <form asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@product.Id" method="post">
+                            <input type="number" value="1" name="Quantity" />
+                            <input type="submit" value="Buy" />
+                        </form>
                     </td>
 
 
@@ -74,5 +74,3 @@
         </tbody>
     </table>
 </div>
-
-<partial name="_AddToCart" />

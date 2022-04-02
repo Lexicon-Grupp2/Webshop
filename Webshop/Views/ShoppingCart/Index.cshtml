@@ -11,7 +11,7 @@
 
     <h4>Products in the shopping cart</h4>
 
-    <table>
+    <table class="table table-striped">
         <tr>
             <th>Quantity</th>
             <th>Product name</th>
@@ -20,16 +20,23 @@
         <tbody>
             @foreach (var item in Model.ShoppingCart.CartContents)
             {
-                
+
             <tr>
                 <td>@item.Quantity</td>
                 <td>@item.Product.Name</td>
+                <td>
+                    <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddOneToCart"
+                       asp-route-id="@item.Product.Id">+</a>
+                    <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="SubtractOneFromCart"
+                       asp-route-id="@item.Product.Id">-</a>
+                    <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="RemoveFromCart"
+                       asp-route-id="@item.Product.Id">Remove</a>
+                </td>
             </tr>
-                
-            }
+        }
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
     <div>
         <h4>Total cost:</h4>
