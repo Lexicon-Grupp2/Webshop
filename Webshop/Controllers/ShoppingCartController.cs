@@ -36,16 +36,52 @@ namespace Webshop.Controllers
             return View(shoppingCartViewModel);
         }
 
-        public RedirectToActionResult AddToCart(int Id)
+        public RedirectToActionResult AddToCart(int Id, int Quantity)
         {
             var addedCupCake = _productRepo.AllProducts.FirstOrDefault(item => item.Id == Id);
 
             if (addedCupCake != null)
             {
-                _shoppingCart.AddProduct(addedCupCake, 1);
+                _shoppingCart.AddProductToCart(addedCupCake, Quantity);
             }
 
             return RedirectToAction("Index");
         }
+        public RedirectToActionResult RemoveFromCart(int Id)
+        {
+            var cupCakeToRemove = _productRepo.Get()
+                .FirstOrDefault(cupCake => cupCake.Id == Id);
+
+            if (cupCakeToRemove != null)
+            {
+                _shoppingCart.RemoveProductFromCart(cupCakeToRemove);
+            }
+            return RedirectToAction("Index");
+        }
+
+        public RedirectToActionResult SubtractOneFromCart(int Id)
+        {
+            var cupCakeToRemove = _productRepo.Get()
+                .FirstOrDefault(cupCake => cupCake.Id == Id);
+
+            if (cupCakeToRemove != null)
+            {
+                _shoppingCart.SubtractOneFromCart(cupCakeToRemove);
+            }
+            return RedirectToAction("Index");
+        }
+
+        public RedirectToActionResult AddOneToCart(int Id)
+        {
+            var cupCakeToAdd = _productRepo.Get()
+                .FirstOrDefault(cupCake => cupCake.Id == Id);
+
+            if (cupCakeToAdd != null)
+            {
+                _shoppingCart.AddOneToCart(cupCakeToAdd);
+            }
+            return RedirectToAction("Index");
+        }
+
     }
 }
