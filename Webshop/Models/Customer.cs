@@ -26,7 +26,7 @@ namespace Webshop.Models
         public string City { get; set; }
         [Required]
         public string Country { get; set; }
-        public List<Receipt> Receipts { get; set; }
+        public List<Order> Orders { get; set; }
         public string CustomerId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
     }

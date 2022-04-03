@@ -17,7 +17,7 @@ namespace Webshop.Data
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<CartContent> CartContents { get; set; }     
         public DbSet<ProductImage> ProductImages { get; set; }
-        public DbSet<Receipt> Receipts { get; set; }
+        public DbSet<Order> Orders { get; set; }
         public DbSet<ApplicationUser> Users { get; set; }
 
 
@@ -46,12 +46,12 @@ namespace Webshop.Data
                 .WithMany(product => product.ProductCategories)
                 .HasForeignKey(productCategory => productCategory.ProductId);
 
-            modelBuilder.Entity<Receipt>()
-                .HasOne<Customer>(receipt => receipt.Customer)
-                .WithMany(customer => customer.Receipts);
+            modelBuilder.Entity<Order>()
+                .HasOne<Customer>(order => order.Customer)
+                .WithMany(customer => customer.Orders);
 
-            modelBuilder.Entity<Receipt>()
-                .HasMany<Product>(receipt => receipt.Products);
+            modelBuilder.Entity<Order>()
+                .HasMany<Product>(order => order.Products);
 
             modelBuilder.Entity<Product>()
                 .HasOne<ProductImage>(product => product.ProductImage)
