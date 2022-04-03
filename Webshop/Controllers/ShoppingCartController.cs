@@ -47,6 +47,7 @@ namespace Webshop.Controllers
 
             return RedirectToAction("Index");
         }
+
         public RedirectToActionResult RemoveFromCart(int Id)
         {
             var cupCakeToRemove = _productRepo.Get()
@@ -59,29 +60,16 @@ namespace Webshop.Controllers
             return RedirectToAction("Index");
         }
 
-        public RedirectToActionResult SubtractOneFromCart(int Id)
+        public RedirectToActionResult UpdateCart(int Id, int Quantity)
         {
-            var cupCakeToRemove = _productRepo.Get()
+            var cupCakeToUpdate = _productRepo.Get()
                 .FirstOrDefault(cupCake => cupCake.Id == Id);
 
-            if (cupCakeToRemove != null)
+            if (cupCakeToUpdate != null)
             {
-                _shoppingCart.SubtractOneFromCart(cupCakeToRemove);
+                _shoppingCart.UpdateCart(cupCakeToUpdate, Quantity);
             }
             return RedirectToAction("Index");
         }
-
-        public RedirectToActionResult AddOneToCart(int Id)
-        {
-            var cupCakeToAdd = _productRepo.Get()
-                .FirstOrDefault(cupCake => cupCake.Id == Id);
-
-            if (cupCakeToAdd != null)
-            {
-                _shoppingCart.AddOneToCart(cupCakeToAdd);
-            }
-            return RedirectToAction("Index");
-        }
-
     }
 }

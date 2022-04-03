@@ -5,41 +5,79 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Shopping Cart</h2>
 
-<div>
+@if (@Model.ShoppingCartTotal == 0)
+{
+<div class="text-center">
 
-    <h4>Products in the shopping cart</h4>
+    <div class="jumbotron">
+        <h2 class="display-4">Your shopping cart is empty</h2>
+        <p class="lead">Check out our selection of delicious cupcakes.</p>
+        <hr class="my-4">
+        <div class="arrival_bg_box">
+            <img src="Images/cupcakes_cart.jpg" alt="">
+        </div>
+        <p class="lead">We have a wide variety that suits everyone.</p>
+        <p class="lead">
+            <div>
+                <a class="btn btn-primary btn-lg" asp-controller="Inventory" asp-action="Index">Shop Now</a>
+            </div>
+        </p>
+    </div>
+</div>
+}
 
-    <table class="table table-striped">
-        <tr>
-            <th>Quantity</th>
-            <th>Product name</th>
-        </tr>
+@if (@Model.ShoppingCartTotal != 0)
+{
 
-        <tbody>
-            @foreach (var item in Model.ShoppingCart.CartContents)
-            {
-
+    
+        <h2>Shopping Cart</h2>
+    
+    <div>
+        <table class="table table-responsive-sm">
             <tr>
-                <td>@item.Quantity</td>
-                <td>@item.Product.Name</td>
-                <td>
-                    <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddOneToCart"
-                       asp-route-id="@item.Product.Id">+</a>
-                    <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="SubtractOneFromCart"
-                       asp-route-id="@item.Product.Id">-</a>
-                    <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="RemoveFromCart"
-                       asp-route-id="@item.Product.Id">Remove</a>
-                </td>
+                <th>Quantity</th>
+                <th>Product name</th>
             </tr>
-        }
+
+            <tbody>
+                @foreach (var item in Model.ShoppingCart.CartContents)
+                {
+
+                    <tr>
+                        <td>@item.Quantity</td>
+                        <td>@item.Product.Name</td>
+                        <td>
+                            <form asp-controller="ShoppingCart" asp-action="UpdateCart" asp-route-id="@item.Product.Id" method="post">
+                                <label>Amount</label>
+                                <input type="number" value="@item.Quantity" name="Quantity" />
+                                <input type="submit" value="Update" />
+                            </form>
+                        </td>
+
+                        <td>
+                            <a class="btn btn-danger" asp-controller="ShoppingCart" asp-action="RemoveFromCart"
+                               asp-route-id="@item.Product.Id">Remove</a>
+                        </td>
+                    </tr>
+                }
 
             </tbody>
         </table>
+    </div>
+}
 
+
+
+@if (@Model.ShoppingCartTotal != 0)
+{
+<div>
     <div>
-        <h4>Total cost:</h4>
-        @Model.ShoppingCartTotal
+        <h5>Subtotal: @Model.ShoppingCartTotal SEK</h5>
+    </div>
+    <div>
+        <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="Index">Proceed to Checkout</a>
     </div>
 </div>
+}
+

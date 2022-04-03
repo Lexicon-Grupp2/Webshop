@@ -11,7 +11,6 @@ namespace Webshop.Models
 {
     public class ShoppingCart
     {
-
         public string ShoppingCartId { get; set; }
         public List<CartContent> CartContents { get; set; }
 
@@ -53,7 +52,7 @@ namespace Webshop.Models
             return new ShoppingCart(context) { ShoppingCartId = cartId };
         }
 
-        public void AddProductToCart(Product product, int amount)   //Lägg även till så man kan lägga flera produkter i varukorgen på samma gång
+        public void AddProductToCart(Product product, int amount)
         {
 
             var cartContent = _context.CartContents.SingleOrDefault(
@@ -69,10 +68,34 @@ namespace Webshop.Models
                 };
                 _context.CartContents.Add(cartContent);
             }
-            
-            cartContent.Quantity.Equals(amount);
+
+            else
+            {
+                var total = cartContent.Quantity + amount;
+
+                cartContent.Quantity = total;
+            }
             
             _context.SaveChanges();
+        }
+
+
+        public void UpdateCart(Product product, int amount)
+        {
+            var cartContent = _context.CartContents.SingleOrDefault(
+                item => item.Product.Id == product.Id && item.ShoppingCartId == ShoppingCartId);
+
+            if (amount == 0)
+            {
+                _context.CartContents.Remove(cartContent);
+                _context.SaveChanges();
+            }
+
+            else
+            {
+                cartContent.Quantity = amount;
+                _context.SaveChanges();
+            }
         }
 
         public int RemoveProductFromCart(Product product)
@@ -88,43 +111,5 @@ namespace Webshop.Models
             
             return totalContent;
         }
-
-        public int SubtractOneFromCart(Product product) //Oklart om denna behövs
-        {
-            var cartContent = _context.CartContents.SingleOrDefault(
-                item => item.Product.Id == product.Id &&
-                item.ShoppingCartId == ShoppingCartId);
-
-            var subtractedQuantity = 0;
-            if (cartContent != null)
-            {
-                if (cartContent.Quantity > 1)
-                {
-                    cartContent.Quantity--;
-                    subtractedQuantity = cartContent.Quantity;
-                }
-                else
-                {
-                    _context.CartContents.Remove(cartContent);
-                }
-            }
-            _context.SaveChanges();
-            return subtractedQuantity;
-        }
-
-        public int AddOneToCart(Product product)  //Oklart om denna behövs
-        {
-            var cartContent = _context.CartContents.SingleOrDefault(
-                item => item.Product.Id == product.Id &&
-                item.ShoppingCartId == ShoppingCartId);
-
-            var totalContent = cartContent.Quantity;
-
-            cartContent.Quantity++;
-            _context.SaveChanges();
-
-            return totalContent;
-        }
-
     }
 }
