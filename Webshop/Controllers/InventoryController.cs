@@ -114,11 +114,18 @@ namespace Webshop.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var prod = await _context.Inventory.FindAsync(id);
-         
-            //delete the record
-            _context.Inventory.Remove(prod);
-            await _context.SaveChangesAsync();
+            var productToDelete = await _context.Inventory.FindAsync(id);
+
+            var productInCart = _context.CartContents
+                        .Where(p => p.Product.Id == id)
+                        .FirstOrDefault();
+
+            if (productInCart == null)
+            {
+                //product is not inside a cart-> ok to delete
+                _context.Inventory.Remove(productToDelete);
+                await _context.SaveChangesAsync();
+            }
 
             return RedirectToAction(nameof(Index));
         }
@@ -132,16 +139,16 @@ namespace Webshop.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Inventory.FindAsync(Id);
-            if (product == null)
+            var productToEdit = await _context.Inventory.FindAsync(Id);
+            if (productToEdit == null)
             {
                 return NotFound();
             }
 
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "CategoryName", product.Category);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "CategoryName", productToEdit.Category);
             ViewData["ImageList"] = new List<ProductImage>(_context.ProductImages.ToList());
 
-            return View(product);
+            return View(productToEdit);
         }
 
         // Post: Inventory/Edit/5
