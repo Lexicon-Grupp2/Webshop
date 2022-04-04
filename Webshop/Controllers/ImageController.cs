@@ -66,7 +66,7 @@ namespace Webshop.Controllers
             {
                 string imageName = await ImageSaver.SaveImage(_context, _hostEnvironment, imageModel);
 
-                if(imageName != "empty")
+                if (imageName != "empty")
                     return RedirectToAction(nameof(Index));
             }
             return View(imageModel);
@@ -84,31 +84,6 @@ namespace Webshop.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            #region old
-            //var imageModel = await _context.ProductImages.FindAsync(id);
-
-            ////detta istället
-            //var imageToRemove = _context.ProductImages.Include(p => p.Products)
-            //    .FirstOrDefault(p => p.ImageId == id);
-
-            ////ändra bättre (set to null?)
-            //if (imageToRemove.Products == null)
-            //{
-            //    //delete image from wwwroot/image/productimages
-            //    var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images/productimages", imageModel.ImageName);
-            //    if (System.IO.File.Exists(imagePath))
-            //        System.IO.File.Delete(imagePath);
-            //    //delete thumbimage from wwwroot/image/productimages
-            //    imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images/productimages", imageModel.ImageThumbName);
-            //    if (System.IO.File.Exists(imagePath))
-            //        System.IO.File.Delete(imagePath);
-
-            //    //delete the record
-            //    _context.ProductImages.Remove(imageModel);
-            //    await _context.SaveChangesAsync();
-            //}
-            #endregion
-
             bool wasDeleted = await ImageSaver.DeleteImageAsync(_context, _hostEnvironment, id);
 
             return RedirectToAction(nameof(Index));
@@ -127,7 +102,26 @@ namespace Webshop.Controllers
             {
                 return NotFound();
             }
+
             return View(imageModel);
+        }
+
+        // Post: Image/Edit/5
+        [HttpPost]
+        public async Task<IActionResult> Edit(int? id, ProductImage productImage)
+        {
+            if (id != null)
+            {
+                if (ModelState.IsValid)
+                {
+                    ProductImage imageToChange = await _context.ProductImages.FindAsync(id);
+                    imageToChange.ImageTitle = productImage.ImageTitle;
+                    _context.ProductImages.Update(imageToChange);
+
+                    await _context.SaveChangesAsync();
+                }
+            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }

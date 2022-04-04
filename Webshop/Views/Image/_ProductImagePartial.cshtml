@@ -1,0 +1,30 @@
+﻿@model Webshop.Models.ProductImage
+
+<div>
+    <h4>ImageModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ImageTitle)
+        </dt>
+        <dd class="col-sm-2">
+            @Html.DisplayFor(model => model.ImageTitle)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ImageName)
+        </dt>
+        <dd class="col-sm-2">
+            @Html.DisplayFor(model => model.ImageName)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            Uploaded Image
+        </dt>
+        <dd class="col-sm-3">
+            <img src="@("~/Images/Productimages/"+Model.ImageName)" asp-append-version="true" class="img-fluid" />
+        </dd>
+    </dl>
+</div>

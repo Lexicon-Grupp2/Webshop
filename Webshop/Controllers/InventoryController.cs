@@ -123,6 +123,57 @@ namespace Webshop.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // GET: Inventory/Edit/5
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? Id)
+        {
+            if (Id == null)
+            {
+                return NotFound();
+            }
+
+            var product = await _context.Inventory.FindAsync(Id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "CategoryName", product.Category);
+            ViewData["ImageList"] = new List<ProductImage>(_context.ProductImages.ToList());
+
+            return View(product);
+        }
+
+        // Post: Inventory/Edit/5
+        [HttpPost]
+        public async Task<IActionResult> Edit(int? id, Product product, int? imageId)
+        {
+            if (id != null)
+            {
+                if (ModelState.IsValid)
+                {
+                    Product productToChange = await _context.Inventory.FindAsync(id);
+
+                    productToChange.CategoryId = product.CategoryId;
+                    productToChange.Name = product.Name;
+                    productToChange.Price = product.Price;
+                    productToChange.Description = product.Description;
+                    if(imageId != null)
+                    {
+                        if (imageId > 0)
+                            productToChange.ProductImageId = imageId;
+                        else
+                            productToChange.ProductImageId = null;
+                    }
+
+                    _context.Inventory.Update(productToChange);
+
+                    await _context.SaveChangesAsync();
+                }
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
         private ProductViewModel CreateProductViewModel(Product product)
         {
             ProductViewModel model = new ProductViewModel();
