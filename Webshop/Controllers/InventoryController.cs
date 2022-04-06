@@ -27,7 +27,7 @@ namespace Webshop.Controllers
             _hostEnvironment = hostEnvironment;
         }
         public IActionResult Index()
-        {
+        {          
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "CategoryName");
             return View(new InventoryViewModel(_context.Inventory
                              .Include(product => product.Category)
