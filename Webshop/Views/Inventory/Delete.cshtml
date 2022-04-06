@@ -28,7 +28,7 @@
             Uploaded Image
         </dt>
         <dd class="col-sm-10">          
-                @if(Model.ProductImage != null && Model.Id < 1002)
+                @if(Model.ProductImage != null)
                 {
                     <img src="@("~/Images/Productimages/"+Model.ProductImage.ImageName)" asp-append-version="true" width="250" height="250" /> 
                 }
