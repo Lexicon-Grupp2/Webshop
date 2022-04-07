@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -79,7 +79,6 @@ namespace Webshop.Models
             _context.SaveChanges();
         }
 
-
         public void UpdateCart(Product product, int amount)
         {
             var cartContent = _context.CartContents.SingleOrDefault(
@@ -110,6 +109,17 @@ namespace Webshop.Models
             _context.SaveChanges();
             
             return totalContent;
+        }
+
+        public void ResetCart()
+        {
+            var cartItems = _context
+                .CartContents
+                .Where(cart => cart.ShoppingCartId == ShoppingCartId);
+
+            _context.CartContents.RemoveRange(cartItems);
+
+            _context.SaveChanges();
         }
     }
 }
