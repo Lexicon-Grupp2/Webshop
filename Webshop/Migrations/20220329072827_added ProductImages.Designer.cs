@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Webshop.Data;
 
 namespace Webshop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220329072827_added ProductImages")]
+    partial class addedProductImages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,15 +50,15 @@ namespace Webshop.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "cc4cbade-0b9f-4ca2-8529-e22824ed0ebe",
-                            ConcurrencyStamp = "2c7e7c7f-2d61-46c9-8005-a18e5003fc3d",
+                            Id = "9b066cc0-65ce-43ba-95a5-f511680af264",
+                            ConcurrencyStamp = "d04b2411-09e2-44af-b970-8726d4b7a9fd",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "1db1c6c0-028e-42db-a348-a84fccf07852",
-                            ConcurrencyStamp = "7c05a208-4fa3-4ea8-93c6-8a1cfc6adeb4",
+                            Id = "aa727466-2da9-4e18-8925-d854a5958787",
+                            ConcurrencyStamp = "b609bc7a-9941-48cb-b236-30e552a9b5d0",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -149,8 +151,8 @@ namespace Webshop.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "eb84e081-210e-4d00-b695-de05356e43c6",
-                            RoleId = "cc4cbade-0b9f-4ca2-8529-e22824ed0ebe"
+                            UserId = "cfadb1b7-160e-48f9-b0f7-566a86b3be2a",
+                            RoleId = "9b066cc0-65ce-43ba-95a5-f511680af264"
                         });
                 });
 
@@ -248,9 +250,9 @@ namespace Webshop.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "eb84e081-210e-4d00-b695-de05356e43c6",
+                            Id = "cfadb1b7-160e-48f9-b0f7-566a86b3be2a",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e7cd25ca-eb91-4713-8471-7f699b0ea7a0",
+                            ConcurrencyStamp = "9c6a1b46-e7a9-4dd2-b379-bf417fb33c68",
                             Email = "admin@admin.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -258,38 +260,12 @@ namespace Webshop.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJ44Bzov9vbqmi6/S/bMTVNj/MdzluZq1FppHY6hu/P+YYrEoB2U1G7zK8XLtACK6w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEN8LkI1Ifg7wq+vEVKFKv7EhiyBJQe0baGAonY5g7AZfAxkHuYnR+lxanrcUma2Rpw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ef8a79f1-5284-4117-998a-b8d34217356e",
+                            SecurityStamp = "c67b52d1-1dbd-402a-8e35-6e4e1e5799de",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         });
-                });
-
-            modelBuilder.Entity("Webshop.Models.CartContent", b =>
-                {
-                    b.Property<int>("CartContentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ShoppingCartId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TotalCost")
-                        .HasColumnType("int");
-
-                    b.HasKey("CartContentId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("CartContents");
                 });
 
             modelBuilder.Entity("Webshop.Models.Category", b =>
@@ -321,11 +297,6 @@ namespace Webshop.Migrations
                         {
                             Id = 103,
                             CategoryName = "Gluten free"
-                        },
-                        new
-                        {
-                            Id = 104,
-                            CategoryName = "Berries and fruits"
                         });
                 });
 
@@ -466,35 +437,6 @@ namespace Webshop.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Webshop.Models.Order", b =>
-                {
-                    b.Property<int>("OrderId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("OrderDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ShoppingCartId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TotalCost")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrderId");
-
-                    b.HasIndex("CustomerId");
-
-                    b.ToTable("Orders");
-                });
-
             modelBuilder.Entity("Webshop.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -511,24 +453,19 @@ namespace Webshop.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductImageId")
+                    b.Property<int?>("ReceiptOrderId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("ReceiptOrderId");
 
-                    b.HasIndex("ProductImageId");
-
-                    b.ToTable("Product");
+                    b.ToTable("Inventory");
 
                     b.HasData(
                         new
@@ -537,8 +474,7 @@ namespace Webshop.Migrations
                             CategoryId = 101,
                             Description = "A delicious chocolate cupcake with belgian chocolate",
                             Name = "Chocolate Dream",
-                            Price = 29,
-                            ProductImageId = 1
+                            Price = 29
                         },
                         new
                         {
@@ -546,8 +482,7 @@ namespace Webshop.Migrations
                             CategoryId = 102,
                             Description = "A frosted strawberry cupcake, filled with strawberry jam",
                             Name = "Pink surprise",
-                            Price = 22,
-                            ProductImageId = 1
+                            Price = 22
                         },
                         new
                         {
@@ -555,71 +490,7 @@ namespace Webshop.Migrations
                             CategoryId = 103,
                             Description = "A gluten free cupcake packed with flavor",
                             Name = "Plain delight",
-                            Price = 34,
-                            ProductImageId = 1
-                        },
-                        new
-                        {
-                            Id = 1004,
-                            CategoryId = 104,
-                            Description = "Filled with peanut butter and topped with delicious peanut frosting.",
-                            Name = "Peanut butter cup-cake",
-                            Price = 34,
-                            ProductImageId = 1
-                        },
-                        new
-                        {
-                            Id = 1005,
-                            CategoryId = 101,
-                            Description = "This is the cupcake for you if you like all things Nutella.",
-                            Name = "Nutella mountain",
-                            Price = 34,
-                            ProductImageId = 1
-                        },
-                        new
-                        {
-                            Id = 1006,
-                            CategoryId = 101,
-                            Description = "A cupcake made to look like a giant M&M.",
-                            Name = "M&M don't sue us",
-                            Price = 34,
-                            ProductImageId = 1
-                        },
-                        new
-                        {
-                            Id = 1007,
-                            CategoryId = 104,
-                            Description = "Not the tea, instead a cupcake with every kind of berry.",
-                            Name = "Forest fruit",
-                            Price = 34,
-                            ProductImageId = 1
-                        },
-                        new
-                        {
-                            Id = 1008,
-                            CategoryId = 101,
-                            Description = "Oreo cookie on top as well as batter and frosting made from oreo's.",
-                            Name = "Oreo supreme",
-                            Price = 34,
-                            ProductImageId = 1
-                        },
-                        new
-                        {
-                            Id = 1009,
-                            CategoryId = 104,
-                            Description = "If you like something with a fresher taste, this cupcake is for you.",
-                            Name = "Lemon",
-                            Price = 34,
-                            ProductImageId = 1
-                        },
-                        new
-                        {
-                            Id = 1010,
-                            CategoryId = 104,
-                            Description = "Every taste of the fruit rainbow you can imagine.",
-                            Name = "Taste the rainbow",
-                            Price = 34,
-                            ProductImageId = 1
+                            Price = 34
                         });
                 });
 
@@ -651,24 +522,35 @@ namespace Webshop.Migrations
                     b.Property<string>("ImageName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageThumbName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ImageTitle")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ImageId");
 
                     b.ToTable("ProductImages");
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            ImageId = 1,
-                            ImageName = "chokladtest.jpg",
-                            ImageThumbName = "chokladtestth.jpg",
-                            ImageTitle = "Chocolate Dream"
-                        });
+            modelBuilder.Entity("Webshop.Models.Receipt", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("TotalCost")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Receipts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -722,27 +604,11 @@ namespace Webshop.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Webshop.Models.CartContent", b =>
-                {
-                    b.HasOne("Webshop.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId");
-                });
-
             modelBuilder.Entity("Webshop.Models.Customer", b =>
                 {
                     b.HasOne("Webshop.Models.ApplicationUser", "ApplicationUser")
                         .WithOne("Customer")
                         .HasForeignKey("Webshop.Models.Customer", "CustomerId");
-                });
-
-            modelBuilder.Entity("Webshop.Models.Order", b =>
-                {
-                    b.HasOne("Webshop.Models.Customer", "Customer")
-                        .WithMany("Orders")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Webshop.Models.Product", b =>
@@ -751,13 +617,9 @@ namespace Webshop.Migrations
                         .WithMany("Products")
                         .HasForeignKey("CategoryId");
 
-                    b.HasOne("Webshop.Models.Order", null)
+                    b.HasOne("Webshop.Models.Receipt", null)
                         .WithMany("Products")
-                        .HasForeignKey("OrderId");
-
-                    b.HasOne("Webshop.Models.ProductImage", "ProductImage")
-                        .WithMany("Products")
-                        .HasForeignKey("ProductImageId");
+                        .HasForeignKey("ReceiptOrderId");
                 });
 
             modelBuilder.Entity("Webshop.Models.ProductCategory", b =>
@@ -771,6 +633,15 @@ namespace Webshop.Migrations
                     b.HasOne("Webshop.Models.Product", "Product")
                         .WithMany("ProductCategories")
                         .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Webshop.Models.Receipt", b =>
+                {
+                    b.HasOne("Webshop.Models.Customer", "Customer")
+                        .WithMany("Receipts")
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
