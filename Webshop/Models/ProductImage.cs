@@ -14,7 +14,7 @@ namespace Webshop.Models
         [Display(Name = "Image Title")]
         public string ImageTitle { get; set; }
 
-        [Display(Name = "Image Title")]
+        [Display(Name = "Image Name")]
         public string ImageName { get; set; }
         public string ImageThumbName { get; set; }
 

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Webshop.Data;
 using Webshop.Models;
 
 namespace Webshop.Areas.Identity.Pages.Account.Manage
@@ -14,13 +15,16 @@ namespace Webshop.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly ApplicationDbContext _context;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager, 
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
         }
 
         public string Username { get; set; }
@@ -36,18 +40,43 @@ namespace Webshop.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            [Required]
+            [Display(Name = "First name")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [Display(Name = "Last name")]
+            public string LastName { get; set; }
+
+            [Required]
+            public string Address { get; set; }
+            [Required]
+            public string PostalCode { get; set; }
+            [Required]
+            public string City { get; set; }
+            [Required]
+            public string Country { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            //var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
             Username = userName;
+            var cus = _context.Customers
+                        .Where(c => c.CustomerId == user.Id)
+                        .FirstOrDefault();
+
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                //PhoneNumber = phoneNumber
+
+                //test customer
+                FirstName = cus.FirstName, LastName = cus.LastName, PhoneNumber = cus.PhoneNumber, 
+                Address = cus.Address, City = cus.City, Country = cus.Country, PostalCode = cus.PostalCode
             };
         }
 
@@ -87,6 +116,21 @@ namespace Webshop.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
+
+            var cus = _context.Customers
+                        .Where(c => c.CustomerId == user.Id)
+                        .FirstOrDefault();
+
+            cus.Address = Input.Address;
+            cus.City = Input.City;
+            cus.Country = Input.Country;
+            cus.FirstName = Input.FirstName;
+            cus.LastName = Input.LastName;
+            cus.PhoneNumber = Input.PhoneNumber;
+            cus.PostalCode = cus.PostalCode;
+
+            _context.Customers.Update(cus);
+            _context.SaveChanges();
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

@@ -1,0 +1,12 @@
+﻿@model Webshop.Models.ProductImage
+
+<div class="card" style="width:200px">
+    @if (Model != null)
+    {
+        <img class="card" src="@("~/images/ProductImages/"+Model.ImageThumbName)" asp-append-version="true" /> }
+    else
+    {
+        <img class="card" src="~/Images/example.jpg">
+    }
+    <h4 class="card-title">@Model.ImageTitle</h4>
+</div>

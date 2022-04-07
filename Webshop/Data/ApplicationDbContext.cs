@@ -9,7 +9,6 @@ namespace Webshop.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Product> Inventory { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -21,9 +20,7 @@ namespace Webshop.Data
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<ApplicationUser> Users { get; set; }
 
-
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -46,6 +43,7 @@ namespace Webshop.Data
                 .HasOne<Product>(productCategory => productCategory.Product)
                 .WithMany(product => product.ProductCategories)
                 .HasForeignKey(productCategory => productCategory.ProductId);
+            
             /*
             modelBuilder.Entity<Order>()
                 .HasOne<Customer>(order => order.Customer)
@@ -54,12 +52,11 @@ namespace Webshop.Data
             modelBuilder.Entity<Order>()
                 .HasMany<Product>(order => order.Products);
             */
-
+            
             modelBuilder.Entity<Product>()
                 .HasOne<ProductImage>(product => product.ProductImage)
                 .WithMany(productImage => productImage.Products)
                 .HasForeignKey(product => product.ProductImageId);
-
 
             modelBuilder.Entity<ProductImage>().HasData(new List<ProductImage>
             {
@@ -84,9 +81,7 @@ namespace Webshop.Data
                 new Customer
                     {Id=7, FirstName = "Sofia", LastName="Bosch", Address="Avenyn 1", PhoneNumber = "0543768798", PostalCode="67823", City="Berlin", Country="Germany", Email="raj@goteborg.se" },
             });
-
             
-
             modelBuilder.Entity<Product>().HasData(new List<Product>
             {
                 new Product
@@ -95,8 +90,21 @@ namespace Webshop.Data
                     {Id = 1002, Name = "Pink surprise", Description="A frosted strawberry cupcake, filled with strawberry jam", CategoryId = 102, Price = 22, ProductImageId = 1 },
                 new Product
                     {Id = 1003, Name = "Plain delight", Description="A gluten free cupcake packed with flavor", CategoryId = 103, Price = 34, ProductImageId = 1 },
+                new Product
+                    {Id = 1004, Name = "Peanut butter cup-cake", Description="Filled with peanut butter and topped with delicious peanut frosting.", CategoryId = 104, Price = 34, ProductImageId = 1 },
+                new Product
+                    {Id = 1005, Name = "Nutella mountain", Description="This is the cupcake for you if you like all things Nutella.", CategoryId = 101, Price = 34, ProductImageId = 1 },
+                new Product
+                    {Id = 1006, Name = "M&M don't sue us", Description="A cupcake made to look like a giant M&M.", CategoryId = 101, Price = 34, ProductImageId = 1 },
+                new Product
+                    {Id = 1007, Name = "Forest fruit", Description="Not the tea, instead a cupcake with every kind of berry.", CategoryId = 104, Price = 34, ProductImageId = 1 },
+                new Product
+                    {Id = 1008, Name = "Oreo supreme", Description="Oreo cookie on top as well as batter and frosting made from oreo's.", CategoryId = 101, Price = 34, ProductImageId = 1 },
+                new Product
+                    {Id = 1009, Name = "Lemon", Description="If you like something with a fresher taste, this cupcake is for you.", CategoryId = 104, Price = 34, ProductImageId = 1 },
+                new Product
+                    {Id = 1010, Name = "Taste the rainbow", Description="Every taste of the fruit rainbow you can imagine.", CategoryId = 104, Price = 34, ProductImageId = 1 },     
             });
-
 
             modelBuilder.Entity<Category>().HasData(new List<Category>
             {
@@ -106,8 +114,9 @@ namespace Webshop.Data
                     {Id = 102, CategoryName = "Frosted" },
                 new Category
                     {Id = 103, CategoryName = "Gluten free" },
+                new Category
+                    {Id = 104, CategoryName = "Berries and fruits" },
             });
-
 
             string roleId = Guid.NewGuid().ToString();
             string userRoleId = Guid.NewGuid().ToString();
@@ -146,8 +155,6 @@ namespace Webshop.Data
                 RoleId = roleId,
                 UserId = userId
             });
-
-
         }
     }
 }
