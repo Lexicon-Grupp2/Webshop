@@ -9,6 +9,8 @@
     <Compile Remove="Migrations\20220330081018_Added one-to-many ProductImage-Product.Designer.cs" />
     <Compile Remove="Migrations\20220330082028_Added one-to-many ProductImage-Product.cs" />
     <Compile Remove="Migrations\20220330082028_Added one-to-many ProductImage-Product.Designer.cs" />
+    <Compile Remove="Migrations\20220406121030_Added neoleds cupcakes seeding.cs" />
+    <Compile Remove="Migrations\20220406121030_Added neoleds cupcakes seeding.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

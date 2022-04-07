@@ -48,15 +48,15 @@ namespace Webshop.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "cc4cbade-0b9f-4ca2-8529-e22824ed0ebe",
-                            ConcurrencyStamp = "2c7e7c7f-2d61-46c9-8005-a18e5003fc3d",
+                            Id = "e0244aca-9ef1-4590-8083-2246eebc8d2c",
+                            ConcurrencyStamp = "1c71a753-26c9-4904-be56-7d12d5b94d91",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "1db1c6c0-028e-42db-a348-a84fccf07852",
-                            ConcurrencyStamp = "7c05a208-4fa3-4ea8-93c6-8a1cfc6adeb4",
+                            Id = "d75d8400-d6ed-4a2f-b1a0-167aba633515",
+                            ConcurrencyStamp = "d3167c1f-2e30-47c3-b754-8e0789fab572",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -149,8 +149,8 @@ namespace Webshop.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "eb84e081-210e-4d00-b695-de05356e43c6",
-                            RoleId = "cc4cbade-0b9f-4ca2-8529-e22824ed0ebe"
+                            UserId = "45df147f-34ff-4cf1-95a4-8e01c7658dbc",
+                            RoleId = "e0244aca-9ef1-4590-8083-2246eebc8d2c"
                         });
                 });
 
@@ -248,9 +248,9 @@ namespace Webshop.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "eb84e081-210e-4d00-b695-de05356e43c6",
+                            Id = "45df147f-34ff-4cf1-95a4-8e01c7658dbc",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e7cd25ca-eb91-4713-8471-7f699b0ea7a0",
+                            ConcurrencyStamp = "d7fba127-ece8-4e75-bc1f-dee41dbc1f82",
                             Email = "admin@admin.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -258,9 +258,9 @@ namespace Webshop.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJ44Bzov9vbqmi6/S/bMTVNj/MdzluZq1FppHY6hu/P+YYrEoB2U1G7zK8XLtACK6w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFJeYJ1WmLaiYlxJAh6xpNUEGjTkiJgH7ypaR3eYMB0Dk/rknBwASCYMC68g76Rfsg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ef8a79f1-5284-4117-998a-b8d34217356e",
+                            SecurityStamp = "eeafc36e-7446-44f6-8db5-19b2a5dad01f",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         });
@@ -321,11 +321,6 @@ namespace Webshop.Migrations
                         {
                             Id = 103,
                             CategoryName = "Gluten free"
-                        },
-                        new
-                        {
-                            Id = 104,
-                            CategoryName = "Berries and fruits"
                         });
                 });
 
@@ -555,69 +550,6 @@ namespace Webshop.Migrations
                             CategoryId = 103,
                             Description = "A gluten free cupcake packed with flavor",
                             Name = "Plain delight",
-                            Price = 34,
-                            ProductImageId = 1
-                        },
-                        new
-                        {
-                            Id = 1004,
-                            CategoryId = 104,
-                            Description = "Filled with peanut butter and topped with delicious peanut frosting.",
-                            Name = "Peanut butter cup-cake",
-                            Price = 34,
-                            ProductImageId = 1
-                        },
-                        new
-                        {
-                            Id = 1005,
-                            CategoryId = 101,
-                            Description = "This is the cupcake for you if you like all things Nutella.",
-                            Name = "Nutella mountain",
-                            Price = 34,
-                            ProductImageId = 1
-                        },
-                        new
-                        {
-                            Id = 1006,
-                            CategoryId = 101,
-                            Description = "A cupcake made to look like a giant M&M.",
-                            Name = "M&M don't sue us",
-                            Price = 34,
-                            ProductImageId = 1
-                        },
-                        new
-                        {
-                            Id = 1007,
-                            CategoryId = 104,
-                            Description = "Not the tea, instead a cupcake with every kind of berry.",
-                            Name = "Forest fruit",
-                            Price = 34,
-                            ProductImageId = 1
-                        },
-                        new
-                        {
-                            Id = 1008,
-                            CategoryId = 101,
-                            Description = "Oreo cookie on top as well as batter and frosting made from oreo's.",
-                            Name = "Oreo supreme",
-                            Price = 34,
-                            ProductImageId = 1
-                        },
-                        new
-                        {
-                            Id = 1009,
-                            CategoryId = 104,
-                            Description = "If you like something with a fresher taste, this cupcake is for you.",
-                            Name = "Lemon",
-                            Price = 34,
-                            ProductImageId = 1
-                        },
-                        new
-                        {
-                            Id = 1010,
-                            CategoryId = 104,
-                            Description = "Every taste of the fruit rainbow you can imagine.",
-                            Name = "Taste the rainbow",
                             Price = 34,
                             ProductImageId = 1
                         });
