@@ -45,7 +45,6 @@ namespace Webshop
 
 
             services.AddScoped<IProductRepo, ProductRepo>();
-            services.AddScoped<IOrderRepo, OrderRepo>();
             services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
 
 
