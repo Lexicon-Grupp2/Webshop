@@ -1,0 +1,55 @@
+﻿@model Webshop.Viewmodels.CreateCategoryViewModel
+@{
+    ViewData["Title"] = "Create Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create Category</h1>
+
+<hr />
+
+@if (Model.ViewMessage != null)
+{
+    <p>@Model.ViewMessage</p>
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateCategory">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CategoryName" class="control-label"></label>
+                <input asp-for="CategoryName" class="form-control" />
+                <span asp-validation-for="CategoryName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create Category" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to admin index</a>
+</div>
+
+<h1>Existing categories:</h1>
+
+<dl class="row">
+    <dt class="col-sm-1">
+        Category
+    </dt>
+</dl>
+
+@foreach (Category cat in Model.Categories)
+{
+    <dl class="row">
+        <dd class="col-sm-2">
+            @cat.CategoryName.ToString()
+        </dd>
+    </dl>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

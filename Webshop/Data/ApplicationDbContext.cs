@@ -61,7 +61,7 @@ namespace Webshop.Data
             modelBuilder.Entity<ProductImage>().HasData(new List<ProductImage>
             {
                 new ProductImage
-                    {ImageId = 1, ImageTitle = "Chocolate Dream", ImageName = "chokladtest.jpg", ImageThumbName = "chokladtestth.jpg"}
+                    {ImageId = 1, ImageTitle = "Chocolate Dream", ImageName = "chokladbild.jpg", ImageThumbName = "chokladbildth.jpg"}
             });
 
             modelBuilder.Entity<Customer>().HasData(new List<Customer>
@@ -87,23 +87,23 @@ namespace Webshop.Data
                 new Product
                     {Id = 1001, Name = "Chocolate Dream", Description="A delicious chocolate cupcake with belgian chocolate", CategoryId = 101, Price = 29, ProductImageId = 1 },
                 new Product
-                    {Id = 1002, Name = "Pink surprise", Description="A frosted strawberry cupcake, filled with strawberry jam", CategoryId = 102, Price = 22, ProductImageId = 1 },
+                    {Id = 1002, Name = "Pink surprise", Description="A frosted strawberry cupcake, filled with strawberry jam", CategoryId = 102, Price = 22},
                 new Product
-                    {Id = 1003, Name = "Plain delight", Description="A gluten free cupcake packed with flavor", CategoryId = 103, Price = 34, ProductImageId = 1 },
+                    {Id = 1003, Name = "Plain delight", Description="A gluten free cupcake packed with flavor", CategoryId = 103, Price = 34},
                 new Product
-                    {Id = 1004, Name = "Peanut butter cup-cake", Description="Filled with peanut butter and topped with delicious peanut frosting.", CategoryId = 104, Price = 34, ProductImageId = 1 },
+                    {Id = 1004, Name = "Peanut butter cup-cake", Description="Filled with peanut butter and topped with delicious peanut frosting.", CategoryId = 104, Price = 34},
                 new Product
-                    {Id = 1005, Name = "Nutella mountain", Description="This is the cupcake for you if you like all things Nutella.", CategoryId = 101, Price = 34, ProductImageId = 1 },
+                    {Id = 1005, Name = "Nutella mountain", Description="This is the cupcake for you if you like all things Nutella.", CategoryId = 101, Price = 34},
                 new Product
-                    {Id = 1006, Name = "M&M don't sue us", Description="A cupcake made to look like a giant M&M.", CategoryId = 101, Price = 34, ProductImageId = 1 },
+                    {Id = 1006, Name = "M&M don't sue us", Description="A cupcake made to look like a giant M&M.", CategoryId = 101, Price = 34},
                 new Product
-                    {Id = 1007, Name = "Forest fruit", Description="Not the tea, instead a cupcake with every kind of berry.", CategoryId = 104, Price = 34, ProductImageId = 1 },
+                    {Id = 1007, Name = "Forest fruit", Description="Not the tea, instead a cupcake with every kind of berry.", CategoryId = 104, Price = 34},
                 new Product
-                    {Id = 1008, Name = "Oreo supreme", Description="Oreo cookie on top as well as batter and frosting made from oreo's.", CategoryId = 101, Price = 34, ProductImageId = 1 },
+                    {Id = 1008, Name = "Oreo supreme", Description="Oreo cookie on top as well as batter and frosting made from oreo's.", CategoryId = 101, Price = 34},
                 new Product
-                    {Id = 1009, Name = "Lemon", Description="If you like something with a fresher taste, this cupcake is for you.", CategoryId = 104, Price = 34, ProductImageId = 1 },
+                    {Id = 1009, Name = "Lemon", Description="If you like something with a fresher taste, this cupcake is for you.", CategoryId = 104, Price = 34},
                 new Product
-                    {Id = 1010, Name = "Taste the rainbow", Description="Every taste of the fruit rainbow you can imagine.", CategoryId = 104, Price = 34, ProductImageId = 1 },     
+                    {Id = 1010, Name = "Taste the rainbow", Description="Every taste of the fruit rainbow you can imagine.", CategoryId = 104, Price = 34},     
             });
 
             modelBuilder.Entity<Category>().HasData(new List<Category>

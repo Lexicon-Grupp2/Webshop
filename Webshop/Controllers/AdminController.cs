@@ -45,5 +45,46 @@ namespace Webshop.Controllers
 
             return RedirectToAction("Index");
         }
+
+        // GET: Admin/CreateCategory
+        public IActionResult CreateCategory()
+        {
+            CreateCategoryViewModel viewModel = new CreateCategoryViewModel();
+            viewModel.Categories = _context.Categories.ToList();
+
+            return View(viewModel);
+        }
+
+        // POST: Admin/CreateCategory
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateCategory([Bind("CategoryName")] CreateCategoryViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                Category category = new Category
+                {
+                    CategoryName = viewModel.CategoryName
+                };
+
+                var tempCategory = _context.Categories
+                        .Where(c => c.CategoryName == viewModel.CategoryName)
+                        .FirstOrDefault();
+
+                if (tempCategory == null)
+                {
+                    await _context.Categories.AddAsync(category);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                    viewModel.ViewMessage = "A category with the name '" + viewModel.CategoryName + "' already exists!";
+            }
+            viewModel.Categories = _context.Categories.ToList();
+
+            return View(viewModel);
+        }
     }
 }
