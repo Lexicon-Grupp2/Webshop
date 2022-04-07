@@ -33,6 +33,16 @@
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="ImageTitle" class="control-label"></label>
+                <input asp-for="ImageTitle" class="form-control" />
+                <span asp-validation-for="ImageTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" accept="image/*" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create Product" class="btn btn-primary" />
             </div>
         </form>

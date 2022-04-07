@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,6 +17,14 @@ namespace Webshop.Viewmodels
         public int Price { get; set; }
         public ProductCategory ProductCategory { get; set; }
         public int CategoryId { get; set; }
+        [StringLength(25, MinimumLength = 3)]
+        [Display(Name = "Image Title")]
+        public string ImageTitle { get; set; }
 
+        [StringLength(50, MinimumLength = 3)]
+        [Display(Name = "Image Name")]
+        public string ImageName { get; set; }
+        [Display(Name = "Upload File")]
+        public IFormFile ImageFile { get; set; }
     }
 }
