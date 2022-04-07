@@ -67,8 +67,6 @@
     </div>
 }
 
-
-
 @if (@Model.ShoppingCartTotal != 0)
 {
 <div>
@@ -76,7 +74,7 @@
         <h5>Subtotal: @Model.ShoppingCartTotal SEK</h5>
     </div>
     <div>
-        <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="Index">Proceed to Checkout</a>
+        <a class="btn btn-primary" asp-controller="Order" asp-action="Checkout">Proceed to Checkout</a>
     </div>
 </div>
 }
