@@ -3,94 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Webshop.Migrations
 {
-    public partial class identityadded : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Product_OrderContents_OrderContentsId",
-                table: "Product");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Receipt_customers_CustomerId",
-                table: "Receipt");
-
-            migrationBuilder.DropTable(
-                name: "OrderContents");
-
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_customers",
-                table: "customers");
-
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_Receipt",
-                table: "Receipt");
-
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_Product",
-                table: "Product");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Product_OrderContentsId",
-                table: "Product");
-
-            migrationBuilder.DropColumn(
-                name: "OrderContentsId",
-                table: "Product");
-
-            migrationBuilder.RenameTable(
-                name: "customers",
-                newName: "Customers");
-
-            migrationBuilder.RenameTable(
-                name: "Receipt",
-                newName: "Receipts");
-
-            migrationBuilder.RenameTable(
-                name: "Product",
-                newName: "Products");
-
-            migrationBuilder.RenameIndex(
-                name: "IX_Receipt_CustomerId",
-                table: "Receipts",
-                newName: "IX_Receipts_CustomerId");
-
-            migrationBuilder.AddColumn<string>(
-                name: "CustomerId",
-                table: "Customers",
-                nullable: true);
-
-            migrationBuilder.AddColumn<int>(
-                name: "TotalCost",
-                table: "Receipts",
-                nullable: false,
-                defaultValue: 0);
-
-            migrationBuilder.AddColumn<int>(
-                name: "CategoryId",
-                table: "Products",
-                nullable: true);
-
-            migrationBuilder.AddColumn<int>(
-                name: "ReceiptOrderId",
-                table: "Products",
-                nullable: true);
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_Customers",
-                table: "Customers",
-                column: "Id");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_Receipts",
-                table: "Receipts",
-                column: "OrderId");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_Products",
-                table: "Products",
-                column: "Id");
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -143,6 +59,21 @@ namespace Webshop.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductImages",
+                columns: table => new
+                {
+                    ImageId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ImageTitle = table.Column<string>(nullable: true),
+                    ImageName = table.Column<string>(nullable: true),
+                    ImageThumbName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductImages", x => x.ImageId);
                 });
 
             migrationBuilder.CreateTable(
@@ -252,6 +183,105 @@ namespace Webshop.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Customers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
+                    PhoneNumber = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    Address = table.Column<string>(nullable: false),
+                    PostalCode = table.Column<string>(nullable: false),
+                    City = table.Column<string>(nullable: false),
+                    Country = table.Column<string>(nullable: false),
+                    CustomerId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Customers_AspNetUsers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Product",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Price = table.Column<int>(nullable: false),
+                    CategoryId = table.Column<int>(nullable: true),
+                    ProductImageId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Product", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Product_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Product_ProductImages_ProductImageId",
+                        column: x => x.ProductImageId,
+                        principalTable: "ProductImages",
+                        principalColumn: "ImageId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    OrderId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderDate = table.Column<DateTime>(nullable: false),
+                    TotalCost = table.Column<int>(nullable: false),
+                    CustomerId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.OrderId);
+                    table.ForeignKey(
+                        name: "FK_Orders_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CartContents",
+                columns: table => new
+                {
+                    CartContentId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TotalCost = table.Column<int>(nullable: false),
+                    ProductId = table.Column<int>(nullable: true),
+                    Quantity = table.Column<int>(nullable: false),
+                    ShoppingCartId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartContents", x => x.CartContentId);
+                    table.ForeignKey(
+                        name: "FK_CartContents_Product_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Product",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProductCategories",
                 columns: table => new
                 {
@@ -269,9 +299,37 @@ namespace Webshop.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProductCategories_Products_ProductId",
+                        name: "FK_ProductCategories_Product_ProductId",
                         column: x => x.ProductId,
-                        principalTable: "Products",
+                        principalTable: "Product",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderDetails",
+                columns: table => new
+                {
+                    OrderDetailId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderId = table.Column<int>(nullable: false),
+                    ProductId = table.Column<int>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false),
+                    Price = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderDetails", x => x.OrderDetailId);
+                    table.ForeignKey(
+                        name: "FK_OrderDetails_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "OrderId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderDetails_Product_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Product",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -281,14 +339,14 @@ namespace Webshop.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "4feeca24-0bf7-4343-9ceb-9cf68f20dfa4", "0fbe93cd-b97c-4d90-9c69-f1019a457975", "Admin", "ADMIN" },
-                    { "f3ec7347-324c-4e28-a4ed-a1919c479c23", "c4c1a46c-9285-4eb1-880c-4ab016511013", "User", "USER" }
+                    { "d8b8468d-c770-43d0-a7dc-b8ec6dd301c6", "7126a0a0-9790-479a-9526-aab46ca40c3d", "Admin", "ADMIN" },
+                    { "fed4bc93-0480-4c6e-bbaf-43d76ffb7757", "ad2be820-a618-4a44-9ae5-599361dce737", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "2ab4357a-9a38-4534-8e93-26c1d5569979", 0, "4cafbdfc-b545-448e-81ad-3db0cfa4794b", "admin@admin.com", false, "Admin", "Adminsson", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEI03ZIIz3qlTTzoWPPaKPUwD2D+jR4d1i/hCXmUEA4X60voIFmTb1RMmSjhqJyOxCg==", null, false, "9ef20d66-fde9-40a8-bbe9-4864e9a1e72c", false, "admin@admin.com" });
+                values: new object[] { "cb017a0f-ea76-4e3f-ae53-87495002a538", 0, "7228c0bd-c37f-4c10-98b5-5ba5158b4bcd", "admin@admin.com", false, "Admin", "Adminsson", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAENK8aVK7rrkCjUvsEHqGsoIgc1eKrUtXbLgJF8mf9etlcI6eVMZpPQ8f+XLrft8INg==", null, false, "c04c9959-32c7-430a-b6f7-914b2aefcd71", false, "admin@admin.com" });
 
             migrationBuilder.InsertData(
                 table: "Categories",
@@ -301,36 +359,38 @@ namespace Webshop.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "AspNetUserRoles",
-                columns: new[] { "UserId", "RoleId" },
-                values: new object[] { "2ab4357a-9a38-4534-8e93-26c1d5569979", "4feeca24-0bf7-4343-9ceb-9cf68f20dfa4" });
-
-            migrationBuilder.InsertData(
-                table: "Products",
-                columns: new[] { "Id", "CategoryId", "Description", "Name", "Price", "ReceiptOrderId" },
+                table: "Customers",
+                columns: new[] { "Id", "Address", "City", "Country", "CustomerId", "Email", "FirstName", "LastName", "PhoneNumber", "PostalCode" },
                 values: new object[,]
                 {
-                    { 1001, 101, "A delicious chocolate cupcake with belgian chocolate", "Chocolate Dream", 29, null },
-                    { 1002, 102, "A frosted strawberry cupcake, filled with strawberry jam", "Pink surprise", 22, null },
-                    { 1003, 103, "A gluten free cupcake packed with flavor", "Plain delight", 34, null }
+                    { 1, "Kanelgatan 3", "Visby", "Sweden", null, "bling@gmail.com", "Arne", "Karat", "043016624", "23445" },
+                    { 2, "Rimbo torg 1", "Skövde", "Sweden", null, "stekarn@gmail.com", "Kenneth", "Svenzon", "0721453456", "44565" },
+                    { 3, "Kungsgatan 4", "Arboga", "Sweden", null, "lucky@hotmail.com", "Angela", "Melodi", "0771242424", "32344" },
+                    { 4, "Royal Carnac Hotel 1", "Cairo", "Egypt", null, "kafr@egypt.gov", "Kaj", "Fridell", "031184698", "33467" },
+                    { 5, "Vedgatan 3", "Oslo", "Norway", null, "tavlan@gmail.com", "Molly", "Sundkvist", "0443346723", "46723" },
+                    { 6, "Gatgatan 2", "Göteborg", "Sweden", null, "test@gmail.com", "Jan", "Andersson", "04422723", "46723" },
+                    { 7, "Avenyn 1", "Berlin", "Germany", null, "raj@goteborg.se", "Sofia", "Bosch", "0543768798", "67823" }
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Customers_CustomerId",
-                table: "Customers",
-                column: "CustomerId",
-                unique: true,
-                filter: "[CustomerId] IS NOT NULL");
+            migrationBuilder.InsertData(
+                table: "ProductImages",
+                columns: new[] { "ImageId", "ImageName", "ImageThumbName", "ImageTitle" },
+                values: new object[] { 1, "chokladtest.jpg", "chokladtestth.jpg", "Chocolate Dream" });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Products_CategoryId",
-                table: "Products",
-                column: "CategoryId");
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "UserId", "RoleId" },
+                values: new object[] { "cb017a0f-ea76-4e3f-ae53-87495002a538", "d8b8468d-c770-43d0-a7dc-b8ec6dd301c6" });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Products_ReceiptOrderId",
-                table: "Products",
-                column: "ReceiptOrderId");
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "Id", "CategoryId", "Description", "Name", "Price", "ProductImageId" },
+                values: new object[,]
+                {
+                    { 1001, 101, "A delicious chocolate cupcake with belgian chocolate", "Chocolate Dream", 29, 1 },
+                    { 1002, 102, "A frosted strawberry cupcake, filled with strawberry jam", "Pink surprise", 22, 1 },
+                    { 1003, 103, "A gluten free cupcake packed with flavor", "Plain delight", 34, 1 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -372,61 +432,50 @@ namespace Webshop.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CartContents_ProductId",
+                table: "CartContents",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Customers_CustomerId",
+                table: "Customers",
+                column: "CustomerId",
+                unique: true,
+                filter: "[CustomerId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderDetails_OrderId",
+                table: "OrderDetails",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderDetails_ProductId",
+                table: "OrderDetails",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_CustomerId",
+                table: "Orders",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Product_CategoryId",
+                table: "Product",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Product_ProductImageId",
+                table: "Product",
+                column: "ProductImageId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProductCategories_CategoryId",
                 table: "ProductCategories",
                 column: "CategoryId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Customers_AspNetUsers_CustomerId",
-                table: "Customers",
-                column: "CustomerId",
-                principalTable: "AspNetUsers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Products_Categories_CategoryId",
-                table: "Products",
-                column: "CategoryId",
-                principalTable: "Categories",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Products_Receipts_ReceiptOrderId",
-                table: "Products",
-                column: "ReceiptOrderId",
-                principalTable: "Receipts",
-                principalColumn: "OrderId",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Receipts_Customers_CustomerId",
-                table: "Receipts",
-                column: "CustomerId",
-                principalTable: "Customers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Customers_AspNetUsers_CustomerId",
-                table: "Customers");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Products_Categories_CategoryId",
-                table: "Products");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Products_Receipts_ReceiptOrderId",
-                table: "Products");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Receipts_Customers_CustomerId",
-                table: "Receipts");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -443,157 +492,34 @@ namespace Webshop.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "CartContents");
+
+            migrationBuilder.DropTable(
+                name: "OrderDetails");
+
+            migrationBuilder.DropTable(
                 name: "ProductCategories");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "Product");
+
+            migrationBuilder.DropTable(
+                name: "Customers");
 
             migrationBuilder.DropTable(
                 name: "Categories");
 
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_Customers",
-                table: "Customers");
+            migrationBuilder.DropTable(
+                name: "ProductImages");
 
-            migrationBuilder.DropIndex(
-                name: "IX_Customers_CustomerId",
-                table: "Customers");
-
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_Receipts",
-                table: "Receipts");
-
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_Products",
-                table: "Products");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Products_CategoryId",
-                table: "Products");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Products_ReceiptOrderId",
-                table: "Products");
-
-            migrationBuilder.DeleteData(
-                table: "Products",
-                keyColumn: "Id",
-                keyValue: 1001);
-
-            migrationBuilder.DeleteData(
-                table: "Products",
-                keyColumn: "Id",
-                keyValue: 1002);
-
-            migrationBuilder.DeleteData(
-                table: "Products",
-                keyColumn: "Id",
-                keyValue: 1003);
-
-            migrationBuilder.DropColumn(
-                name: "CustomerId",
-                table: "Customers");
-
-            migrationBuilder.DropColumn(
-                name: "TotalCost",
-                table: "Receipts");
-
-            migrationBuilder.DropColumn(
-                name: "CategoryId",
-                table: "Products");
-
-            migrationBuilder.DropColumn(
-                name: "ReceiptOrderId",
-                table: "Products");
-
-            migrationBuilder.RenameTable(
-                name: "Customers",
-                newName: "customers");
-
-            migrationBuilder.RenameTable(
-                name: "Receipts",
-                newName: "Receipt");
-
-            migrationBuilder.RenameTable(
-                name: "Products",
-                newName: "Product");
-
-            migrationBuilder.RenameIndex(
-                name: "IX_Receipts_CustomerId",
-                table: "Receipt",
-                newName: "IX_Receipt_CustomerId");
-
-            migrationBuilder.AddColumn<int>(
-                name: "OrderContentsId",
-                table: "Product",
-                type: "int",
-                nullable: true);
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_customers",
-                table: "customers",
-                column: "Id");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_Receipt",
-                table: "Receipt",
-                column: "OrderId");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_Product",
-                table: "Product",
-                column: "Id");
-
-            migrationBuilder.CreateTable(
-                name: "OrderContents",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    ReceiptOrderId = table.Column<int>(type: "int", nullable: true),
-                    TotalCost = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OrderContents", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_OrderContents_Receipt_ReceiptOrderId",
-                        column: x => x.ReceiptOrderId,
-                        principalTable: "Receipt",
-                        principalColumn: "OrderId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Product_OrderContentsId",
-                table: "Product",
-                column: "OrderContentsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderContents_ReceiptOrderId",
-                table: "OrderContents",
-                column: "ReceiptOrderId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Product_OrderContents_OrderContentsId",
-                table: "Product",
-                column: "OrderContentsId",
-                principalTable: "OrderContents",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Receipt_customers_CustomerId",
-                table: "Receipt",
-                column: "CustomerId",
-                principalTable: "customers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

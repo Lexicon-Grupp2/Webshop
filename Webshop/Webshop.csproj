@@ -5,13 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20220330081018_Added one-to-many ProductImage-Product.cs" />
-    <Compile Remove="Migrations\20220330081018_Added one-to-many ProductImage-Product.Designer.cs" />
-    <Compile Remove="Migrations\20220330082028_Added one-to-many ProductImage-Product.cs" />
-    <Compile Remove="Migrations\20220330082028_Added one-to-many ProductImage-Product.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="bootstrap" Version="5.1.3" />
     <PackageReference Include="JavaScriptEngineSwitcher.Core" Version="3.3.0" />
     <PackageReference Include="JavaScriptEngineSwitcher.Extensions.MsDependencyInjection" Version="3.3.0" />
