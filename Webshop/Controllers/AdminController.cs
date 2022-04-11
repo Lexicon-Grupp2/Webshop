@@ -46,6 +46,68 @@ namespace Webshop.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult ListUsers()
+        {          
+            List<ApplicationUser> users = _context.Users.Include(user => user.Customer).ToList();
+
+            UsersViewModel viewModel = new UsersViewModel(users);
+
+            return View(viewModel);
+        }
+
+        // GET: Admin/EditUser/5
+        [HttpGet]
+        public async Task<IActionResult> EditUser(string Id)
+        {
+            if (Id == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _context.Users.FindAsync(Id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
+
+        // Post: Admin/Edit/5
+        [HttpPost]
+        public async Task<IActionResult> EditUser(string Id, ApplicationUser user)
+        {
+            //test get logged in user
+            var tempuser = _context.Users
+                        .Where(u => u.UserName == User.Identity.Name)
+                        .FirstOrDefault();
+
+            if (Id != null)
+            {
+                if (ModelState.IsValid)
+                {
+                    ApplicationUser userToChange = await _context.Users.FindAsync(Id);
+
+                    //update todo->change better
+                    userToChange.FirstName = user.FirstName;
+                    userToChange.LastName = user.LastName;
+                    userToChange.PhoneNumber = user.PhoneNumber;
+                    userToChange.Email = user.Email;
+                    userToChange.NormalizedEmail = user.Email.ToUpper();
+                    userToChange.UserName = user.Email;
+                    user.NormalizedUserName = user.Email.ToUpper();
+                    userToChange.Country = user.Country;
+                    userToChange.City = user.City;
+                    userToChange.Address = user.Address;
+                    user.PostalCode = user.PostalCode;
+
+                    _context.Users.Update(userToChange);
+
+                    await _context.SaveChangesAsync();
+                }
+            }
+            return RedirectToAction(nameof(ListUsers));
+        }
+
         // GET: Admin/CreateCategory
         public IActionResult CreateCategory()
         {

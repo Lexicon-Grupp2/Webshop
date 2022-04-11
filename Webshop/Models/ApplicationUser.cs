@@ -15,6 +15,14 @@ namespace Webshop.Models
         [Required]
         [Display(Name = "Last name")]
         public string LastName { get; set; }
+        [Required]
+        public string Address { get; set; }
+        [Required]
+        public string PostalCode { get; set; }
+        [Required]
+        public string City { get; set; }
+        [Required]
+        public string Country { get; set; }
 
         public Customer Customer { get; set; }
     

@@ -121,6 +121,7 @@ namespace Webshop.Data
             string roleId = Guid.NewGuid().ToString();
             string userRoleId = Guid.NewGuid().ToString();
             string userId = Guid.NewGuid().ToString();
+            string customerId = Guid.NewGuid().ToString();
 
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
             {
@@ -138,23 +139,51 @@ namespace Webshop.Data
 
             PasswordHasher<ApplicationUser> hasher = new PasswordHasher<ApplicationUser>();
 
-            modelBuilder.Entity<ApplicationUser>().HasData(new ApplicationUser
-            {
-                Id = userId,
-                Email = "admin@admin.com",
-                NormalizedEmail = "ADMIN@ADMIN.COM",
-                UserName = "admin@admin.com",
-                NormalizedUserName = "ADMIN@ADMIN.COM",
-                PasswordHash = hasher.HashPassword(null, "password"),
-                FirstName = "Admin",
-                LastName = "Adminsson"
-            });
+            modelBuilder.Entity<ApplicationUser>().HasData(
+                new ApplicationUser
+                {
+                    Id = userId,
+                    Email = "admin@admin.com",
+                    NormalizedEmail = "ADMIN@ADMIN.COM",
+                    UserName = "admin@admin.com",
+                    NormalizedUserName = "ADMIN@ADMIN.COM",
+                    PasswordHash = hasher.HashPassword(null, "password"),
+                    FirstName = "Admin",
+                    LastName = "Adminsson",
+                    Address = "Adminvägen 1",
+                    PostalCode = "12345",
+                    City = "Admin city",
+                    Country = "Admin country",
+                    PhoneNumber = "123456578"
+                },
+                new ApplicationUser
+                {
+                    Id = customerId,
+                    Email = "seeduser@seeduser.com",
+                    NormalizedEmail = "SEEDUSER@SEEDUSER.COM",
+                    UserName = "seeduser@seeduser.com",
+                    NormalizedUserName = "SEEDUSER@SEEDUSER.COM",
+                    PasswordHash = hasher.HashPassword(null, "password"),
+                    FirstName = "Admin",
+                    LastName = "Adminsson",
+                    Address = "Kundvägen 11",
+                    PostalCode = "12345",
+                    City = "Kundstaden",
+                    Country = "Sverige",
+                    PhoneNumber = "87654321"
+                });
 
-            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
-            {
-                RoleId = roleId,
-                UserId = userId
-            });
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(
+                new IdentityUserRole<string>
+                {
+                    RoleId = roleId,
+                    UserId = userId
+                },
+                new IdentityUserRole<string>
+                {
+                    RoleId = userRoleId,
+                    UserId = customerId
+                });
         }
     }
 }

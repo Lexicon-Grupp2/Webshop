@@ -1,0 +1,57 @@
+﻿@model Webshop.Viewmodels.UsersViewModel
+
+<h1>Users</h1>
+
+<table class="table table-striped">
+    <thead class="thead-light">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Country</th>
+            <th>City</th>
+            <th>Orders</th>
+            <th>Details</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ApplicationUser user in Model.Users)
+        {
+        <tr>
+            <td>
+                @user.FirstName @user.LastName
+            </td>
+            <td>
+                @user.Email
+            </td>
+            <td>
+                @user.Country
+            </td>
+            <td>
+                @user.City
+            </td>
+            <td>
+                @if (user.Customer != null)
+                {
+                    if (user.Customer.Orders != null)
+                    {
+                        @user.Customer.Orders.Count
+                    }
+                    else
+                    {
+                        <p>null (Orders is null)</p>
+                    }
+                }
+                else
+                {
+                    <p>null (Customer is null)</p>
+                }
+            </td>
+            <td>link details</td>
+            <td><a asp-action="EditUser" asp-route-id="@user.Id">Edit</a></td>
+            <td>link delete</td>
+        </tr>
+        }
+    </tbody>
+</table>
