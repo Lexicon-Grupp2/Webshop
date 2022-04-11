@@ -33,7 +33,7 @@ namespace Webshop.Models
 
         }
 
-        public void Create(Order order)
+        public void Create(Order order, string customerid)
         {
             order.OrderDate = DateTime.Now;
 
@@ -48,7 +48,7 @@ namespace Webshop.Models
                 {
 
                     //Här kan vi lägga till fler värden efter behov
-
+                    ProductName = item.Product.Name,
                     Quantity = item.Quantity,
                     ProductId = item.Product.Id,
                     Price = item.Product.Price

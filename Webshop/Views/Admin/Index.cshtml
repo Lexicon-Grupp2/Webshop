@@ -11,6 +11,7 @@
         <tr>
             <th>Id</th>
             <th>Date</th>
+            <th>Customer Id</th>
             <th>Total Cost</th>
         </tr>
     </thead>
@@ -23,6 +24,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerId)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TotalCost)
