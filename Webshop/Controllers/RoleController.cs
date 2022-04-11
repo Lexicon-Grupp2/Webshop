@@ -55,6 +55,15 @@ namespace Webshop.Controllers
             return View(model);
         }
 
+        public IActionResult AddRoleToSpecificUser(ApplicationUser roleUser)
+        {
+            AddRoleToUserViewModel model = new AddRoleToUserViewModel();
+            model.Roles = new SelectList(_roleManager.Roles, "Name", "Name");
+            model.User = roleUser;
+
+            return View(model);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddRoleToUser(string role, string user)
         {

@@ -14,6 +14,7 @@ namespace Webshop.Viewmodels
         public string City { get; set; }
         public int Orders { get; set; }
         public List<string> Roles { get; set; }
+        public string Role { get; set; }
 
     }
 }

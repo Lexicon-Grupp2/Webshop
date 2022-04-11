@@ -47,10 +47,57 @@ namespace Webshop.Controllers
         }
 
         public IActionResult ListUsers()
-        {          
-            List<ApplicationUser> users = _context.Users.Include(user => user.Customer).ToList();
+        {
+            var customers = (from role in _context.Roles // get person table as p
+                                  join user in _context.UserRoles // implement join as e in EmailAddresses table
+                                  on role.Id equals user.RoleId //implement join on rows where p.BusinessEntityID == e.BusinessEntityID
+                                  where role.Name == "User"
+                                  select new UserWithRole { UserId = user.UserId, RoleId = role.Id, RoleName = role.Name }).ToList();
+
+            var admins = (from role in _context.Roles // get person table as p
+                                  join user in _context.UserRoles // implement join as e in EmailAddresses table
+                                  on role.Id equals user.RoleId //implement join on rows where p.BusinessEntityID == e.BusinessEntityID
+                                  where role.Name == "Admin"
+                                  select new UserWithRole { UserId = user.UserId, RoleId = role.Id, RoleName = role.Name }).ToList();
+
+            var adminsWithNames = (from admin in admins
+                                   join user in _context.Users
+                                   on admin.UserId equals user.Id
+                                   select new UserInListViewModel { UserId = user.Id, City = user.City, Country = user.Country, Email = user.Email, Name = user.FirstName + " " + user.LastName, Role = admin.RoleName}).ToList();
+
+            var customersWithNames = (from tUser in customers
+                                   join user in _context.Users
+                                   on tUser.UserId equals user.Id
+                                   select new UserInListViewModel { UserId = user.Id, City = user.City, Country = user.Country, Email = user.Email, Name = user.FirstName + " " + user.LastName, Role = tUser.RoleName }).ToList();
+
+
+            List< ApplicationUser > users = _context.Users.Include(user => user.Customer).ToList();
 
             UsersViewModel viewModel = new UsersViewModel(users);
+
+            foreach (ApplicationUser u in viewModel.Users)
+            {
+                UserInListViewModel userViewModel = (new UserInListViewModel 
+                { UserId = u.Id, City = u.City, Country = u.Country, 
+                    Email = u.Email, Name = u.FirstName + " " + u.LastName  
+                });
+
+                if(u.Customer != null)
+                {
+                    if(u.Customer.Orders != null)
+                    {
+                        userViewModel.Orders = u.Customer.Orders.Count;
+                    }
+                }
+
+                //roles
+
+                //add
+                viewModel.UserViewModels.Add(userViewModel);
+            }
+
+            viewModel.Admins = adminsWithNames;
+            viewModel.Customers = customersWithNames;
 
             return View(viewModel);
         }
@@ -70,6 +117,24 @@ namespace Webshop.Controllers
                 return NotFound();
             }
             return View(user);
+        }
+
+        // GET: Admin/EditUser/5
+        [HttpGet]
+        public async Task<IActionResult> AddRoleToUser(string Id)
+        {
+            if (Id == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _context.Users.FindAsync(Id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return RedirectToAction("AddRoleToSpecificUser", "Role", user);
         }
 
         // Post: Admin/Edit/5
