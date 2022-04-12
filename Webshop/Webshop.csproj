@@ -19,12 +19,16 @@
     <Compile Remove="Migrations\20220407204155_changed seeding.Designer.cs" />
     <Compile Remove="Migrations\20220408084039_Updated ApplicationUser.cs" />
     <Compile Remove="Migrations\20220408084039_Updated ApplicationUser.Designer.cs" />
+    <Compile Remove="Migrations\20220408084312_Updated ApplicationUser.cs" />
+    <Compile Remove="Migrations\20220408084312_Updated ApplicationUser.Designer.cs" />
     <Compile Remove="Migrations\20220408125905_test order &amp; userid.cs" />
     <Compile Remove="Migrations\20220408125905_test order &amp; userid.Designer.cs" />
     <Compile Remove="Migrations\20220411131018_added 1 seeded user.cs" />
     <Compile Remove="Migrations\20220411131018_added 1 seeded user.Designer.cs" />
     <Compile Remove="Migrations\20220411131303_added 1 seeded user.cs" />
     <Compile Remove="Migrations\20220411131303_added 1 seeded user.Designer.cs" />
+    <Compile Remove="Migrations\20220412092121_Added 4 seeded users.cs" />
+    <Compile Remove="Migrations\20220412092121_Added 4 seeded users.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
