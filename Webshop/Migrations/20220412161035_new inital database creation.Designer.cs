@@ -10,8 +10,8 @@ using Webshop.Data;
 namespace Webshop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220407204602_changed seeding")]
-    partial class changedseeding
+    [Migration("20220412161035_new inital database creation")]
+    partial class newinitaldatabasecreation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace Webshop.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "45f2c495-f316-4a94-91a5-a9cd0cf02dd0",
-                            ConcurrencyStamp = "b8b86ae2-63e0-486a-ac90-1601f975c7cc",
+                            Id = "3a1f1eca-4ab8-45e7-99c5-0ac1fae73356",
+                            ConcurrencyStamp = "29b515ec-ac6c-4e57-8393-e663a5ec5869",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "2843df3c-f0af-447d-85eb-995093a9ab8e",
-                            ConcurrencyStamp = "f3fe6e86-5f7f-4b80-9257-6e33380a3791",
+                            Id = "a16e2917-6951-475c-9616-c9ff11679b90",
+                            ConcurrencyStamp = "b04c5a15-0bf2-43bc-bf92-c1b73caf385a",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -151,8 +151,28 @@ namespace Webshop.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "072cfc86-a988-4b01-9923-60fc8564c75d",
-                            RoleId = "45f2c495-f316-4a94-91a5-a9cd0cf02dd0"
+                            UserId = "d3203281-3f97-4b0f-920e-fd43cca6637a",
+                            RoleId = "3a1f1eca-4ab8-45e7-99c5-0ac1fae73356"
+                        },
+                        new
+                        {
+                            UserId = "50d3f6df-f9d5-41fb-8d66-4110f64250a0",
+                            RoleId = "a16e2917-6951-475c-9616-c9ff11679b90"
+                        },
+                        new
+                        {
+                            UserId = "d13a3ff0-9a84-42e2-8bce-98cd6bd96dc2",
+                            RoleId = "a16e2917-6951-475c-9616-c9ff11679b90"
+                        },
+                        new
+                        {
+                            UserId = "c9be1724-46f3-41e1-afd8-ff3acb9f3603",
+                            RoleId = "a16e2917-6951-475c-9616-c9ff11679b90"
+                        },
+                        new
+                        {
+                            UserId = "01484be6-e833-4a39-9db8-52e5f9b84e56",
+                            RoleId = "a16e2917-6951-475c-9616-c9ff11679b90"
                         });
                 });
 
@@ -183,8 +203,20 @@ namespace Webshop.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -225,6 +257,10 @@ namespace Webshop.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -250,9 +286,12 @@ namespace Webshop.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "072cfc86-a988-4b01-9923-60fc8564c75d",
+                            Id = "d3203281-3f97-4b0f-920e-fd43cca6637a",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "aa2921cb-c321-4c07-8699-b09aaf8b46ab",
+                            Address = "Adminvägen 1",
+                            City = "Admin city",
+                            ConcurrencyStamp = "dda1898c-14e6-4036-ad7d-d901d27c27df",
+                            Country = "Admin country",
                             Email = "admin@admin.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -260,11 +299,105 @@ namespace Webshop.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEH6ucIbfNPxIpad+K8e5Wka3bXKgwc0AiW7Uz+Jot65YuP/GInYbcGS9in0SJchfWg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEO06R+IBc5j3z5+O7UJ/+25Rk9TjwLiX/Mnef4/q8C8u2+8ZWz1Z8LKyqUrv0Dg9+A==",
+                            PhoneNumber = "123456578",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0d68c89d-a13d-48bb-85d2-1f511dc0a681",
+                            PostalCode = "12345",
+                            SecurityStamp = "315b25a5-6477-4de0-bea0-d782a7903d44",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
+                        },
+                        new
+                        {
+                            Id = "50d3f6df-f9d5-41fb-8d66-4110f64250a0",
+                            AccessFailedCount = 0,
+                            Address = "Kanelgatan 3",
+                            City = "Visby",
+                            ConcurrencyStamp = "8aafa24e-9fb9-4e6b-b1f3-015a1d797405",
+                            Country = "Sweden",
+                            Email = "customer1@seeduser.com",
+                            EmailConfirmed = false,
+                            FirstName = "Arne",
+                            LastName = "Karat",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "CUSTOMER1@SEEDUSER.COM",
+                            NormalizedUserName = "CUSTOMER1@SEEDUSER.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPQOck5qJO/nF7BuqoTFfVONKyx6smJiNyYOOAT779ASDSNuvp2LMEVxhSOwDGE/wA==",
+                            PhoneNumber = "043016624",
+                            PhoneNumberConfirmed = false,
+                            PostalCode = "23445",
+                            SecurityStamp = "8331a3ec-bda0-4b3d-b633-a5616c8aa8b7",
+                            TwoFactorEnabled = false,
+                            UserName = "customer1@seeduser.com"
+                        },
+                        new
+                        {
+                            Id = "d13a3ff0-9a84-42e2-8bce-98cd6bd96dc2",
+                            AccessFailedCount = 0,
+                            Address = "Rimbo torg 1",
+                            City = "Skövde",
+                            ConcurrencyStamp = "4604b0a3-5ec3-4ae1-974a-ee6a89848022",
+                            Country = "Sweden",
+                            Email = "customer2@seeduser.com",
+                            EmailConfirmed = false,
+                            FirstName = "Kenneth",
+                            LastName = "Svenzon",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "CUSTOMER2@SEEDUSER.COM",
+                            NormalizedUserName = "CUSTOMER2@SEEDUSER.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAECwn/dIzERyjOB73KvP+RPPguBqHjC0VL1fV8rhMa2Xw0Lyao9kdRX4Cd0ep2UZTyw==",
+                            PhoneNumber = "0721453456",
+                            PhoneNumberConfirmed = false,
+                            PostalCode = "44565",
+                            SecurityStamp = "b999b73d-22f1-4d7c-8b3d-50504e86cb8a",
+                            TwoFactorEnabled = false,
+                            UserName = "customer2@seeduser.com"
+                        },
+                        new
+                        {
+                            Id = "c9be1724-46f3-41e1-afd8-ff3acb9f3603",
+                            AccessFailedCount = 0,
+                            Address = "Kungsgatan 4",
+                            City = "Arboga",
+                            ConcurrencyStamp = "11779972-5da7-476d-bce6-5c4a4e2f3622",
+                            Country = "Sweden",
+                            Email = "customer3@seeduser.com",
+                            EmailConfirmed = false,
+                            FirstName = "Angela",
+                            LastName = "Melodi",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "CUSTOMER3@SEEDUSER.COM",
+                            NormalizedUserName = "CUSTOMER3@SEEDUSER.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEA061pLol1obtVbb+bTCKstwSZviE8bz4f0yr9XgSyfjYrDYRQc3PNfQFqLfjvAZNw==",
+                            PhoneNumber = "0771242424",
+                            PhoneNumberConfirmed = false,
+                            PostalCode = "32344",
+                            SecurityStamp = "7c799b83-9e2a-4c14-a233-2b2b8ded36dd",
+                            TwoFactorEnabled = false,
+                            UserName = "customer3@seeduser.com"
+                        },
+                        new
+                        {
+                            Id = "01484be6-e833-4a39-9db8-52e5f9b84e56",
+                            AccessFailedCount = 0,
+                            Address = "Royal Carnac Hotel 1",
+                            City = "Cairo",
+                            ConcurrencyStamp = "bac33314-5020-4bd3-8dbb-86e38da9d1cd",
+                            Country = "Egypt",
+                            Email = "seeduser@seeduser.com",
+                            EmailConfirmed = false,
+                            FirstName = "Kaj",
+                            LastName = "Fridell",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "SEEDUSER@SEEDUSER.COM",
+                            NormalizedUserName = "SEEDUSER@SEEDUSER.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEK6D+aeIpL9w/v0zUrZ7h8bsk+rjuYchgPZQ4QU+jtb8guN2JjLr/c42v1U1uwE72Q==",
+                            PhoneNumber = "031184698",
+                            PhoneNumberConfirmed = false,
+                            PostalCode = "33467",
+                            SecurityStamp = "1748b744-7fda-402f-a868-7a6f1967cc59",
+                            TwoFactorEnabled = false,
+                            UserName = "seeduser@seeduser.com"
                         });
                 });
 
@@ -475,18 +608,24 @@ namespace Webshop.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CustomerId")
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CustomerId1")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("Paid")
+                        .HasColumnType("bit");
 
                     b.Property<int>("TotalCost")
                         .HasColumnType("int");
 
                     b.HasKey("OrderId");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomerId1");
 
                     b.ToTable("Orders");
                 });
@@ -506,6 +645,9 @@ namespace Webshop.Migrations
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
+
+                    b.Property<string>("ProductName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -750,7 +892,7 @@ namespace Webshop.Migrations
                 {
                     b.HasOne("Webshop.Models.Customer", null)
                         .WithMany("Orders")
-                        .HasForeignKey("CustomerId");
+                        .HasForeignKey("CustomerId1");
                 });
 
             modelBuilder.Entity("Webshop.Models.OrderDetail", b =>
