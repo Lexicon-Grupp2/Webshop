@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Webshop.Models;
+using Webshop.Viewmodels;
 
 namespace Webshop.Controllers
 {
@@ -33,7 +34,6 @@ namespace Webshop.Controllers
         }
 
         //Task needs to be Async
-
         [HttpPost]
         public async Task<IActionResult> Create(string name)
         {
@@ -46,23 +46,46 @@ namespace Webshop.Controllers
             return View();
         }
 
-        public IActionResult AddUserToRole()
+        public IActionResult AddRoleToUser()
         {
-            ViewData["Roles"] = new SelectList(_roleManager.Roles, "Name", "Name");
-            ViewData["Users"] = new SelectList(_userManager.Users, "Id", "UserName");
-            return View();
+            AddRoleToUsersViewModel model = new AddRoleToUsersViewModel();
+            model.Roles = new SelectList(_roleManager.Roles, "Name", "Name");
+            model.Users = new SelectList(_userManager.Users, "Id", "UserName");
+
+            return View(model);
+        }
+
+        public IActionResult AddRoleToSpecificUser(ApplicationUser roleUser)
+        {
+            AddRoleToUserViewModel model = new AddRoleToUserViewModel();
+            model.Roles = new SelectList(_roleManager.Roles, "Name", "Name");
+            model.User = roleUser;
+
+            return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddUserToRole(string role, string user)
+        public async Task<IActionResult> AddRoleToUser(string role, string user)
         {
-            var _user = await _userManager.FindByIdAsync(user);
+            var tempUser = await _userManager.FindByIdAsync(user);
 
-            IdentityResult result = await _userManager.AddToRoleAsync(_user, role);
+            IdentityResult result = await _userManager.AddToRoleAsync(tempUser, role);
             if (result.Succeeded)
                 return RedirectToAction("Index");
 
-            return View();
+            //if reached-> error -> create error message to viewmodel
+            AddRoleToUsersViewModel model = new AddRoleToUsersViewModel();
+            model.Roles = new SelectList(_roleManager.Roles, "Name", "Name");
+            model.Users = new SelectList(_userManager.Users, "Id", "UserName");
+            if (result.Errors.Any())
+            {
+                foreach (var item in result.Errors)
+                {
+                    //Todo-> change to array 
+                    model.Message += item.Description;
+                }
+            }
+            return View(model);
         }
     }
 }
