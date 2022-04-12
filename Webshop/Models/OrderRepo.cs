@@ -22,8 +22,6 @@ namespace Webshop.Models
             return _context.Orders.ToList();
         }
 
-        //Bättre (säkrare) att lägga all logiken här istället?
-
         public void Remove(int id)
         {
             var chosenOrder = _context.Orders.SingleOrDefault(order => order.OrderId == id);
@@ -33,9 +31,11 @@ namespace Webshop.Models
 
         }
 
-        public void Create(Order order)
+        public void Create(Order order, string customerid)
         {
             order.OrderDate = DateTime.Now;
+            order.Paid = true;
+            order.CustomerId = customerid;
 
             var shoppingCartContents = _shoppingCart.CartContents;
             order.TotalCost = _shoppingCart.GetShoppingCartTotal();
@@ -46,9 +46,7 @@ namespace Webshop.Models
             {
                 var orderDetail = new OrderDetail
                 {
-
-                    //Här kan vi lägga till fler värden efter behov
-
+                    ProductName = item.Product.Name,
                     Quantity = item.Quantity,
                     ProductId = item.Product.Id,
                     Price = item.Product.Price

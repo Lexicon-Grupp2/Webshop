@@ -9,6 +9,6 @@ namespace Webshop.Models
     {
         List<Order> ViewAll();
         void Remove(int id);
-        void Create(Order order);
+        void Create(Order order, string customerid);
     }
 }
