@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Webshop.Migrations
 {
-    public partial class init : Migration
+    public partial class updatedorder : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -245,15 +245,17 @@ namespace Webshop.Migrations
                     OrderId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderDate = table.Column<DateTime>(nullable: false),
+                    CustomerId = table.Column<string>(nullable: true),
+                    Paid = table.Column<bool>(nullable: false),
                     TotalCost = table.Column<int>(nullable: false),
-                    CustomerId = table.Column<int>(nullable: true)
+                    CustomerId1 = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.OrderId);
                     table.ForeignKey(
-                        name: "FK_Orders_Customers_CustomerId",
-                        column: x => x.CustomerId,
+                        name: "FK_Orders_Customers_CustomerId1",
+                        column: x => x.CustomerId1,
                         principalTable: "Customers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -313,6 +315,7 @@ namespace Webshop.Migrations
                     OrderDetailId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderId = table.Column<int>(nullable: false),
+                    ProductName = table.Column<string>(nullable: true),
                     ProductId = table.Column<int>(nullable: false),
                     Quantity = table.Column<int>(nullable: false),
                     Price = table.Column<int>(nullable: false)
@@ -339,14 +342,14 @@ namespace Webshop.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "d8b8468d-c770-43d0-a7dc-b8ec6dd301c6", "7126a0a0-9790-479a-9526-aab46ca40c3d", "Admin", "ADMIN" },
-                    { "fed4bc93-0480-4c6e-bbaf-43d76ffb7757", "ad2be820-a618-4a44-9ae5-599361dce737", "User", "USER" }
+                    { "5f1446e0-7af5-40a7-9333-8c1e116b5fa1", "e8d1baf4-69b6-43d8-ab61-30980c59c48a", "Admin", "ADMIN" },
+                    { "a0370123-847b-472f-921e-d946523988ac", "256a6aaf-497e-42d5-9500-44f0c5e019a5", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "cb017a0f-ea76-4e3f-ae53-87495002a538", 0, "7228c0bd-c37f-4c10-98b5-5ba5158b4bcd", "admin@admin.com", false, "Admin", "Adminsson", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAENK8aVK7rrkCjUvsEHqGsoIgc1eKrUtXbLgJF8mf9etlcI6eVMZpPQ8f+XLrft8INg==", null, false, "c04c9959-32c7-430a-b6f7-914b2aefcd71", false, "admin@admin.com" });
+                values: new object[] { "7a11e1e4-b731-4d22-84eb-d67a1f2f75bf", 0, "2b44fc2f-7c20-498c-8621-1747e366b771", "admin@admin.com", false, "Admin", "Adminsson", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEFolo4vmiQSsvs3KzXJwMzsq9AnXj0hvO6Ok249t+4DWKY7cJ47wZ4yiMTdSa75VpQ==", null, false, "dede5c85-4fa6-4091-a4d6-e89038799a90", false, "admin@admin.com" });
 
             migrationBuilder.InsertData(
                 table: "Categories",
@@ -355,7 +358,8 @@ namespace Webshop.Migrations
                 {
                     { 101, "Chocolate" },
                     { 102, "Frosted" },
-                    { 103, "Gluten free" }
+                    { 103, "Gluten free" },
+                    { 104, "Berries and fruits" }
                 });
 
             migrationBuilder.InsertData(
@@ -380,7 +384,7 @@ namespace Webshop.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "UserId", "RoleId" },
-                values: new object[] { "cb017a0f-ea76-4e3f-ae53-87495002a538", "d8b8468d-c770-43d0-a7dc-b8ec6dd301c6" });
+                values: new object[] { "7a11e1e4-b731-4d22-84eb-d67a1f2f75bf", "5f1446e0-7af5-40a7-9333-8c1e116b5fa1" });
 
             migrationBuilder.InsertData(
                 table: "Product",
@@ -389,7 +393,14 @@ namespace Webshop.Migrations
                 {
                     { 1001, 101, "A delicious chocolate cupcake with belgian chocolate", "Chocolate Dream", 29, 1 },
                     { 1002, 102, "A frosted strawberry cupcake, filled with strawberry jam", "Pink surprise", 22, 1 },
-                    { 1003, 103, "A gluten free cupcake packed with flavor", "Plain delight", 34, 1 }
+                    { 1003, 103, "A gluten free cupcake packed with flavor", "Plain delight", 34, 1 },
+                    { 1004, 104, "Filled with peanut butter and topped with delicious peanut frosting.", "Peanut butter cup-cake", 34, 1 },
+                    { 1005, 101, "This is the cupcake for you if you like all things Nutella.", "Nutella mountain", 34, 1 },
+                    { 1006, 101, "A cupcake made to look like a giant M&M.", "M&M don't sue us", 34, 1 },
+                    { 1007, 104, "Not the tea, instead a cupcake with every kind of berry.", "Forest fruit", 34, 1 },
+                    { 1008, 101, "Oreo cookie on top as well as batter and frosting made from oreo's.", "Oreo supreme", 34, 1 },
+                    { 1009, 104, "If you like something with a fresher taste, this cupcake is for you.", "Lemon", 34, 1 },
+                    { 1010, 104, "Every taste of the fruit rainbow you can imagine.", "Taste the rainbow", 34, 1 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -454,9 +465,9 @@ namespace Webshop.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_CustomerId",
+                name: "IX_Orders_CustomerId1",
                 table: "Orders",
-                column: "CustomerId");
+                column: "CustomerId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Product_CategoryId",

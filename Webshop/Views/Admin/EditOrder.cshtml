@@ -1,0 +1,41 @@
+﻿@model Order
+
+@{
+    ViewData["Title"] = "EditOrder";
+}
+
+<div class="text-center">
+    <div>
+        <form asp-action="EditOrder">
+
+            <div asp-validation-summary="ModelOnly"></div>
+            <input type="hidden" asp-for="OrderId" />
+            <div>
+                <label>Order date</label>
+                <input asp-for="OrderDate" class="form-control" />
+                <span asp-validation-for="OrderDate"></span>
+            </div>
+            <div>
+                <label>Customer Id</label>
+                <input asp-for="CustomerId" class="form-control" />
+                <span asp-validation-for="CustomerId"></span>
+            </div>
+            <div>
+                <label>Payment status</label>
+                <input asp-for="Paid" class="form-control" />
+                <span asp-validation-for="Paid"></span>
+            </div>
+
+            <div>
+                <input type="submit" value="Save changes" class="btn" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back</a>
+</div>
+
+
+

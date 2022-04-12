@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,23 @@ namespace Webshop.Controllers
 
             return View("OrderDetails", details);
         }
+
+        public IActionResult EditOrder(int id)
+        {
+            Order order = _context.Orders.FirstOrDefault(order => order.OrderId == id);
+
+            return View(order);
+        }
+
+        [HttpPost]
+        public IActionResult EditOrder(Order order)
+        {
+            _context.Entry(order).State = EntityState.Modified;
+
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
 
         public IActionResult DeleteOrder(int id)
         {

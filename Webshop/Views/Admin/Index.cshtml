@@ -12,6 +12,7 @@
             <th>Id</th>
             <th>Date</th>
             <th>Customer Id</th>
+            <th>Paid</th>
             <th>Total Cost</th>
         </tr>
     </thead>
@@ -29,10 +30,16 @@
                 @Html.DisplayFor(modelItem => item.CustomerId)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Paid)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.TotalCost)
             </td>
             <td>
                 <a asp-route-id="@item.OrderId" asp-action="Details" type="button">Details</a>
+            </td>
+            <td>
+                <a asp-route-id="@item.OrderId" asp-action="EditOrder" type="button">Edit order</a>
             </td>
             <td>
                 <a asp-route-id="@item.OrderId" asp-action="DeleteOrder" type="button">Delete</a>
