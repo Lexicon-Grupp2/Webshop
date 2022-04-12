@@ -41,13 +41,18 @@ namespace Webshop.Models
 
                     string tpath = wwwRootPath + "/images/ProductImages/" + thumbFilename;
                     Image image = Image.FromStream(imageModel.ImageFile.OpenReadStream(), true, true);
-                    var newimage = new Bitmap(twidth, theight);
 
-                    using (var a = Graphics.FromImage(newimage))
-                    {
-                        a.DrawImage(image, 0, 0, twidth, theight);
-                        newimage.Save(tpath);
-                    }
+                    //resized
+                    Bitmap resizetofit = new Bitmap(image, image.Width, image.Height);
+                    Bitmap bitmapResized = ProportionallyResizeBitmapByHeight(resizetofit, 200);
+                    bitmapResized.Save(tpath);
+
+                    //old way stretched
+                    //using (var a = Graphics.FromImage(newimage))
+                    //{
+                    //    a.DrawImage(image, 0, 0, twidth, theight);
+                    //    newimage.Save(tpath);
+                    //}
                 }
 
                 //Insert record
@@ -86,6 +91,27 @@ namespace Webshop.Models
 
                 result = true;
             }
+
+            return result;
+        }
+
+        public static Bitmap ProportionallyResizeBitmapByHeight(Bitmap imgToResize, int height)
+        {
+            int sourceWidth = imgToResize.Width;
+            int sourceHeight = imgToResize.Height;
+
+            float scale = 0;
+
+            scale = (height / (float)sourceHeight);
+
+            int destWidth = (int)(sourceWidth * scale);
+            int destHeight = (int)(sourceHeight * scale);
+
+            Bitmap result = new Bitmap(destWidth, destHeight);
+            result.SetResolution(imgToResize.HorizontalResolution, imgToResize.VerticalResolution);
+            Graphics g = Graphics.FromImage(result);
+            g.DrawImage(imgToResize, 0, 0, destWidth, destHeight);
+            g.Dispose();
 
             return result;
         }
