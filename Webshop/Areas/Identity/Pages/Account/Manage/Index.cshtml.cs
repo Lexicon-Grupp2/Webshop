@@ -65,18 +65,14 @@ namespace Webshop.Areas.Identity.Pages.Account.Manage
             //var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
             Username = userName;
-            var cus = _context.Customers
-                        .Where(c => c.CustomerId == user.Id)
-                        .FirstOrDefault();
-
 
             Input = new InputModel
             {
                 //PhoneNumber = phoneNumber
 
                 //test customer
-                FirstName = cus.FirstName, LastName = cus.LastName, PhoneNumber = cus.PhoneNumber, 
-                Address = cus.Address, City = cus.City, Country = cus.Country, PostalCode = cus.PostalCode
+                FirstName = user.FirstName, LastName = user.LastName, PhoneNumber = user.PhoneNumber, 
+                Address = user.Address, City = user.City, Country = user.Country, PostalCode = user.PostalCode
             };
         }
 
@@ -121,15 +117,30 @@ namespace Webshop.Areas.Identity.Pages.Account.Manage
                         .Where(c => c.CustomerId == user.Id)
                         .FirstOrDefault();
 
-            cus.Address = Input.Address;
-            cus.City = Input.City;
-            cus.Country = Input.Country;
-            cus.FirstName = Input.FirstName;
-            cus.LastName = Input.LastName;
-            cus.PhoneNumber = Input.PhoneNumber;
-            cus.PostalCode = cus.PostalCode;
+            //user
+            user.Address = Input.Address;
+            user.City = Input.City;
+            user.Country = Input.Country;
+            user.FirstName = Input.FirstName;
+            user.LastName = Input.LastName;
+            user.PhoneNumber = Input.PhoneNumber;
+            user.PostalCode = Input.PostalCode;
+            _context.Users.Update(user);
 
-            _context.Customers.Update(cus);
+
+            //customer
+            if (cus != null)
+            {
+                cus.Address = Input.Address;
+                cus.City = Input.City;
+                cus.Country = Input.Country;
+                cus.FirstName = Input.FirstName;
+                cus.LastName = Input.LastName;
+                cus.PhoneNumber = Input.PhoneNumber;
+                cus.PostalCode = cus.PostalCode;
+                _context.Customers.Update(cus);
+            }
+
             _context.SaveChanges();
 
             await _signInManager.RefreshSignInAsync(user);

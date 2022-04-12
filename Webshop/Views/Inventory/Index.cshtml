@@ -36,7 +36,7 @@
                             <img src="@("~/images/ProductImages/"+product.ProductImage.ImageThumbName)" asp-append-version="true" /> }
                         else
                         {
-                            <img class="card" src="~/Images/example.jpg">}
+                            <img src="@("~/images/ProductImages/placeholderth.jpg")" asp-append-version="true" />}
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => product.Name)

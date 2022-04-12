@@ -61,7 +61,7 @@ namespace Webshop.Data
             modelBuilder.Entity<ProductImage>().HasData(new List<ProductImage>
             {
                 new ProductImage
-                    {ImageId = 1, ImageTitle = "Chocolate Dream", ImageName = "chokladtest.jpg", ImageThumbName = "chokladtestth.jpg"}
+                    {ImageId = 1, ImageTitle = "Chocolate Dream", ImageName = "chokladbild.jpg", ImageThumbName = "chokladbildth.jpg"}
             });
 
             modelBuilder.Entity<Customer>().HasData(new List<Customer>
@@ -87,23 +87,23 @@ namespace Webshop.Data
                 new Product
                     {Id = 1001, Name = "Chocolate Dream", Description="A delicious chocolate cupcake with belgian chocolate", CategoryId = 101, Price = 29, ProductImageId = 1 },
                 new Product
-                    {Id = 1002, Name = "Pink surprise", Description="A frosted strawberry cupcake, filled with strawberry jam", CategoryId = 102, Price = 22, ProductImageId = 1 },
+                    {Id = 1002, Name = "Pink surprise", Description="A frosted strawberry cupcake, filled with strawberry jam", CategoryId = 102, Price = 22},
                 new Product
-                    {Id = 1003, Name = "Plain delight", Description="A gluten free cupcake packed with flavor", CategoryId = 103, Price = 34, ProductImageId = 1 },
+                    {Id = 1003, Name = "Plain delight", Description="A gluten free cupcake packed with flavor", CategoryId = 103, Price = 34},
                 new Product
-                    {Id = 1004, Name = "Peanut butter cup-cake", Description="Filled with peanut butter and topped with delicious peanut frosting.", CategoryId = 104, Price = 34, ProductImageId = 1 },
+                    {Id = 1004, Name = "Peanut butter cup-cake", Description="Filled with peanut butter and topped with delicious peanut frosting.", CategoryId = 104, Price = 34},
                 new Product
-                    {Id = 1005, Name = "Nutella mountain", Description="This is the cupcake for you if you like all things Nutella.", CategoryId = 101, Price = 34, ProductImageId = 1 },
+                    {Id = 1005, Name = "Nutella mountain", Description="This is the cupcake for you if you like all things Nutella.", CategoryId = 101, Price = 34},
                 new Product
-                    {Id = 1006, Name = "M&M don't sue us", Description="A cupcake made to look like a giant M&M.", CategoryId = 101, Price = 34, ProductImageId = 1 },
+                    {Id = 1006, Name = "M&M don't sue us", Description="A cupcake made to look like a giant M&M.", CategoryId = 101, Price = 34},
                 new Product
-                    {Id = 1007, Name = "Forest fruit", Description="Not the tea, instead a cupcake with every kind of berry.", CategoryId = 104, Price = 34, ProductImageId = 1 },
+                    {Id = 1007, Name = "Forest fruit", Description="Not the tea, instead a cupcake with every kind of berry.", CategoryId = 104, Price = 34},
                 new Product
-                    {Id = 1008, Name = "Oreo supreme", Description="Oreo cookie on top as well as batter and frosting made from oreo's.", CategoryId = 101, Price = 34, ProductImageId = 1 },
+                    {Id = 1008, Name = "Oreo supreme", Description="Oreo cookie on top as well as batter and frosting made from oreo's.", CategoryId = 101, Price = 34},
                 new Product
-                    {Id = 1009, Name = "Lemon", Description="If you like something with a fresher taste, this cupcake is for you.", CategoryId = 104, Price = 34, ProductImageId = 1 },
+                    {Id = 1009, Name = "Lemon", Description="If you like something with a fresher taste, this cupcake is for you.", CategoryId = 104, Price = 34},
                 new Product
-                    {Id = 1010, Name = "Taste the rainbow", Description="Every taste of the fruit rainbow you can imagine.", CategoryId = 104, Price = 34, ProductImageId = 1 },     
+                    {Id = 1010, Name = "Taste the rainbow", Description="Every taste of the fruit rainbow you can imagine.", CategoryId = 104, Price = 34},     
             });
 
             modelBuilder.Entity<Category>().HasData(new List<Category>
@@ -122,6 +122,12 @@ namespace Webshop.Data
             string userRoleId = Guid.NewGuid().ToString();
             string userId = Guid.NewGuid().ToString();
 
+            //users/customers
+            string customerId = Guid.NewGuid().ToString();
+            string customerId2 = Guid.NewGuid().ToString();
+            string customerId3 = Guid.NewGuid().ToString();
+            string customerId4 = Guid.NewGuid().ToString();
+
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
             {
                 Id = roleId,
@@ -138,23 +144,117 @@ namespace Webshop.Data
 
             PasswordHasher<ApplicationUser> hasher = new PasswordHasher<ApplicationUser>();
 
-            modelBuilder.Entity<ApplicationUser>().HasData(new ApplicationUser
-            {
-                Id = userId,
-                Email = "admin@admin.com",
-                NormalizedEmail = "ADMIN@ADMIN.COM",
-                UserName = "admin@admin.com",
-                NormalizedUserName = "ADMIN@ADMIN.COM",
-                PasswordHash = hasher.HashPassword(null, "password"),
-                FirstName = "Admin",
-                LastName = "Adminsson"
-            });
+            modelBuilder.Entity<ApplicationUser>().HasData(
+                new ApplicationUser
+                {
+                    Id = userId,
+                    Email = "admin@admin.com",
+                    NormalizedEmail = "ADMIN@ADMIN.COM",
+                    UserName = "admin@admin.com",
+                    NormalizedUserName = "ADMIN@ADMIN.COM",
+                    PasswordHash = hasher.HashPassword(null, "password"),
+                    FirstName = "Admin",
+                    LastName = "Adminsson",
+                    Address = "Adminvägen 1",
+                    PostalCode = "12345",
+                    City = "Admin city",
+                    Country = "Admin country",
+                    PhoneNumber = "123456578"
+                },
+                new ApplicationUser
+                {
+                    Id = customerId,
+                    Email = "customer1@seeduser.com",
+                    NormalizedEmail = "CUSTOMER1@SEEDUSER.COM",
+                    UserName = "customer1@seeduser.com",
+                    NormalizedUserName = "CUSTOMER1@SEEDUSER.COM",
+                    PasswordHash = hasher.HashPassword(null, "password"),
+                    FirstName = "Arne",
+                    LastName = "Karat",
+                    Address = "Kanelgatan 3",
+                    PhoneNumber = "043016624",
+                    PostalCode = "23445",
+                    City = "Visby",
+                    Country = "Sweden"
+                },
+                new ApplicationUser
+                {
+                    Id = customerId2,
+                    Email = "customer2@seeduser.com",
+                    NormalizedEmail = "CUSTOMER2@SEEDUSER.COM",
+                    UserName = "customer2@seeduser.com",
+                    NormalizedUserName = "CUSTOMER2@SEEDUSER.COM",
+                    PasswordHash = hasher.HashPassword(null, "password"),
+                    FirstName = "Kenneth",
+                    LastName = "Svenzon",
+                    Address = "Rimbo torg 1",
+                    PhoneNumber = "0721453456",
+                    PostalCode = "44565",
+                    City = "Skövde",
+                    Country = "Sweden"
+                },
+                new ApplicationUser
+                {
+                    Id = customerId3,
+                    Email = "customer3@seeduser.com",
+                    NormalizedEmail = "CUSTOMER3@SEEDUSER.COM",
+                    UserName = "customer3@seeduser.com",
+                    NormalizedUserName = "CUSTOMER3@SEEDUSER.COM",
+                    PasswordHash = hasher.HashPassword(null, "password"),
+                    FirstName = "Angela",
+                    LastName = "Melodi",
+                    Address = "Kungsgatan 4",
+                    PhoneNumber = "0771242424",
+                    PostalCode = "32344",
+                    City = "Arboga",
+                    Country = "Sweden"
+                },
+                new ApplicationUser
+                {
+                    Id = customerId4,
+                    Email = "seeduser@seeduser.com",
+                    NormalizedEmail = "SEEDUSER@SEEDUSER.COM",
+                    UserName = "seeduser@seeduser.com",
+                    NormalizedUserName = "SEEDUSER@SEEDUSER.COM",
+                    PasswordHash = hasher.HashPassword(null, "password"),
+                    FirstName = "Kaj",
+                    LastName = "Fridell",
+                    Address = "Royal Carnac Hotel 1",
+                    PhoneNumber = "031184698",
+                    PostalCode = "33467",
+                    City = "Cairo",
+                    Country = "Egypt"
+                });
 
-            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
-            {
-                RoleId = roleId,
-                UserId = userId
-            });
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(
+                new IdentityUserRole<string>
+                {
+                    RoleId = roleId,
+                    UserId = userId
+                },
+                new IdentityUserRole<string>
+                {
+                    RoleId = userRoleId,
+                    UserId = customerId
+                }
+                ,
+                new IdentityUserRole<string>
+                {
+                    RoleId = userRoleId,
+                    UserId = customerId2
+                }
+                ,
+                new IdentityUserRole<string>
+                {
+                    RoleId = userRoleId,
+                    UserId = customerId3
+                }
+                ,
+                new IdentityUserRole<string>
+                {
+                    RoleId = userRoleId,
+                    UserId = customerId4
+                });
         }
     }
 }

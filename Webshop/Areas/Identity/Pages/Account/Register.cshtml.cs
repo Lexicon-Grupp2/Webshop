@@ -98,7 +98,9 @@ namespace Webshop.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, FirstName = Input.FirstName, LastName = Input.LastName};
+                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, FirstName = Input.FirstName, LastName = Input.LastName,
+                    Address = Input.Address, City = Input.City, Country = Input.Country, PostalCode = Input.PostalCode, PhoneNumber = Input.PhoneNumber
+                };
                 var customer = new Customer { FirstName = Input.FirstName, LastName = Input.LastName, Address = Input.Address, 
                                             City = Input.City, Country = Input.Country, Email = Input.Email, 
                                             PhoneNumber = Input.PhoneNumber, PostalCode = Input.PostalCode};
@@ -113,6 +115,8 @@ namespace Webshop.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    await _userManager.AddToRoleAsync(user, "User");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
