@@ -37,6 +37,10 @@ namespace Webshop.Models
             order.Paid = true;
             order.CustomerId = customerid;
 
+            ApplicationUser cus = _context.Users.Find(customerid);
+            order.Customer = cus;
+
+
             var shoppingCartContents = _shoppingCart.CartContents;
             order.TotalCost = _shoppingCart.GetShoppingCartTotal();
 
@@ -54,6 +58,14 @@ namespace Webshop.Models
 
                 order.OrderDetails.Add(orderDetail);
             }
+
+            if(cus.Orders == null)
+            {
+                cus.Orders = new List<Order>();
+            }
+
+            cus.Orders.Add(order);
+            _context.Update(cus);
 
             _context.Orders.Add(order);
 

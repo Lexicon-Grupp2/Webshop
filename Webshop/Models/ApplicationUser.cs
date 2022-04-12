@@ -25,6 +25,8 @@ namespace Webshop.Models
         public string Country { get; set; }
 
         public Customer Customer { get; set; }
-    
+
+        public List<Order> Orders { get; set; }
+
     }
 }

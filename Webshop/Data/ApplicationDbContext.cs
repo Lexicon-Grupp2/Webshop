@@ -43,7 +43,7 @@ namespace Webshop.Data
                 .HasOne<Product>(productCategory => productCategory.Product)
                 .WithMany(product => product.ProductCategories)
                 .HasForeignKey(productCategory => productCategory.ProductId);
-            
+
             /*
             modelBuilder.Entity<Order>()
                 .HasOne<Customer>(order => order.Customer)
@@ -52,6 +52,11 @@ namespace Webshop.Data
             modelBuilder.Entity<Order>()
                 .HasMany<Product>(order => order.Products);
             */
+
+            modelBuilder.Entity<Order>()
+                .HasOne<ApplicationUser>(order => order.Customer)
+                .WithMany(user => user.Orders)
+                .HasForeignKey(order => order.CustomerId);
             
             modelBuilder.Entity<Product>()
                 .HasOne<ProductImage>(product => product.ProductImage)
