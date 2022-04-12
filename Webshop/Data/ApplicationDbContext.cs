@@ -121,7 +121,12 @@ namespace Webshop.Data
             string roleId = Guid.NewGuid().ToString();
             string userRoleId = Guid.NewGuid().ToString();
             string userId = Guid.NewGuid().ToString();
+
+            //users/customers
             string customerId = Guid.NewGuid().ToString();
+            string customerId2 = Guid.NewGuid().ToString();
+            string customerId3 = Guid.NewGuid().ToString();
+            string customerId4 = Guid.NewGuid().ToString();
 
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
             {
@@ -159,18 +164,66 @@ namespace Webshop.Data
                 new ApplicationUser
                 {
                     Id = customerId,
+                    Email = "customer1@seeduser.com",
+                    NormalizedEmail = "CUSTOMER1@SEEDUSER.COM",
+                    UserName = "customer1@seeduser.com",
+                    NormalizedUserName = "CUSTOMER1@SEEDUSER.COM",
+                    PasswordHash = hasher.HashPassword(null, "password"),
+                    FirstName = "Arne",
+                    LastName = "Karat",
+                    Address = "Kanelgatan 3",
+                    PhoneNumber = "043016624",
+                    PostalCode = "23445",
+                    City = "Visby",
+                    Country = "Sweden"
+                },
+                new ApplicationUser
+                {
+                    Id = customerId2,
+                    Email = "customer2@seeduser.com",
+                    NormalizedEmail = "CUSTOMER2@SEEDUSER.COM",
+                    UserName = "customer2@seeduser.com",
+                    NormalizedUserName = "CUSTOMER2@SEEDUSER.COM",
+                    PasswordHash = hasher.HashPassword(null, "password"),
+                    FirstName = "Kenneth",
+                    LastName = "Svenzon",
+                    Address = "Rimbo torg 1",
+                    PhoneNumber = "0721453456",
+                    PostalCode = "44565",
+                    City = "Skövde",
+                    Country = "Sweden"
+                },
+                new ApplicationUser
+                {
+                    Id = customerId3,
+                    Email = "customer3@seeduser.com",
+                    NormalizedEmail = "CUSTOMER3@SEEDUSER.COM",
+                    UserName = "customer3@seeduser.com",
+                    NormalizedUserName = "CUSTOMER3@SEEDUSER.COM",
+                    PasswordHash = hasher.HashPassword(null, "password"),
+                    FirstName = "Angela",
+                    LastName = "Melodi",
+                    Address = "Kungsgatan 4",
+                    PhoneNumber = "0771242424",
+                    PostalCode = "32344",
+                    City = "Arboga",
+                    Country = "Sweden"
+                },
+                new ApplicationUser
+                {
+                    Id = customerId4,
                     Email = "seeduser@seeduser.com",
                     NormalizedEmail = "SEEDUSER@SEEDUSER.COM",
                     UserName = "seeduser@seeduser.com",
                     NormalizedUserName = "SEEDUSER@SEEDUSER.COM",
                     PasswordHash = hasher.HashPassword(null, "password"),
-                    FirstName = "Kund",
-                    LastName = "Kundsson",
-                    Address = "Kundvägen 11",
-                    PostalCode = "12345",
-                    City = "Kundstaden",
-                    Country = "Sverige",
-                    PhoneNumber = "87654321"
+                    FirstName = "Kaj",
+                    LastName = "Fridell",
+                    Address = "Royal Carnac Hotel 1",
+                    PhoneNumber = "031184698",
+                    PostalCode = "33467",
+                    City = "Cairo",
+                    Country = "Egypt"
                 });
 
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(
@@ -183,6 +236,24 @@ namespace Webshop.Data
                 {
                     RoleId = userRoleId,
                     UserId = customerId
+                }
+                ,
+                new IdentityUserRole<string>
+                {
+                    RoleId = userRoleId,
+                    UserId = customerId2
+                }
+                ,
+                new IdentityUserRole<string>
+                {
+                    RoleId = userRoleId,
+                    UserId = customerId3
+                }
+                ,
+                new IdentityUserRole<string>
+                {
+                    RoleId = userRoleId,
+                    UserId = customerId4
                 });
         }
     }

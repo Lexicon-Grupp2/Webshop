@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,12 +15,14 @@ namespace Webshop.Controllers
     public class AdminController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IOrderRepo _orderRepo;
 
-        public AdminController(ApplicationDbContext context, IOrderRepo orderRepo)
+        public AdminController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, IOrderRepo orderRepo)
         {
             _context = context;
             _orderRepo = orderRepo;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -46,11 +49,15 @@ namespace Webshop.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult ListUsers()
+        public async Task<IActionResult> ListUsers()
         {
-            var customers = (from role in _context.Roles // get person table as p
-                                  join user in _context.UserRoles // implement join as e in EmailAddresses table
-                                  on role.Id equals user.RoleId //implement join on rows where p.BusinessEntityID == e.BusinessEntityID
+            //new way for later
+            var customersList = await _userManager.GetUsersInRoleAsync("Admin");
+            var adminList = await _userManager.GetUsersInRoleAsync("User");
+
+            var customers = (from role in _context.Roles 
+                                  join user in _context.UserRoles 
+                                  on role.Id equals user.RoleId
                                   where role.Name == "User"
                                   select new UserWithRole { UserId = user.UserId, RoleId = role.Id, RoleName = role.Name }).ToList();
 
