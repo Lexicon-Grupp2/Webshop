@@ -28,12 +28,18 @@ namespace Webshop.Controllers
 
         public IActionResult Index()
         {
+            return View(_orderRepo.ViewAll());
+        }
+
+        public IActionResult ListOrdersForSpecificCustomer(string id)
+        {
             var orders = _context.Orders
                              .Include(order => order.Customer)
                              .Include(order => order.OrderDetails)
+                             .Where(order => order.CustomerId == id)
                              .ToList();
 
-            return View(_orderRepo.ViewAll());
+            return View("Index", orders);
         }
 
         public IActionResult Details(int id)
@@ -75,66 +81,57 @@ namespace Webshop.Controllers
         public async Task<IActionResult> ListUsers()
         {
             //new way for later
-            var customersList = await _userManager.GetUsersInRoleAsync("Admin");
-            var adminList = await _userManager.GetUsersInRoleAsync("User");
-
-            var customers = (from role in _context.Roles 
-                                  join user in _context.UserRoles 
-                                  on role.Id equals user.RoleId
-                                  where role.Name == "User"
-                                  select new UserWithRole { UserId = user.UserId, RoleId = role.Id, RoleName = role.Name }).ToList();
-
-            var admins = (from role in _context.Roles // get person table as p
-                                  join user in _context.UserRoles // implement join as e in EmailAddresses table
-                                  on role.Id equals user.RoleId //implement join on rows where p.BusinessEntityID == e.BusinessEntityID
-                                  where role.Name == "Admin"
-                                  select new UserWithRole { UserId = user.UserId, RoleId = role.Id, RoleName = role.Name }).ToList();
-
-            var adminsWithNames = (from admin in admins
-                                   join user in _context.Users
-                                   on admin.UserId equals user.Id
-                                   select new UserInListViewModel { UserId = user.Id, City = user.City, Country = user.Country, Email = user.Email, Name = user.FirstName + " " + user.LastName, Role = admin.RoleName}).ToList();
-
-            var customersWithNames = (from tUser in customers
-                                   join user in _context.Users
-                                   on tUser.UserId equals user.Id
-                                   select new UserInListViewModel { UserId = user.Id, City = user.City, Country = user.Country, Email = user.Email, Name = user.FirstName + " " + user.LastName, Role = tUser.RoleName }).ToList();
-
-
-            List< ApplicationUser > users = _context.Users.Include(user => user.Customer).ToList();
-
-            List<ApplicationUser> users2 = _context.Users.Include(user => user.Orders).ToList();
-
-            UsersViewModel viewModel = new UsersViewModel(users);
-
-            foreach (ApplicationUser u in viewModel.Users)
+            var adminList = await _userManager.GetUsersInRoleAsync("Admin");
+            List<UserInListViewModel> adminsViewModels = new List<UserInListViewModel>();
+            foreach (ApplicationUser adm in adminList)
             {
-                UserInListViewModel userViewModel = (new UserInListViewModel 
-                { UserId = u.Id, City = u.City, Country = u.Country, 
-                    Email = u.Email, Name = u.FirstName + " " + u.LastName  
-                });
+                UserInListViewModel cvm = new UserInListViewModel();
 
-                //if(u.Customer != null)
-                //{
-                //    if(u.Customer.Orders != null)
-                //    {
-                //        userViewModel.Orders = u.Customer.Orders.Count;
-                //    }
-                //}
-                if (u.Orders != null)
+                cvm.Name = adm.FirstName + " " + adm.LastName;
+                cvm.Country = adm.Country;
+                cvm.City = adm.City;
+                cvm.Email = adm.Email;
+                cvm.Role = "Admin";
+                cvm.UserId = adm.Id;
+
+                adminsViewModels.Add(cvm);
+            }
+
+            var customersList = await _userManager.GetUsersInRoleAsync("User");
+
+            List<UserInListViewModel> customerViewModels = new List<UserInListViewModel>();
+            foreach (ApplicationUser cust in customersList)
+            {
+                UserInListViewModel cvm = new UserInListViewModel();
+
+                cvm.Name = cust.FirstName + " " + cust.LastName;
+                cvm.Country = cust.Country;
+                cvm.City = cust.City;
+                cvm.Email = cust.Email;
+                cvm.Role = "User";
+                cvm.UserId = cust.Id;
+
+                if (cust.Orders != null)
                 {
-                    userViewModel.Orders = u.Orders.Count;
+                    cvm.Orders = cust.Orders.Count();
+                }
+                else
+                {
+                    cvm.Orders = 0;
+
+                    ApplicationUser tempuser = _context.Users
+                                                    .Include(u => u.Orders)
+                                                    .FirstOrDefault(u => u.Id == cust.Id);
+
+                    if (tempuser.Orders != null)
+                        cvm.Orders = tempuser.Orders.Count;
                 }
 
 
-                //roles
-
-                //add
-                viewModel.UserViewModels.Add(userViewModel);
+                customerViewModels.Add(cvm);
             }
 
-            viewModel.Admins = adminsWithNames;
-            viewModel.Customers = customersWithNames;
+            UsersViewModel viewModel = new UsersViewModel(adminsViewModels, customerViewModels);
 
             return View(viewModel);
         }

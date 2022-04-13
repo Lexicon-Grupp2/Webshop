@@ -62,6 +62,7 @@ namespace Webshop.Data
                 .HasOne<ProductImage>(product => product.ProductImage)
                 .WithMany(productImage => productImage.Products)
                 .HasForeignKey(product => product.ProductImageId);
+           
 
             modelBuilder.Entity<ProductImage>().HasData(new List<ProductImage>
             {
@@ -86,15 +87,17 @@ namespace Webshop.Data
                 new Customer
                     {Id=7, FirstName = "Sofia", LastName="Bosch", Address="Avenyn 1", PhoneNumber = "0543768798", PostalCode="67823", City="Berlin", Country="Germany", Email="raj@goteborg.se" },
             });
-            
+
+            Product chocolateDream = new Product
+            { Id = 1001, Name = "Chocolate Dream", Description = "A delicious chocolate cupcake with belgian chocolate", CategoryId = 101, Price = 29, ProductImageId = 1 };
+            Product pinkDelight = new Product
+            { Id = 1002, Name = "Pink surprise", Description = "A frosted strawberry cupcake, filled with strawberry jam", CategoryId = 102, Price = 22 };
+            Product plainDelight = new Product
+            { Id = 1003, Name = "Plain delight", Description = "A gluten free cupcake packed with flavor", CategoryId = 103, Price = 34 };
+
             modelBuilder.Entity<Product>().HasData(new List<Product>
             {
-                new Product
-                    {Id = 1001, Name = "Chocolate Dream", Description="A delicious chocolate cupcake with belgian chocolate", CategoryId = 101, Price = 29, ProductImageId = 1 },
-                new Product
-                    {Id = 1002, Name = "Pink surprise", Description="A frosted strawberry cupcake, filled with strawberry jam", CategoryId = 102, Price = 22},
-                new Product
-                    {Id = 1003, Name = "Plain delight", Description="A gluten free cupcake packed with flavor", CategoryId = 103, Price = 34},
+                chocolateDream, pinkDelight, plainDelight,
                 new Product
                     {Id = 1004, Name = "Peanut butter cup-cake", Description="Filled with peanut butter and topped with delicious peanut frosting.", CategoryId = 104, Price = 34},
                 new Product
@@ -123,6 +126,43 @@ namespace Webshop.Data
                     {Id = 104, CategoryName = "Berries and fruits" },
             });
 
+            OrderDetail oDetail1 = new OrderDetail
+            {
+                OrderDetailId = 1,
+                Quantity = 3, 
+                ProductId = chocolateDream.Id, 
+                ProductName = chocolateDream.Name, 
+                Price = chocolateDream.Price, 
+                OrderId = 1 
+            };
+            OrderDetail oDetail2 = new OrderDetail
+            {
+                OrderDetailId = 2,
+                Quantity = 2,
+                ProductId = pinkDelight.Id,
+                ProductName = pinkDelight.Name, 
+                OrderId = 2, 
+                Price = pinkDelight.Price 
+            };
+            OrderDetail oDetail3 = new OrderDetail
+            {
+                OrderDetailId = 3,
+                Quantity = 5,
+                ProductId = plainDelight.Id,
+                ProductName = plainDelight.Name,
+                OrderId = 3,
+                Price = plainDelight.Price
+            };
+            OrderDetail oDetail4 = new OrderDetail
+            {
+                OrderDetailId = 4,
+                Quantity = 3,
+                ProductId = chocolateDream.Id,
+                ProductName = chocolateDream.Name,
+                OrderId = 3,
+                Price = chocolateDream.Price
+            };
+
             string roleId = Guid.NewGuid().ToString();
             string userRoleId = Guid.NewGuid().ToString();
             string userId = Guid.NewGuid().ToString();
@@ -132,6 +172,35 @@ namespace Webshop.Data
             string customerId2 = Guid.NewGuid().ToString();
             string customerId3 = Guid.NewGuid().ToString();
             string customerId4 = Guid.NewGuid().ToString();
+
+            Order order1 = new Order
+            {
+                OrderId = 1,
+                Paid = true,
+                OrderDate = DateTime.Now,
+                TotalCost = oDetail1.Price * oDetail1.Quantity,
+                CustomerId = customerId, 
+            };
+            Order order2 = new Order
+            {
+                OrderId = 2,
+                Paid = true,
+                OrderDate = DateTime.Now,
+                TotalCost = oDetail2.Price * oDetail2.Quantity,
+                CustomerId = customerId2
+            };
+            Order order3 = new Order
+            {
+                OrderId = 3,
+                Paid = true,
+                OrderDate = DateTime.Now,
+                TotalCost = (oDetail3.Price * oDetail3.Quantity) + (oDetail4.Price * oDetail4.Quantity),
+                CustomerId = customerId2
+            };
+
+            modelBuilder.Entity<OrderDetail>().HasData(oDetail1, oDetail2, oDetail3, oDetail4);
+
+            modelBuilder.Entity<Order>().HasData(order1, order2, order3);
 
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
             {

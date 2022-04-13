@@ -31,6 +31,20 @@
     <Compile Remove="Migrations\20220412092121_Added 4 seeded users.Designer.cs" />
     <Compile Remove="Migrations\20220412194210_added order-user relation.cs" />
     <Compile Remove="Migrations\20220412194210_added order-user relation.Designer.cs" />
+    <Compile Remove="Migrations\20220412194348_added order-user relation.cs" />
+    <Compile Remove="Migrations\20220412194348_added order-user relation.Designer.cs" />
+    <Compile Remove="Migrations\20220413095112_seed test order.cs" />
+    <Compile Remove="Migrations\20220413095112_seed test order.Designer.cs" />
+    <Compile Remove="Migrations\20220413095614_seed test order.cs" />
+    <Compile Remove="Migrations\20220413095614_seed test order.Designer.cs" />
+    <Compile Remove="Migrations\20220413102431_seed test orders.cs" />
+    <Compile Remove="Migrations\20220413102431_seed test orders.Designer.cs" />
+    <Compile Remove="Migrations\20220413102645_seed test orders.cs" />
+    <Compile Remove="Migrations\20220413102645_seed test orders.Designer.cs" />
+    <Compile Remove="Migrations\20220413103816_seed test orders.cs" />
+    <Compile Remove="Migrations\20220413103816_seed test orders.Designer.cs" />
+    <Compile Remove="Migrations\20220413104051_seed test orders.cs" />
+    <Compile Remove="Migrations\20220413104051_seed test orders.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
