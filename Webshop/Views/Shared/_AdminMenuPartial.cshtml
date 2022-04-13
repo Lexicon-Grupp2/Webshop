@@ -1,0 +1,13 @@
+﻿<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+        Admin menu
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+        <li role="presentation"><a role="menuitem" asp-controller="Admin" asp-action="ListUsers">Manage Users</a></li>
+        <li role="presentation"><a role="menuitem" asp-controller="Role" asp-action="Index">Manage Roles</a></li>
+        <li role="presentation"><a role="menuitem" asp-controller="Image" asp-action="Index">Manage Images</a></li>
+        <li role="presentation"><a role="menuitem" asp-controller="Admin" asp-action="CreateCategory">Create Category</a></li>
+        <li role="presentation"><a role="menuitem" asp-controller="Inventory" asp-action="CreateProduct">Create Product</a></li>
+    </ul>
+</div>

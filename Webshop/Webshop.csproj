@@ -5,6 +5,33 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20220330081018_Added one-to-many ProductImage-Product.cs" />
+    <Compile Remove="Migrations\20220330081018_Added one-to-many ProductImage-Product.Designer.cs" />
+    <Compile Remove="Migrations\20220330082028_Added one-to-many ProductImage-Product.cs" />
+    <Compile Remove="Migrations\20220330082028_Added one-to-many ProductImage-Product.Designer.cs" />
+    <Compile Remove="Migrations\20220406121030_Added neoleds cupcakes seeding.cs" />
+    <Compile Remove="Migrations\20220406121030_Added neoleds cupcakes seeding.Designer.cs" />
+    <Compile Remove="Migrations\20220407203921_changed seeding.cs" />
+    <Compile Remove="Migrations\20220407203921_changed seeding.Designer.cs" />
+    <Compile Remove="Migrations\20220407204120_changed seeding.cs" />
+    <Compile Remove="Migrations\20220407204120_changed seeding.Designer.cs" />
+    <Compile Remove="Migrations\20220407204155_changed seeding.cs" />
+    <Compile Remove="Migrations\20220407204155_changed seeding.Designer.cs" />
+    <Compile Remove="Migrations\20220408084039_Updated ApplicationUser.cs" />
+    <Compile Remove="Migrations\20220408084039_Updated ApplicationUser.Designer.cs" />
+    <Compile Remove="Migrations\20220408084312_Updated ApplicationUser.cs" />
+    <Compile Remove="Migrations\20220408084312_Updated ApplicationUser.Designer.cs" />
+    <Compile Remove="Migrations\20220408125905_test order &amp; userid.cs" />
+    <Compile Remove="Migrations\20220408125905_test order &amp; userid.Designer.cs" />
+    <Compile Remove="Migrations\20220411131018_added 1 seeded user.cs" />
+    <Compile Remove="Migrations\20220411131018_added 1 seeded user.Designer.cs" />
+    <Compile Remove="Migrations\20220411131303_added 1 seeded user.cs" />
+    <Compile Remove="Migrations\20220411131303_added 1 seeded user.Designer.cs" />
+    <Compile Remove="Migrations\20220412092121_Added 4 seeded users.cs" />
+    <Compile Remove="Migrations\20220412092121_Added 4 seeded users.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="bootstrap" Version="5.1.3" />
     <PackageReference Include="DynamicDataTemplatesCS" Version="1.0.1" />
     <PackageReference Include="JavaScriptEngineSwitcher.Core" Version="3.3.0" />
@@ -24,10 +51,6 @@
     <PackageReference Include="PuppeteerSharp" Version="6.2.0" />
     <PackageReference Include="React.AspNet" Version="5.2.12" />
     <PackageReference Include="System.Drawing.Common" Version="5.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\Images\ProductImages\" />
   </ItemGroup>
 
 </Project>
