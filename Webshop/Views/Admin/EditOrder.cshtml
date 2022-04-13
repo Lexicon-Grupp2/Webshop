@@ -1,19 +1,19 @@
-﻿@model Order
+﻿@model Webshop.Viewmodels.OrderViewModel
 
 @{
     ViewData["Title"] = "EditOrder";
 }
 
+
 <div class="text-center">
     <div>
         <form asp-action="EditOrder">
-
             <div asp-validation-summary="ModelOnly"></div>
-            <input type="hidden" asp-for="OrderId" />
+            <input type="hidden" asp-for="@Model.OrderId" />
             <div>
                 <label>Order date</label>
-                <input asp-for="OrderDate" class="form-control" />
-                <span asp-validation-for="OrderDate"></span>
+                <input asp-for="@Model.OrderDate" class="form-control" />
+                <span asp-validation-for="@Model.OrderDate"></span>
             </div>
             <div>
                 <label>Customer Id</label>
@@ -25,7 +25,11 @@
                 <input asp-for="Paid" class="form-control" />
                 <span asp-validation-for="Paid"></span>
             </div>
-
+            <div>
+                <label>Total Cost</label>
+                <input asp-for="TotalCost" class="form-control" />
+                <span asp-validation-for="TotalCost"></span>
+            </div>
             <div>
                 <input type="submit" value="Save changes" class="btn" />
             </div>

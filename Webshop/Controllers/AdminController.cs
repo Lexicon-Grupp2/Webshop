@@ -41,18 +41,38 @@ namespace Webshop.Controllers
         {
             Order order = _context.Orders.FirstOrDefault(order => order.OrderId == id);
 
-            return View(order);
+            OrderViewModel orderViewModel = new OrderViewModel()
+            {
+                OrderId = id,
+                OrderDate = order.OrderDate,
+                Paid = order.Paid,
+                TotalCost = order.TotalCost,
+                CustomerId = order.CustomerId
+            };
+
+            return View("EditOrder", orderViewModel);
         }
 
         [HttpPost]
-        public IActionResult EditOrder(Order order)
+        public IActionResult EditOrder(OrderViewModel updatedOrder)
         {
-            _context.Entry(order).State = EntityState.Modified;
+            Order order = _context.Orders
+                .Where(order => order.OrderId == updatedOrder.OrderId)
+                .FirstOrDefault();
 
+            if (!updatedOrder.Equals(order))
+            {
+                order.OrderId = updatedOrder.OrderId;
+                order.OrderDate = updatedOrder.OrderDate;
+                order.Paid = updatedOrder.Paid;
+                order.TotalCost = updatedOrder.TotalCost;
+                order.CustomerId = updatedOrder.CustomerId;
+            }
             _context.SaveChanges();
-            return RedirectToAction("Index");
-        }
 
+            return RedirectToAction("Index");
+
+        }
 
         public IActionResult DeleteOrder(int id)
         {
