@@ -28,6 +28,11 @@ namespace Webshop.Controllers
 
         public IActionResult Index()
         {
+            var orders = _context.Orders
+                             .Include(order => order.Customer)
+                             .Include(order => order.OrderDetails)
+                             .ToList();
+
             return View(_orderRepo.ViewAll());
         }
 
@@ -76,7 +81,7 @@ namespace Webshop.Controllers
             return RedirectToAction("Index");
 
         }
-
+        
         public IActionResult DeleteOrder(int id)
         {
             var chosenOrder = _context.Orders.SingleOrDefault(order => order.OrderId == id);
@@ -118,6 +123,8 @@ namespace Webshop.Controllers
 
             List< ApplicationUser > users = _context.Users.Include(user => user.Customer).ToList();
 
+            List<ApplicationUser> users2 = _context.Users.Include(user => user.Orders).ToList();
+
             UsersViewModel viewModel = new UsersViewModel(users);
 
             foreach (ApplicationUser u in viewModel.Users)
@@ -127,13 +134,18 @@ namespace Webshop.Controllers
                     Email = u.Email, Name = u.FirstName + " " + u.LastName  
                 });
 
-                if(u.Customer != null)
+                //if(u.Customer != null)
+                //{
+                //    if(u.Customer.Orders != null)
+                //    {
+                //        userViewModel.Orders = u.Customer.Orders.Count;
+                //    }
+                //}
+                if (u.Orders != null)
                 {
-                    if(u.Customer.Orders != null)
-                    {
-                        userViewModel.Orders = u.Customer.Orders.Count;
-                    }
+                    userViewModel.Orders = u.Orders.Count;
                 }
+
 
                 //roles
 
