@@ -1,8 +1,50 @@
-﻿@{
+@model List<Order>
+
+@{
     ViewData["Title"] = "Index";
 }
 
 <h1>Customer Index</h1>
+
+<a class="btn btn-primary" href="Identity/Account/Manage">Manage your account details / adress</a>
+
+<h3>Order History:</h3>
+
+<table class="table table-striped">
+    <thead class="thead-light">
+        <tr>
+            <th>Date</th>
+            <th>Order ID</th>
+            <th>Paid</th>
+            <th>Total Cost</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Paid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalCost)
+            </td>
+            <td>
+                <a asp-route-id="@item.OrderId" asp-action="Details" type="button">Details</a>
+            </td>
+            <td>
+                <a class="btn btn-primary" asp-controller="Customer" asp-action="Receipt">Receipt</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
 
 
 <div>
