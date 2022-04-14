@@ -1,4 +1,5 @@
-﻿
+﻿@model Webshop.Viewmodels.ReceiptViewModel
+
 @{
     Layout = null;
 }
@@ -12,12 +13,25 @@
 </head>
 <body>
 
-    <h2>Receipt for specific order</h2>
-
-    <partial name="_customerDetails" />
+    <h2>Order Id: @Model.OrderId</h2>
 
 
-    <p>Partial views med data från olika källor...</p>
+
+    <h4>@Model.FirstName @Model.LastName</h4>
+    <h4>@Model.Address</h4>
+    <h4>@Model.PostalCode @Model.City</h4>
+    <h4>@Model.Country</h4>
+
+
+    <h4>@Model.OrderDate</h4>
+
+
+    @foreach (var item in @Model.OrderDetails)
+    {
+        @item.Quantity     @item.ProductName
+    }
+
+    <h2>Total Cost: @Model.TotalCost</h2>
 
     <div>
         <a class="btn btn-primary" asp-controller="Customer" asp-action="Print">Print Receipt</a>
