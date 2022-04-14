@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Webshop.Migrations
 {
-    public partial class updatedorder : Migration
+    public partial class Initalnewcreationofdababase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,7 +41,11 @@ namespace Webshop.Migrations
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(nullable: false),
-                    LastName = table.Column<string>(nullable: false)
+                    LastName = table.Column<string>(nullable: false),
+                    Address = table.Column<string>(nullable: false),
+                    PostalCode = table.Column<string>(nullable: false),
+                    City = table.Column<string>(nullable: false),
+                    Country = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -254,6 +258,12 @@ namespace Webshop.Migrations
                 {
                     table.PrimaryKey("PK_Orders", x => x.OrderId);
                     table.ForeignKey(
+                        name: "FK_Orders_AspNetUsers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Orders_Customers_CustomerId1",
                         column: x => x.CustomerId1,
                         principalTable: "Customers",
@@ -342,24 +352,31 @@ namespace Webshop.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "5f1446e0-7af5-40a7-9333-8c1e116b5fa1", "e8d1baf4-69b6-43d8-ab61-30980c59c48a", "Admin", "ADMIN" },
-                    { "a0370123-847b-472f-921e-d946523988ac", "256a6aaf-497e-42d5-9500-44f0c5e019a5", "User", "USER" }
+                    { "5311855d-e63a-4b5f-a003-dc747533181e", "ed30944f-5233-4e67-94d9-b1c467dd9d96", "Admin", "ADMIN" },
+                    { "a12b1fd4-2ca5-45d7-a99f-984c574ddab6", "a8e2371a-ccd1-4ab9-b3fa-f12e294470d0", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "7a11e1e4-b731-4d22-84eb-d67a1f2f75bf", 0, "2b44fc2f-7c20-498c-8621-1747e366b771", "admin@admin.com", false, "Admin", "Adminsson", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEFolo4vmiQSsvs3KzXJwMzsq9AnXj0hvO6Ok249t+4DWKY7cJ47wZ4yiMTdSa75VpQ==", null, false, "dede5c85-4fa6-4091-a4d6-e89038799a90", false, "admin@admin.com" });
+                columns: new[] { "Id", "AccessFailedCount", "Address", "City", "ConcurrencyStamp", "Country", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "PostalCode", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "91ae4ef7-22e1-4c9a-9157-6ce082553e41", 0, "Adminvägen 1", "Admin city", "1c551551-0d61-47a0-9a07-060369a9a6da", "Admin country", "admin@admin.com", false, "Admin", "Adminsson", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAENF+mGn5x2aNgfGSDeaHtGueElIiB2QW4VfXaMocOiPflvslYqZqLxyLSBdaKn4Jyw==", "123456578", false, "12345", "7e5d35da-af27-4a7c-afbe-a08e53bdda78", false, "admin@admin.com" },
+                    { "296c6000-35ba-4241-8a57-7d89c7acddf9", 0, "Kanelgatan 3", "Visby", "76e62cb3-dd93-416e-b57a-1c8173cb01fa", "Sweden", "customer1@seeduser.com", false, "Arne", "Karat", false, null, "CUSTOMER1@SEEDUSER.COM", "CUSTOMER1@SEEDUSER.COM", "AQAAAAEAACcQAAAAEPSMr5QJDlPdyruaGiG4FKV659V3TL3+5pxeWpih1l5/afrrrJlNBRooB8lSsPYzWQ==", "043016624", false, "23445", "1425a7f9-d140-48a1-9035-c036dbc78911", false, "customer1@seeduser.com" },
+                    { "84829134-dbb3-4548-a832-5c7dd07c3793", 0, "Rimbo torg 1", "Skövde", "bf76b5aa-27d2-4657-a4c0-0d8a87954946", "Sweden", "customer2@seeduser.com", false, "Kenneth", "Svenzon", false, null, "CUSTOMER2@SEEDUSER.COM", "CUSTOMER2@SEEDUSER.COM", "AQAAAAEAACcQAAAAEN1fVQLFyGfbObvgHWTnjJ10OiTVeRKptEKTtbldetyi9qXUsxuX0MWCtj0M8JAV0A==", "0721453456", false, "44565", "c4606722-7045-465a-931e-9f49c9f89c63", false, "customer2@seeduser.com" },
+                    { "b874b562-3058-4d3c-95c6-55870b7973bb", 0, "Kungsgatan 4", "Arboga", "f2a1092c-106b-4adb-931e-1e1a893e59c8", "Sweden", "customer3@seeduser.com", false, "Angela", "Melodi", false, null, "CUSTOMER3@SEEDUSER.COM", "CUSTOMER3@SEEDUSER.COM", "AQAAAAEAACcQAAAAEPfSMT3AsbyUZ/8/T1jleBvpWemDKbTmsUEQsP28HSus7azgUiNURlIPwpn6GJ/nKg==", "0771242424", false, "32344", "e4c5a146-a5d8-43ed-b8e6-f125be814f2f", false, "customer3@seeduser.com" },
+                    { "40fc262c-767f-4b6f-b9aa-ba08b911b878", 0, "Royal Carnac Hotel 1", "Cairo", "6ee17bd2-f47c-4a1a-af30-8ac4a482274f", "Egypt", "seeduser@seeduser.com", false, "Kaj", "Fridell", false, null, "SEEDUSER@SEEDUSER.COM", "SEEDUSER@SEEDUSER.COM", "AQAAAAEAACcQAAAAEOjWoaL8UudZ7Dy8etegZOnABjWy06mB0EHofC+qdrB94dTy6bFYR1sVrYLT/0rcQw==", "031184698", false, "33467", "de7101cd-8180-4984-a9c6-52d05300ff71", false, "seeduser@seeduser.com" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "Id", "CategoryName" },
                 values: new object[,]
                 {
-                    { 101, "Chocolate" },
-                    { 102, "Frosted" },
+                    { 104, "Berries and fruits" },
                     { 103, "Gluten free" },
-                    { 104, "Berries and fruits" }
+                    { 101, "Chocolate" },
+                    { 102, "Frosted" }
                 });
 
             migrationBuilder.InsertData(
@@ -367,40 +384,68 @@ namespace Webshop.Migrations
                 columns: new[] { "Id", "Address", "City", "Country", "CustomerId", "Email", "FirstName", "LastName", "PhoneNumber", "PostalCode" },
                 values: new object[,]
                 {
+                    { 7, "Avenyn 1", "Berlin", "Germany", null, "raj@goteborg.se", "Sofia", "Bosch", "0543768798", "67823" },
                     { 1, "Kanelgatan 3", "Visby", "Sweden", null, "bling@gmail.com", "Arne", "Karat", "043016624", "23445" },
                     { 2, "Rimbo torg 1", "Skövde", "Sweden", null, "stekarn@gmail.com", "Kenneth", "Svenzon", "0721453456", "44565" },
                     { 3, "Kungsgatan 4", "Arboga", "Sweden", null, "lucky@hotmail.com", "Angela", "Melodi", "0771242424", "32344" },
                     { 4, "Royal Carnac Hotel 1", "Cairo", "Egypt", null, "kafr@egypt.gov", "Kaj", "Fridell", "031184698", "33467" },
                     { 5, "Vedgatan 3", "Oslo", "Norway", null, "tavlan@gmail.com", "Molly", "Sundkvist", "0443346723", "46723" },
-                    { 6, "Gatgatan 2", "Göteborg", "Sweden", null, "test@gmail.com", "Jan", "Andersson", "04422723", "46723" },
-                    { 7, "Avenyn 1", "Berlin", "Germany", null, "raj@goteborg.se", "Sofia", "Bosch", "0543768798", "67823" }
+                    { 6, "Gatgatan 2", "Göteborg", "Sweden", null, "test@gmail.com", "Jan", "Andersson", "04422723", "46723" }
                 });
 
             migrationBuilder.InsertData(
                 table: "ProductImages",
                 columns: new[] { "ImageId", "ImageName", "ImageThumbName", "ImageTitle" },
-                values: new object[] { 1, "chokladtest.jpg", "chokladtestth.jpg", "Chocolate Dream" });
+                values: new object[] { 1, "chokladbild.jpg", "chokladbildth.jpg", "Chocolate Dream" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "UserId", "RoleId" },
-                values: new object[] { "7a11e1e4-b731-4d22-84eb-d67a1f2f75bf", "5f1446e0-7af5-40a7-9333-8c1e116b5fa1" });
+                values: new object[,]
+                {
+                    { "91ae4ef7-22e1-4c9a-9157-6ce082553e41", "5311855d-e63a-4b5f-a003-dc747533181e" },
+                    { "296c6000-35ba-4241-8a57-7d89c7acddf9", "a12b1fd4-2ca5-45d7-a99f-984c574ddab6" },
+                    { "84829134-dbb3-4548-a832-5c7dd07c3793", "a12b1fd4-2ca5-45d7-a99f-984c574ddab6" },
+                    { "b874b562-3058-4d3c-95c6-55870b7973bb", "a12b1fd4-2ca5-45d7-a99f-984c574ddab6" },
+                    { "40fc262c-767f-4b6f-b9aa-ba08b911b878", "a12b1fd4-2ca5-45d7-a99f-984c574ddab6" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Orders",
+                columns: new[] { "OrderId", "CustomerId", "CustomerId1", "OrderDate", "Paid", "TotalCost" },
+                values: new object[,]
+                {
+                    { 1, "296c6000-35ba-4241-8a57-7d89c7acddf9", null, new DateTime(2022, 4, 14, 9, 52, 2, 481, DateTimeKind.Local).AddTicks(9769), true, 87 },
+                    { 2, "84829134-dbb3-4548-a832-5c7dd07c3793", null, new DateTime(2022, 4, 14, 9, 52, 2, 484, DateTimeKind.Local).AddTicks(5303), true, 44 },
+                    { 3, "84829134-dbb3-4548-a832-5c7dd07c3793", null, new DateTime(2022, 4, 14, 9, 52, 2, 484, DateTimeKind.Local).AddTicks(5387), true, 257 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Product",
                 columns: new[] { "Id", "CategoryId", "Description", "Name", "Price", "ProductImageId" },
                 values: new object[,]
                 {
-                    { 1001, 101, "A delicious chocolate cupcake with belgian chocolate", "Chocolate Dream", 29, 1 },
-                    { 1002, 102, "A frosted strawberry cupcake, filled with strawberry jam", "Pink surprise", 22, 1 },
-                    { 1003, 103, "A gluten free cupcake packed with flavor", "Plain delight", 34, 1 },
-                    { 1004, 104, "Filled with peanut butter and topped with delicious peanut frosting.", "Peanut butter cup-cake", 34, 1 },
-                    { 1005, 101, "This is the cupcake for you if you like all things Nutella.", "Nutella mountain", 34, 1 },
-                    { 1006, 101, "A cupcake made to look like a giant M&M.", "M&M don't sue us", 34, 1 },
-                    { 1007, 104, "Not the tea, instead a cupcake with every kind of berry.", "Forest fruit", 34, 1 },
-                    { 1008, 101, "Oreo cookie on top as well as batter and frosting made from oreo's.", "Oreo supreme", 34, 1 },
-                    { 1009, 104, "If you like something with a fresher taste, this cupcake is for you.", "Lemon", 34, 1 },
-                    { 1010, 104, "Every taste of the fruit rainbow you can imagine.", "Taste the rainbow", 34, 1 }
+                    { 1009, 104, "If you like something with a fresher taste, this cupcake is for you.", "Lemon", 34, null },
+                    { 1007, 104, "Not the tea, instead a cupcake with every kind of berry.", "Forest fruit", 34, null },
+                    { 1004, 104, "Filled with peanut butter and topped with delicious peanut frosting.", "Peanut butter cup-cake", 34, null },
+                    { 1003, 103, "A gluten free cupcake packed with flavor", "Plain delight", 34, null },
+                    { 1005, 101, "This is the cupcake for you if you like all things Nutella.", "Nutella mountain", 34, null },
+                    { 1008, 101, "Oreo cookie on top as well as batter and frosting made from oreo's.", "Oreo supreme", 34, null },
+                    { 1006, 101, "A cupcake made to look like a giant M&M.", "M&M don't sue us", 34, null },
+                    { 1010, 104, "Every taste of the fruit rainbow you can imagine.", "Taste the rainbow", 34, null },
+                    { 1002, 102, "A frosted strawberry cupcake, filled with strawberry jam", "Pink surprise", 22, null },
+                    { 1001, 101, "A delicious chocolate cupcake with belgian chocolate", "Chocolate Dream", 29, 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "OrderDetails",
+                columns: new[] { "OrderDetailId", "OrderId", "Price", "ProductId", "ProductName", "Quantity" },
+                values: new object[,]
+                {
+                    { 2, 2, 22, 1002, "Pink surprise", 2 },
+                    { 3, 3, 34, 1003, "Plain delight", 5 },
+                    { 1, 1, 29, 1001, "Chocolate Dream", 3 },
+                    { 4, 3, 29, 1001, "Chocolate Dream", 3 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -463,6 +508,11 @@ namespace Webshop.Migrations
                 name: "IX_OrderDetails_ProductId",
                 table: "OrderDetails",
                 column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_CustomerId",
+                table: "Orders",
+                column: "CustomerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_CustomerId1",
