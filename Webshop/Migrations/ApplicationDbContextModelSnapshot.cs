@@ -48,15 +48,15 @@ namespace Webshop.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "86efe060-a6bf-470e-ae43-3a69c0ce1758",
-                            ConcurrencyStamp = "09159eaa-7096-4e39-889f-9cd023fa806c",
+                            Id = "5311855d-e63a-4b5f-a003-dc747533181e",
+                            ConcurrencyStamp = "ed30944f-5233-4e67-94d9-b1c467dd9d96",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "1259de13-a55d-4ba4-9cc3-bbe293dc6d07",
-                            ConcurrencyStamp = "6f8841ce-7c05-457d-bdd5-ca344cc85d94",
+                            Id = "a12b1fd4-2ca5-45d7-a99f-984c574ddab6",
+                            ConcurrencyStamp = "a8e2371a-ccd1-4ab9-b3fa-f12e294470d0",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -149,28 +149,28 @@ namespace Webshop.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "0ca0f471-d686-4f5e-85a1-d0e87a995d70",
-                            RoleId = "86efe060-a6bf-470e-ae43-3a69c0ce1758"
+                            UserId = "91ae4ef7-22e1-4c9a-9157-6ce082553e41",
+                            RoleId = "5311855d-e63a-4b5f-a003-dc747533181e"
                         },
                         new
                         {
-                            UserId = "79cb9168-f470-4620-b861-edc081705d94",
-                            RoleId = "1259de13-a55d-4ba4-9cc3-bbe293dc6d07"
+                            UserId = "296c6000-35ba-4241-8a57-7d89c7acddf9",
+                            RoleId = "a12b1fd4-2ca5-45d7-a99f-984c574ddab6"
                         },
                         new
                         {
-                            UserId = "cd46f162-dd90-426d-8fe0-20944d5df397",
-                            RoleId = "1259de13-a55d-4ba4-9cc3-bbe293dc6d07"
+                            UserId = "84829134-dbb3-4548-a832-5c7dd07c3793",
+                            RoleId = "a12b1fd4-2ca5-45d7-a99f-984c574ddab6"
                         },
                         new
                         {
-                            UserId = "6671a692-f7ef-4cd7-9520-ff50c7c6a283",
-                            RoleId = "1259de13-a55d-4ba4-9cc3-bbe293dc6d07"
+                            UserId = "b874b562-3058-4d3c-95c6-55870b7973bb",
+                            RoleId = "a12b1fd4-2ca5-45d7-a99f-984c574ddab6"
                         },
                         new
                         {
-                            UserId = "54a7b7aa-108e-4c64-8b84-8fbb92615e52",
-                            RoleId = "1259de13-a55d-4ba4-9cc3-bbe293dc6d07"
+                            UserId = "40fc262c-767f-4b6f-b9aa-ba08b911b878",
+                            RoleId = "a12b1fd4-2ca5-45d7-a99f-984c574ddab6"
                         });
                 });
 
@@ -284,11 +284,11 @@ namespace Webshop.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0ca0f471-d686-4f5e-85a1-d0e87a995d70",
+                            Id = "91ae4ef7-22e1-4c9a-9157-6ce082553e41",
                             AccessFailedCount = 0,
                             Address = "Adminvägen 1",
                             City = "Admin city",
-                            ConcurrencyStamp = "28c57389-ee2f-46e8-9f32-584070647b33",
+                            ConcurrencyStamp = "1c551551-0d61-47a0-9a07-060369a9a6da",
                             Country = "Admin country",
                             Email = "admin@admin.com",
                             EmailConfirmed = false,
@@ -297,21 +297,21 @@ namespace Webshop.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBdH4t3ldRZrYCusr85NREilxT6gfFgV1zKQhvuG0OGdXsxSg0UwXCfwlVGRYOJuYQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENF+mGn5x2aNgfGSDeaHtGueElIiB2QW4VfXaMocOiPflvslYqZqLxyLSBdaKn4Jyw==",
                             PhoneNumber = "123456578",
                             PhoneNumberConfirmed = false,
                             PostalCode = "12345",
-                            SecurityStamp = "caae5b8e-bd79-4dee-84ae-e9d89e512c31",
+                            SecurityStamp = "7e5d35da-af27-4a7c-afbe-a08e53bdda78",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
                         new
                         {
-                            Id = "79cb9168-f470-4620-b861-edc081705d94",
+                            Id = "296c6000-35ba-4241-8a57-7d89c7acddf9",
                             AccessFailedCount = 0,
                             Address = "Kanelgatan 3",
                             City = "Visby",
-                            ConcurrencyStamp = "341fba9e-d583-4163-aa77-0fd06a41b441",
+                            ConcurrencyStamp = "76e62cb3-dd93-416e-b57a-1c8173cb01fa",
                             Country = "Sweden",
                             Email = "customer1@seeduser.com",
                             EmailConfirmed = false,
@@ -320,21 +320,21 @@ namespace Webshop.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "CUSTOMER1@SEEDUSER.COM",
                             NormalizedUserName = "CUSTOMER1@SEEDUSER.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKqrh1NVnJxdkZ3/83MXaT/dG30WlJniOt2r4Ghibs09CLqHWlh3T9aVuoj9tGiUbw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPSMr5QJDlPdyruaGiG4FKV659V3TL3+5pxeWpih1l5/afrrrJlNBRooB8lSsPYzWQ==",
                             PhoneNumber = "043016624",
                             PhoneNumberConfirmed = false,
                             PostalCode = "23445",
-                            SecurityStamp = "2b497417-8561-478d-80eb-fa08880bfc3c",
+                            SecurityStamp = "1425a7f9-d140-48a1-9035-c036dbc78911",
                             TwoFactorEnabled = false,
                             UserName = "customer1@seeduser.com"
                         },
                         new
                         {
-                            Id = "cd46f162-dd90-426d-8fe0-20944d5df397",
+                            Id = "84829134-dbb3-4548-a832-5c7dd07c3793",
                             AccessFailedCount = 0,
                             Address = "Rimbo torg 1",
                             City = "Skövde",
-                            ConcurrencyStamp = "973414a1-736f-405d-8cd8-7e54ee0adde9",
+                            ConcurrencyStamp = "bf76b5aa-27d2-4657-a4c0-0d8a87954946",
                             Country = "Sweden",
                             Email = "customer2@seeduser.com",
                             EmailConfirmed = false,
@@ -343,21 +343,21 @@ namespace Webshop.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "CUSTOMER2@SEEDUSER.COM",
                             NormalizedUserName = "CUSTOMER2@SEEDUSER.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFZxSgDn0YdkSdxYmgKhebvfjOOtmRF3gQcWR/3kdsqr1rEiaLMMIa/8LH8fQ81k5Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEN1fVQLFyGfbObvgHWTnjJ10OiTVeRKptEKTtbldetyi9qXUsxuX0MWCtj0M8JAV0A==",
                             PhoneNumber = "0721453456",
                             PhoneNumberConfirmed = false,
                             PostalCode = "44565",
-                            SecurityStamp = "bbcd78d5-3024-43bd-80ff-83ac013c4e1a",
+                            SecurityStamp = "c4606722-7045-465a-931e-9f49c9f89c63",
                             TwoFactorEnabled = false,
                             UserName = "customer2@seeduser.com"
                         },
                         new
                         {
-                            Id = "6671a692-f7ef-4cd7-9520-ff50c7c6a283",
+                            Id = "b874b562-3058-4d3c-95c6-55870b7973bb",
                             AccessFailedCount = 0,
                             Address = "Kungsgatan 4",
                             City = "Arboga",
-                            ConcurrencyStamp = "c0ae6bef-1957-4dee-9127-a978f6876826",
+                            ConcurrencyStamp = "f2a1092c-106b-4adb-931e-1e1a893e59c8",
                             Country = "Sweden",
                             Email = "customer3@seeduser.com",
                             EmailConfirmed = false,
@@ -366,21 +366,21 @@ namespace Webshop.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "CUSTOMER3@SEEDUSER.COM",
                             NormalizedUserName = "CUSTOMER3@SEEDUSER.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAENZpKmKqelaZJorixJEG7ni0/74Yen4pkmbIsQScZPvRk/Wuv+oiqzP6gU+W2LDxJA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPfSMT3AsbyUZ/8/T1jleBvpWemDKbTmsUEQsP28HSus7azgUiNURlIPwpn6GJ/nKg==",
                             PhoneNumber = "0771242424",
                             PhoneNumberConfirmed = false,
                             PostalCode = "32344",
-                            SecurityStamp = "cd0ec23a-d1dd-41d1-ad8e-4b0a463486dc",
+                            SecurityStamp = "e4c5a146-a5d8-43ed-b8e6-f125be814f2f",
                             TwoFactorEnabled = false,
                             UserName = "customer3@seeduser.com"
                         },
                         new
                         {
-                            Id = "54a7b7aa-108e-4c64-8b84-8fbb92615e52",
+                            Id = "40fc262c-767f-4b6f-b9aa-ba08b911b878",
                             AccessFailedCount = 0,
                             Address = "Royal Carnac Hotel 1",
                             City = "Cairo",
-                            ConcurrencyStamp = "3f84c690-4716-452c-94ee-9aa196afb06e",
+                            ConcurrencyStamp = "6ee17bd2-f47c-4a1a-af30-8ac4a482274f",
                             Country = "Egypt",
                             Email = "seeduser@seeduser.com",
                             EmailConfirmed = false,
@@ -389,11 +389,11 @@ namespace Webshop.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SEEDUSER@SEEDUSER.COM",
                             NormalizedUserName = "SEEDUSER@SEEDUSER.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIQXBNieiFYp+dNtkO1NLZpI1M8cUKTGy76gJaKqmN4DUY6N/6jxSJcHPGvtKMs0gA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOjWoaL8UudZ7Dy8etegZOnABjWy06mB0EHofC+qdrB94dTy6bFYR1sVrYLT/0rcQw==",
                             PhoneNumber = "031184698",
                             PhoneNumberConfirmed = false,
                             PostalCode = "33467",
-                            SecurityStamp = "da000ee7-948b-4525-ac56-6ccdd4d0821d",
+                            SecurityStamp = "de7101cd-8180-4984-a9c6-52d05300ff71",
                             TwoFactorEnabled = false,
                             UserName = "seeduser@seeduser.com"
                         });
@@ -633,24 +633,24 @@ namespace Webshop.Migrations
                         new
                         {
                             OrderId = 1,
-                            CustomerId = "79cb9168-f470-4620-b861-edc081705d94",
-                            OrderDate = new DateTime(2022, 4, 13, 12, 44, 27, 688, DateTimeKind.Local).AddTicks(3270),
+                            CustomerId = "296c6000-35ba-4241-8a57-7d89c7acddf9",
+                            OrderDate = new DateTime(2022, 4, 14, 9, 52, 2, 481, DateTimeKind.Local).AddTicks(9769),
                             Paid = true,
                             TotalCost = 87
                         },
                         new
                         {
                             OrderId = 2,
-                            CustomerId = "cd46f162-dd90-426d-8fe0-20944d5df397",
-                            OrderDate = new DateTime(2022, 4, 13, 12, 44, 27, 690, DateTimeKind.Local).AddTicks(5856),
+                            CustomerId = "84829134-dbb3-4548-a832-5c7dd07c3793",
+                            OrderDate = new DateTime(2022, 4, 14, 9, 52, 2, 484, DateTimeKind.Local).AddTicks(5303),
                             Paid = true,
                             TotalCost = 44
                         },
                         new
                         {
                             OrderId = 3,
-                            CustomerId = "cd46f162-dd90-426d-8fe0-20944d5df397",
-                            OrderDate = new DateTime(2022, 4, 13, 12, 44, 27, 690, DateTimeKind.Local).AddTicks(5936),
+                            CustomerId = "84829134-dbb3-4548-a832-5c7dd07c3793",
+                            OrderDate = new DateTime(2022, 4, 14, 9, 52, 2, 484, DateTimeKind.Local).AddTicks(5387),
                             Paid = true,
                             TotalCost = 257
                         });
