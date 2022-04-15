@@ -1,24 +1,13 @@
 ﻿<div class="dropdown">
-    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownAdminMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Admin menu
-        <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-        <li role="presentation"><a role="menuitem" asp-controller="Admin" asp-action="ListUsers">Manage Users</a></li>
-        <li role="presentation"><a role="menuitem" asp-controller="Role" asp-action="Index">Manage Roles</a></li>
-        <li role="presentation"><a role="menuitem" asp-controller="Image" asp-action="Index">Manage Images</a></li>
-        <li role="presentation"><a role="menuitem" asp-controller="Admin" asp-action="CreateCategory">Create Category</a></li>
-        <li role="presentation"><a role="menuitem" asp-controller="Inventory" asp-action="CreateProduct">Create Product</a></li>
-    </ul>
-</div>
-
-<div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Dropdown button
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
+        <a class="dropdown-item" asp-controller="Admin" asp-action="ListUsers">Manage Users</a>
+        <a class="dropdown-item" asp-controller="Role" asp-action="Index">Manage Roles</a>
+        <a class="dropdown-item" asp-controller="Image" asp-action="Index">Manage Images</a>
+        <a class="dropdown-item" asp-controller="Admin" asp-action="ListCategories">Manage Categories</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" asp-controller="Inventory" asp-action="CreateProduct">Create Product</a>
     </div>
 </div>
