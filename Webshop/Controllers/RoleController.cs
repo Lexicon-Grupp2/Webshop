@@ -69,6 +69,11 @@ namespace Webshop.Controllers
         {
             var tempUser = await _userManager.FindByIdAsync(user);
 
+            if (tempUser == null)
+            {
+                return NotFound();
+            }
+
             IdentityResult result = await _userManager.AddToRoleAsync(tempUser, role);
             if (result.Succeeded)
                 return RedirectToAction("Index");
@@ -86,6 +91,36 @@ namespace Webshop.Controllers
                 }
             }
             return View(model);
+        }
+
+        public async Task<IActionResult> RemoveAdminRole(string Id)
+        {
+            var tempUser = await _userManager.FindByIdAsync(Id);
+
+            if (tempUser == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                IdentityResult result = await _userManager.RemoveFromRoleAsync(tempUser, "Admin");
+                if (result.Succeeded)
+                    return RedirectToAction("Index");
+
+                //if reached-> error -> create error message to viewmodel
+                AddRoleToUsersViewModel model = new AddRoleToUsersViewModel();
+                model.Roles = new SelectList(_roleManager.Roles, "Name", "Name");
+                model.Users = new SelectList(_userManager.Users, "Id", "UserName");
+                if (result.Errors.Any())
+                {
+                    foreach (var item in result.Errors)
+                    {
+                        //Todo-> change to array 
+                        model.Message += item.Description;
+                    }
+                }
+                return View(model);
+            }
         }
     }
 }
