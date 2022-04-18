@@ -38,6 +38,17 @@ namespace Webshop.Controllers
             )) ;
         }
 
+        public IActionResult AdminInventory()
+        {
+            return View(new AdminInventoryViewModel(_context.Inventory
+                             .Include(product => product.Category)
+                             .Include(product => product.ProductImage)
+                             .ToList()
+                             .Select(product => CreateProductViewModel(product))
+                             .ToList()
+            ));
+        }
+
         // GET: Inventory/CreateProduct
         public IActionResult CreateProduct()
         {
@@ -114,20 +125,48 @@ namespace Webshop.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            string errormessage;
             var productToDelete = await _context.Inventory.FindAsync(id);
 
+            //todo-> combine these checks
             var productInCart = _context.CartContents
                         .Where(p => p.Product.Id == id)
                         .FirstOrDefault();
 
-            if (productInCart == null)
+            var productInOrderDetails = _context.OrderDetails
+                        .Where(od => od.ProductId == id)
+                        .FirstOrDefault();
+
+            if(productInCart != null)
             {
-                //product is not inside a cart-> ok to delete
-                _context.Inventory.Remove(productToDelete);
-                await _context.SaveChangesAsync();
+                errormessage = "Cant delete product '" + productToDelete.Name + "' because it exists in a cart!";
+                return View("AdminInventory", new AdminInventoryViewModel(_context.Inventory
+                             .Include(product => product.Category)
+                             .Include(product => product.ProductImage)
+                             .ToList()
+                             .Select(product => CreateProductViewModel(product))
+                             .ToList(), errormessage
+            ));
+            }
+            if(productInOrderDetails != null)
+            {
+                errormessage =  "Cant delete product '" + productToDelete.Name + "' because it exists in an order!";
+                return View("AdminInventory", new AdminInventoryViewModel(_context.Inventory
+                             .Include(product => product.Category)
+                             .Include(product => product.ProductImage)
+                             .ToList()
+                             .Select(product => CreateProductViewModel(product))
+                             .ToList(), errormessage
+            ));
             }
 
-            return RedirectToAction(nameof(Index));
+            else
+            {
+                //product is not inside a cart/orderdetail-> ok to delete
+                _context.Inventory.Remove(productToDelete);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(AdminInventory));
+            }         
         }
 
         // GET: Inventory/Edit/5
