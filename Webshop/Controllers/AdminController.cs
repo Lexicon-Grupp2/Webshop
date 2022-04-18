@@ -271,7 +271,7 @@ namespace Webshop.Controllers
                 else
                     viewModel.ViewMessage = "A category with the name '" + viewModel.CategoryName + "' already exists!";
             }
-            viewModel.Categories = _context.Categories.ToList();
+            viewModel.Categories = _context.Categories.Include(c => c.Products).ToList();
 
             return View(viewModel);
         }
