@@ -67,7 +67,25 @@ namespace Webshop.Data
             modelBuilder.Entity<ProductImage>().HasData(new List<ProductImage>
             {
                 new ProductImage
-                    {ImageId = 1, ImageTitle = "Chocolate Dream", ImageName = "chokladbild.jpg", ImageThumbName = "chokladbildth.jpg"}
+                    {ImageId = 1, ImageTitle = "Chocolate Dream", ImageName = "cupcake-chocolate.jpg", ImageThumbName = "cupcake-chocolate.jpg"},
+                new ProductImage
+                    {ImageId = 2, ImageTitle = "Pink surprise", ImageName = "cupcake-strawberry.jpg", ImageThumbName = "cupcake-strawberry.jpg"},
+                new ProductImage
+                    {ImageId = 3, ImageTitle = "Plain delight", ImageName = "cupcake-glutenfree.jpg", ImageThumbName = "cupcake-glutenfree.jpg"},
+                new ProductImage
+                    {ImageId = 4, ImageTitle = "Peanut butter cup-cake", ImageName = "cupcake-peanut.jpg", ImageThumbName = "cupcake-peanut.jpg"},
+                new ProductImage
+                    {ImageId = 5, ImageTitle = "Nutella mountain", ImageName = "cupcake-nutella.jpg", ImageThumbName = "cupcake-nutella.jpg"},
+                new ProductImage
+                    {ImageId = 6, ImageTitle = "M&M don't sue us", ImageName = "cupcake-mm.jpg", ImageThumbName = "cupcake-mm.jpg"},
+                new ProductImage
+                    {ImageId = 7, ImageTitle = "Forest fruit", ImageName = "cupcake-forest.jpg", ImageThumbName = "cupcake-forest.jpg"},
+                new ProductImage
+                    {ImageId = 8, ImageTitle = "Oreo supreme", ImageName = "cupcakes-oreo.jpg", ImageThumbName = "cupcakes-oreo.jpg"},
+                new ProductImage
+                    {ImageId = 9, ImageTitle = "Lemon", ImageName = "cupcake-lemon.jpg", ImageThumbName = "cupcake-lemon.jpg"},
+                new ProductImage
+                    {ImageId = 10, ImageTitle = "Taste the rainbow", ImageName = "cupcake-rainbow.jpg", ImageThumbName = "cupcake-rainbow.jpg"},
             });
 
             modelBuilder.Entity<Customer>().HasData(new List<Customer>
@@ -90,28 +108,28 @@ namespace Webshop.Data
 
             Product chocolateDream = new Product
             { Id = 1001, Name = "Chocolate Dream", Description = "A delicious chocolate cupcake with belgian chocolate", CategoryId = 101, Price = 29, ProductImageId = 1 };
-            Product pinkDelight = new Product
-            { Id = 1002, Name = "Pink surprise", Description = "A frosted strawberry cupcake, filled with strawberry jam", CategoryId = 102, Price = 22 };
+            Product pinkSurprise = new Product
+            { Id = 1002, Name = "Pink surprise", Description = "A frosted strawberry cupcake, filled with strawberry jam", CategoryId = 102, Price = 22, ProductImageId = 2 };
             Product plainDelight = new Product
-            { Id = 1003, Name = "Plain delight", Description = "A gluten free cupcake packed with flavor", CategoryId = 103, Price = 34 };
+            { Id = 1003, Name = "Plain delight", Description = "A gluten free cupcake packed with flavor", CategoryId = 103, Price = 34, ProductImageId = 3 };
+            Product peanutButterCupCake = new Product
+            { Id = 1004, Name = "Peanut butter cup-cake", Description = "Filled with peanut butter and topped with delicious peanut frosting.", CategoryId = 103, Price = 34, ProductImageId = 4 };
+            Product nutellaMountain = new Product
+            { Id = 1005, Name = "Nutella mountain", Description = "This is the cupcake for you if you like all things Nutella.", CategoryId = 101, Price = 34, ProductImageId = 5 };
+            Product mAndM = new Product
+            { Id = 1006, Name = "M&M don't sue us", Description = "A cupcake made to look like a giant M&M.", CategoryId = 101, Price = 34, ProductImageId = 6 };
+            Product forestFruit = new Product
+            { Id = 1007, Name = "Forest fruit", Description = "Not the tea, instead a cupcake with every kind of berry.", CategoryId = 102, Price = 34, ProductImageId = 7 };
+            Product oreoSupreme = new Product
+            { Id = 1008, Name = "Oreo supreme", Description = "Oreo cookie on top as well as batter and frosting made from oreo's.", CategoryId = 101, Price = 34, ProductImageId = 8 };
+            Product lemon = new Product
+            { Id = 1009, Name = "Lemon", Description = "If you like something with a fresher taste, this cupcake is for you.", CategoryId = 103, Price = 34, ProductImageId = 9 };
+            Product tasteTheRainbow = new Product
+            { Id = 1010, Name = "Taste the rainbow", Description = "Every taste of the fruit rainbow you can imagine.", CategoryId = 102, Price = 34, ProductImageId = 10 };
 
             modelBuilder.Entity<Product>().HasData(new List<Product>
             {
-                chocolateDream, pinkDelight, plainDelight,
-                new Product
-                    {Id = 1004, Name = "Peanut butter cup-cake", Description="Filled with peanut butter and topped with delicious peanut frosting.", CategoryId = 104, Price = 34},
-                new Product
-                    {Id = 1005, Name = "Nutella mountain", Description="This is the cupcake for you if you like all things Nutella.", CategoryId = 101, Price = 34},
-                new Product
-                    {Id = 1006, Name = "M&M don't sue us", Description="A cupcake made to look like a giant M&M.", CategoryId = 101, Price = 34},
-                new Product
-                    {Id = 1007, Name = "Forest fruit", Description="Not the tea, instead a cupcake with every kind of berry.", CategoryId = 104, Price = 34},
-                new Product
-                    {Id = 1008, Name = "Oreo supreme", Description="Oreo cookie on top as well as batter and frosting made from oreo's.", CategoryId = 101, Price = 34},
-                new Product
-                    {Id = 1009, Name = "Lemon", Description="If you like something with a fresher taste, this cupcake is for you.", CategoryId = 104, Price = 34},
-                new Product
-                    {Id = 1010, Name = "Taste the rainbow", Description="Every taste of the fruit rainbow you can imagine.", CategoryId = 104, Price = 34},     
+                chocolateDream, pinkSurprise, plainDelight,peanutButterCupCake,nutellaMountain,mAndM, forestFruit, oreoSupreme, tasteTheRainbow,    
             });
 
             modelBuilder.Entity<Category>().HasData(new List<Category>
@@ -119,11 +137,9 @@ namespace Webshop.Data
                 new Category
                     {Id = 101, CategoryName = "Chocolate" },
                 new Category
-                    {Id = 102, CategoryName = "Frosted" },
+                    {Id = 102, CategoryName = "Fruit" },
                 new Category
-                    {Id = 103, CategoryName = "Gluten free" },
-                new Category
-                    {Id = 104, CategoryName = "Berries and fruits" },
+                    {Id = 103, CategoryName = "Vegan" },
             });
 
             OrderDetail oDetail1 = new OrderDetail
@@ -139,10 +155,10 @@ namespace Webshop.Data
             {
                 OrderDetailId = 2,
                 Quantity = 2,
-                ProductId = pinkDelight.Id,
-                ProductName = pinkDelight.Name, 
+                ProductId = pinkSurprise.Id,
+                ProductName = pinkSurprise.Name, 
                 OrderId = 2, 
-                Price = pinkDelight.Price 
+                Price = pinkSurprise.Price 
             };
             OrderDetail oDetail3 = new OrderDetail
             {
