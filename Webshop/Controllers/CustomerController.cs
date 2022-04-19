@@ -24,6 +24,7 @@ namespace Webshop.Controllers
         public CustomerController(ApplicationDbContext context)
         {
             _context = context;
+        }
 
         private readonly UserManager<ApplicationUser> _userManager;
 
@@ -65,11 +66,6 @@ namespace Webshop.Controllers
             List<OrderDetail> details = chosenDetails.OrderDetails.ToList();
 
             return View("OrderDetails", details);
-        }
-
-        public IActionResult Index()
-        {
-            return View();
         }
         
         public IActionResult Receipt(int id)
