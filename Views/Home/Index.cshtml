@@ -1,0 +1,55 @@
+﻿@model Webshop.Viewmodels.InventoryViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="main.css"/>
+        <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    </head>
+    <body>
+
+        <div id="home">
+            
+            <div class="slogan"><h1>This is a slogan!</h1></div>
+            <a href="#shop"><i class="las la-angle-down"></i></a>
+            <img src="~/Images/main-cupcake.jpg" alt="main">
+
+        </div>
+
+        <div id="shop">
+            
+            <div class="category-container">
+                <h1>Chocolate</h1>
+
+                <partial name="PartialViews\_inventoryPartial", model="@Model" />
+
+            </div>
+            
+            <div class="category-container">
+                <h1>Fruit</h1>
+               
+            </div>
+            
+            <div class="category-container">
+                <h1>Vegan</h1>
+                
+            </div>
+            
+        </div>
+        <div id="about"></div>
+        <div id="store"></div>
+
+    </body>
+</html>
+
+
+
+
+
+

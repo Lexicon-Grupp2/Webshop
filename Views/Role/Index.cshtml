@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+
+<h1>Roles</h1>
+
+<a asp-action="AddRoleToUser">Add user to role</a>
+
+<div class="role-list-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Role Name</th>
+                <th scope="col">Role Id</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Id</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,76 @@
+﻿@model Webshop.Viewmodels.InventoryViewModel
+
+<h1>List of products</h1>
+
+@*@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="CreateProduct">Create New</a>
+    </p>
+}*@
+
+
+<div>
+    <h3>List of cupcakes</h3>
+    <table class="table table-striped">
+        <thead class="thead-light">
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                @if (User.IsInRole("Admin"))
+                {
+                <th>Edit</th>
+                <th>Delete</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model.Inventory)
+            {
+                <tr>
+                    <td>
+                        @if (product.ProductImage != null)
+                        {
+                            <img src="@("~/images/ProductImages/"+product.ProductImage.ImageThumbName)" asp-append-version="true" /> }
+                        else
+                        {
+                            <img src="@("~/images/ProductImages/placeholderth.jpg")" asp-append-version="true" />}
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.Category.CategoryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.Price)
+                    </td>
+                    <td>
+                        <form asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@product.Id" method="post">
+                            <input type="number" value="1" name="Quantity" />
+                            <input type="submit" value="Add to cart" />
+                        </form>
+                    </td>
+
+
+
+                    @if (User.IsInRole("Admin"))
+                    {
+
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@product.Id">Edit</a>
+                        </td>
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@product.Id">Delete</a>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

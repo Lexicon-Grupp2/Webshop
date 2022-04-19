@@ -1,0 +1,29 @@
+﻿@model Order
+
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<div class="text-center">
+
+
+    <div class="jumbotron">
+        <h2 class="display-4">Checkout</h2>
+        <p class="lead">You are just one click away from your delicious cupcakes.</p>
+        <hr class="my-4">
+        <div class="arrival_bg_box">
+            <img src="/Images/pastryshop.jpg" alt="">
+        </div>
+        <form asp-action="Checkout" method="post" class="form-row form-inline" role="form">
+            <div>
+                <div class="col-md-offset-2 col-md-5">
+                    <input type="submit" class="btn btn-primary text-center" value="Complete order" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+
+</div>

@@ -1,0 +1,28 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Receipt</title>
+</head>
+<body>
+
+    <h2>Receipt for specific order</h2>
+
+    <partial name="_customerDetails" />
+
+
+    <p>Partial views med data från olika källor...</p>
+
+    <div>
+        <a class="btn btn-primary" asp-controller="Customer" asp-action="Print">Print Receipt</a>
+    </div>
+
+
+</body>
+</html>

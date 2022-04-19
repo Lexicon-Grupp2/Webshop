@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Webshop.Models.ProductImage>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>ProductImage Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Image
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageName)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@("~/images/ProductImages/"+item.ImageThumbName)" asp-append-version="true" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImageTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImageName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ImageId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ImageId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ImageId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
