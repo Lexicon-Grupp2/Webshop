@@ -21,11 +21,6 @@ namespace Webshop.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        public CustomerController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
         private readonly UserManager<ApplicationUser> _userManager;
 
         public CustomerController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
