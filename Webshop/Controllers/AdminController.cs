@@ -173,24 +173,6 @@ namespace Webshop.Controllers
             return View(user);
         }
 
-        // GET: Admin/RemoveAdminRole/5
-        [HttpGet]
-        public async Task<IActionResult> RemoveAdminRole(string Id)
-        {
-            if (Id == null)
-            {
-                return NotFound();
-            }
-
-            var user = await _context.Users.FindAsync(Id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return RedirectToAction("RemoveAdminRole", "Role", user.Id);
-        }
-
         // GET: Admin/EditUser/5
         [HttpGet]
         public async Task<IActionResult> AddRoleToUser(string Id)
