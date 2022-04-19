@@ -227,11 +227,19 @@ namespace Webshop.Controllers
             return RedirectToAction(nameof(ListUsers));
         }
 
+        // GET: Admin/ListCategories
+        public IActionResult ListCategories()
+        {
+            ListCategoriesViewModel viewmodel = new ListCategoriesViewModel { Categories = _context.Categories.Include(c => c.Products).ToList() };
+
+            return View(viewmodel);
+        }
+
         // GET: Admin/CreateCategory
         public IActionResult CreateCategory()
-        {
+        {          
             CreateCategoryViewModel viewModel = new CreateCategoryViewModel();
-            viewModel.Categories = _context.Categories.ToList();
+            viewModel.Categories = _context.Categories.Include(c => c.Products).ToList();
 
             return View(viewModel);
         }
@@ -258,14 +266,116 @@ namespace Webshop.Controllers
                 {
                     await _context.Categories.AddAsync(category);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(ListCategories));
                 }
                 else
                     viewModel.ViewMessage = "A category with the name '" + viewModel.CategoryName + "' already exists!";
             }
-            viewModel.Categories = _context.Categories.ToList();
+            viewModel.Categories = _context.Categories.Include(c => c.Products).ToList();
 
             return View(viewModel);
+        }
+
+        public async Task<IActionResult> DeleteCategory(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            Category category = await _context.Categories.Include(c => c.Products)
+                        .Where(c => c.Id == id)
+                        .FirstAsync();
+
+            bool okToDelete = false;
+            string errorMessage = "";
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+            else if (category.Products != null)
+            {
+                if (category.Products.Count > 0)
+                {
+                    errorMessage = ("Unable to delete category '" + category.CategoryName + "' because it has products connected to it!");
+                }
+                else   
+                    okToDelete = true;
+            }
+            if (okToDelete)
+            {
+                _context.Categories.Remove(category);
+                await _context.SaveChangesAsync();
+
+                //todo-> if savechanges was successful?
+                errorMessage = ("Category '" + category.CategoryName + "' was deleted!");
+            }
+
+            ListCategoriesViewModel viewmodel = new ListCategoriesViewModel { Categories = _context.Categories.Include(c => c.Products).ToList() };
+            viewmodel.ErrorMessage = errorMessage;
+
+            return View(nameof(ListCategories), viewmodel);
+        }
+
+        // GET: Admin/EditCategory/5
+        [HttpGet]
+        public async Task<IActionResult> EditCategory(int? Id)
+        {
+            if (Id == null)
+            {
+                return NotFound();
+            }
+
+            var category = await _context.Categories.FindAsync(Id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            EditCategoryViewModel editCategoryViewModel = new EditCategoryViewModel
+            {
+                CategoryName = category.CategoryName,
+                ID = category.Id
+            };
+
+            return View(editCategoryViewModel);
+        }
+
+        // Post: Admin/EditCategory/5
+        [HttpPost]
+        public async Task<IActionResult> EditCategory(EditCategoryViewModel editCategoryViewModel)
+        {
+
+            if (editCategoryViewModel != null)
+            {
+                if (ModelState.IsValid)
+                {
+                    Category categoryToUpdate = await _context.Categories.FindAsync(editCategoryViewModel.ID);
+
+                    if(categoryToUpdate != null)
+                    {
+                        //check if another category with same name exists?
+                        var categoryDuplicateExists = _context.Categories.Where(c => c.CategoryName == editCategoryViewModel.CategoryName)
+                        .FirstOrDefault();
+
+                        if(categoryDuplicateExists == null)
+                        {
+                            categoryToUpdate.CategoryName = editCategoryViewModel.CategoryName;
+
+                            _context.Categories.Update(categoryToUpdate);
+                            await _context.SaveChangesAsync();
+                        }
+                        else
+                        {
+                            editCategoryViewModel.ErrorMessage = "A category with the name '" + editCategoryViewModel.CategoryName +
+                                                                    "' already exists!";
+                            return View(editCategoryViewModel);
+                        }
+                    }                                      
+                }
+            }
+            return RedirectToAction(nameof(ListCategories));
         }
     }
 }
