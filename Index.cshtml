@@ -1,0 +1,58 @@
+﻿@model Webshop.Viewmodels.ShoppingCartViewModel
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (@Model.ShoppingCartTotal != 0)
+{
+
+    
+        <h2>Shopping Cart</h2>
+    
+    <div>
+        <table class="table table-responsive-sm">
+            <tr>
+                <th>Quantity</th>
+                <th>Product name</th>
+            </tr>
+
+            <tbody>
+                @foreach (var item in Model.ShoppingCart.CartContents)
+                {
+
+                    <tr>
+                        <td>@item.Quantity</td>
+                        <td>@item.Product.Name</td>
+                        <td>
+                            <form asp-controller="ShoppingCart" asp-action="UpdateCart" asp-route-id="@item.Product.Id" method="post">
+                                <label>Amount</label>
+                                <input type="number" value="@item.Quantity" name="Quantity" />
+                                <input type="submit" value="Update" />
+                            </form>
+                        </td>
+
+                        <td>
+                            <a class="btn btn-danger" asp-controller="ShoppingCart" asp-action="RemoveFromCart"
+                               asp-route-id="@item.Product.Id">Remove</a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+}
+@if (@Model.ShoppingCartTotal != 0)
+{
+<div>
+    <div>
+        <h5>Subtotal: @Model.ShoppingCartTotal SEK</h5>
+    </div>
+    <div>
+        <a class="btn btn-primary" asp-controller="Order" asp-action="Checkout">Proceed to Checkout</a>
+    </div>
+</div>
+}
+
