@@ -30,7 +30,7 @@
                         <h4>@Html.DisplayFor(modelItem => product.Price) kr</h4>
 
                         <form asp-controller="ShoppingCart" style="width: 150px; float: left; position:absolute;" asp-action="AddToCart" asp-route-id="@product.Id" method="post">
-                            <input type="number" style="width:50px" value="1" name="Quantity" />
+                            <input type="number" style="width:50px" value="1" name="Quantity" min="1" oninput="validity.valid||(value='');"/>
                             <input type="submit" value="Add to cart" />
                         </form>
 
