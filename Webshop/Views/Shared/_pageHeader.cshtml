@@ -38,6 +38,12 @@
 </nav>*@
 
 <header>
+    <div class="admin-box">Admin options</div>
+    <div class="admin-box-content">
+        <a href="">test</a>
+        <a href="">test</a>
+        <a href="">test</a>
+    </div>
 
     <div class="menu">
         <ul>
@@ -54,7 +60,12 @@
             <li>Butiker</li></a>
         </ul>
 
-        <a asp-area="" asp-controller="ShoppingCart" asp-action="Index"><i class="las la-shopping-cart"></i></a>
+        <div class="cart-box">
+            <div class="login-box">Sign up | Login</div>
+            <a asp-area="" asp-controller="ShoppingCart" asp-action="Index"><i class="las la-shopping-cart"></i></a>
+                
+        </div>
+
     </div>
 
 </header>
