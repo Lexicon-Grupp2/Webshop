@@ -16,6 +16,7 @@ namespace Webshop.Viewmodels
         public string Description { get; set; }
         public int Price { get; set; }
         public ProductCategory ProductCategory { get; set; }
+        [Display(Name = "Product Category")]
         public int CategoryId { get; set; }
         [StringLength(25, MinimumLength = 3)]
         [Display(Name = "Image Title")]

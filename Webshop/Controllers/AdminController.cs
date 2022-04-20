@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 using Webshop.Data;
 using Webshop.Models;
 using Webshop.Viewmodels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Webshop.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly ApplicationDbContext _context;

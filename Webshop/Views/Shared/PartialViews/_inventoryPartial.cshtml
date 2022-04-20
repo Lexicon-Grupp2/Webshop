@@ -14,15 +14,15 @@
                     <li>
                         @if (product.ProductImage == null)
                         {
-                            <img src="@("~/images/ProductImages/placeholderth.jpg")" asp-append-version="true" />
+                            <img src="@("~/images/ProductImages/placeholderth.jpg")"  alt="@product.Name" asp-append-version="true" />
                         }
                         else if (product.ProductImage.ImageId == 8)
                         {
-                            <img src="@("~/images/ProductImages/"+product.ProductImage.ImageThumbName)" style="object-position: left;" asp-append-version="true" />
+                            <img src="@("~/images/ProductImages/"+product.ProductImage.ImageThumbName)" style="object-position: left;" alt="@product.Name" asp-append-version="true" />
                         }
                         else
                         {
-                            <img src="@("~/images/ProductImages/"+product.ProductImage.ImageThumbName)" asp-append-version="true" />
+                            <img src="@("~/images/ProductImages/"+product.ProductImage.ImageThumbName)" alt="@product.Name" asp-append-version="true" />
                         }
 
                         <h2>@Html.DisplayFor(modelItem => product.Name)</h2><p>@Html.DisplayFor(modelItem => product.Description)</p>
