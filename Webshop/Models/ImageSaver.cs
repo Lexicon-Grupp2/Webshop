@@ -34,7 +34,7 @@ namespace Webshop.Models
                     await imageModel.ImageFile.CopyToAsync(fileStream);
 
                     //thumb test
-                    int thumbHeight = 200;
+                    int thumbHeight = 300;
                     string thumbFilename = Path.GetFileNameWithoutExtension(productImage.ImageName) + "th" + extension;
                     productImage.ImageThumbName = thumbFilename;
 

@@ -38,7 +38,8 @@ namespace Webshop.Controllers
                              .Include(product => product.ProductImage)
                              .ToList()
                              .Select(product => CreateProductViewModel(product))
-                             .ToList()
+                             .ToList(),
+                            _context.Categories.ToList()
             ));
         }
 
