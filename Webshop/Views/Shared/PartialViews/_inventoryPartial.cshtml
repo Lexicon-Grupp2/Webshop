@@ -1,4 +1,4 @@
-﻿@model Webshop.Viewmodels.InventoryViewModel
+@model Webshop.Viewmodels.InventoryViewModel
 
 @foreach (Category cat in Model.ProductCategories)
 {
@@ -10,7 +10,7 @@
         {
             if (product.Category.CategoryName == cat.CategoryName)
             {
-                <ol>
+                <ul>
                     <li>
                         @if (product.ProductImage == null)
                         {
@@ -42,7 +42,7 @@
                             </div>
                         }
                     </li>
-                </ol>
+                </ul>
             }
         }
     </div>
