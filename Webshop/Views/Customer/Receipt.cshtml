@@ -34,7 +34,7 @@
     <h2>Total Cost: @Model.TotalCost</h2>
 
     <div>
-        <a class="btn btn-primary" asp-controller="Customer" asp-action="Print">Print Receipt</a>
+        <a class="btn btn-primary" asp-route-id="@Model.OrderId" asp-controller="Customer" asp-action="Print">Print Receipt</a>
     </div>
 
 
