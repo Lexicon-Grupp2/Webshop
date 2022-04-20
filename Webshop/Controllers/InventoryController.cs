@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Webshop.Data;
+using Webshop.Interfaces;
 using Webshop.Models;
 using Webshop.Viewmodels;
 
@@ -20,12 +21,19 @@ namespace Webshop.Controllers
 
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _hostEnvironment;
+        private readonly IProductRepo _productRepo;
+        private readonly ShoppingCart _shoppingCart;
 
-        public InventoryController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment)
+        public InventoryController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment, IProductRepo productRepo, ShoppingCart shoppingCart)
         {
             _context = context;
             _hostEnvironment = hostEnvironment;
+            _productRepo = productRepo;
+            _shoppingCart = shoppingCart;
         }
+
+
+
         public IActionResult Index()
         {          
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "CategoryName");

@@ -16,11 +16,10 @@ using Webshop.Viewmodels;
 
 namespace Webshop.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class CustomerController : Controller
     {
         private readonly ApplicationDbContext _context;
-
         private readonly UserManager<ApplicationUser> _userManager;
 
         public CustomerController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
@@ -93,7 +92,8 @@ namespace Webshop.Controllers
 
         [HttpGet]
         [Obsolete]
-        public async Task<IActionResult> Print()
+        [Authorize(Roles = "Admin, User")]
+        public async Task<IActionResult> Print(int id)
         
         {
             var browserFetcher = new BrowserFetcher();
@@ -101,8 +101,11 @@ namespace Webshop.Controllers
 
             await using var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
 
+            var path = "https://localhost:44341/Customer/Receipt/" + id;
+
             await using var page = await browser.NewPageAsync();
-            await page.GoToAsync("https://localhost:44341/Customer/Receipt");           //Change this to your localhost
+
+            await page.GoToAsync(path);           //Change this to your localhost
 
 
             var pdfContent = await page.PdfStreamAsync(new PdfOptions
