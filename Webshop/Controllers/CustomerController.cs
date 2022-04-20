@@ -16,7 +16,7 @@ using Webshop.Viewmodels;
 
 namespace Webshop.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class CustomerController : Controller
     {
         private readonly ApplicationDbContext _context;
