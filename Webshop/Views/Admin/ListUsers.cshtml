@@ -1,5 +1,9 @@
 ﻿@model Webshop.Viewmodels.UsersViewModel
 
+@{
+    ViewData["Title"] = "Users";
+}
+
 <partial name="_AdminMenuPartial" />
 
 <h1>Admins:</h1>
@@ -20,24 +24,24 @@
     <tbody>
         @foreach (UserInListViewModel user in Model.Admins)
         {
-        <tr>
-            <td>
-                @user.Name
-            </td>
-            <td>
-                @user.Email
-            </td>
-            <td>
-                @user.Country
-            </td>
-            <td>
-                @user.City
-            </td>
-            <td>link details</td>
-            <td><a asp-action="EditUser" asp-route-id="@user.UserId">Edit</a></td>
-            <td><a asp-controller="Role" asp-action="RemoveAdminRole" asp-route-id="@user.UserId">Remove Admin role</a></td>
-            <td>link delete</td>
-        </tr>
+            <tr>
+                <td>
+                    @user.Name
+                </td>
+                <td>
+                    @user.Email
+                </td>
+                <td>
+                    @user.Country
+                </td>
+                <td>
+                    @user.City
+                </td>
+                <td>link details</td>
+                <td><a asp-action="EditUser" asp-route-id="@user.UserId">Edit</a></td>
+                <td><a asp-controller="Role" asp-action="RemoveAdminRole" asp-route-id="@user.UserId">Remove Admin role</a></td>
+                <td>link delete</td>
+            </tr>
         }
     </tbody>
 </table>
@@ -61,25 +65,25 @@
     <tbody>
         @foreach (UserInListViewModel user in Model.Customers)
         {
-        <tr>
-            <td>
-                @user.Name
-            </td>
-            <td>
-                @user.Email
-            </td>
-            <td>
-                @user.Country
-            </td>
-            <td>
-                @user.City
-            </td>
-            <td><a asp-action="ListOrdersForSpecificCustomer" asp-route-id="@user.UserId">@user.Orders</a></td>
-            <td>link details</td>
-            <td><a asp-action="EditUser" asp-route-id="@user.UserId">Edit</a></td>
-            <td><a asp-controller="Role" asp-action="AddAdminRole" asp-route-id="@user.UserId">Add Admin role</a></td>
-            <td>link delete</td>
-        </tr>
+            <tr>
+                <td>
+                    @user.Name
+                </td>
+                <td>
+                    @user.Email
+                </td>
+                <td>
+                    @user.Country
+                </td>
+                <td>
+                    @user.City
+                </td>
+                <td><a asp-action="ListOrdersForSpecificCustomer" asp-route-id="@user.UserId">@user.Orders</a></td>
+                <td>link details</td>
+                <td><a asp-action="EditUser" asp-route-id="@user.UserId">Edit</a></td>
+                <td><a asp-controller="Role" asp-action="AddAdminRole" asp-route-id="@user.UserId">Add Admin role</a></td>
+                <td>link delete</td>
+            </tr>
         }
     </tbody>
 </table>

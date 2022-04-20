@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,10 +14,10 @@ using Webshop.Viewmodels;
 
 namespace Webshop.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ImageController : Controller
     {
         private readonly ApplicationDbContext _context;
-
         private readonly IWebHostEnvironment _hostEnvironment;
 
         public ImageController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment)
@@ -62,7 +63,7 @@ namespace Webshop.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ImageId,ImageTitle,ImageFile")] ProductImageViewModel imageModel)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && imageModel.ImageFile != null)
             {
                 string imageName = await ImageSaver.SaveImage(_context, _hostEnvironment, imageModel);
 
