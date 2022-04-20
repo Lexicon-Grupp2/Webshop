@@ -40,9 +40,12 @@
 <header>
     <div class="admin-box">Admin options</div>
     <div class="admin-box-content">
-        <a href="">test</a>
-        <a href="">test</a>
-        <a href="">test</a>
+        <a asp-controller="Admin" asp-action="ListUsers">Manage Users</a>
+        <a asp-controller="Role" asp-action="Index">Manage Roles</a>
+        <a asp-controller="Image" asp-action="Index">Manage Images</a>
+        <a asp-controller="Inventory" asp-action="AdminInventory">Manage Inventory</a>
+        <a asp-controller="Admin" asp-action="ListCategories">Manage Categories</a>
+        <a asp-controller="Admin" asp-action="Index">Manage Orders</a>
     </div>
 
     <div class="menu">
@@ -61,7 +64,7 @@
         </ul>
 
         <div class="cart-box">
-            <div class="login-box">Sign up | Login</div>
+            <div class="login-box"><partial name="_LoginPartial" /></div>
             <a asp-area="" asp-controller="ShoppingCart" asp-action="Index"><i class="las la-shopping-cart"></i></a>
                 
         </div>
