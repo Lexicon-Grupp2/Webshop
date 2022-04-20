@@ -11,11 +11,14 @@ namespace Webshop.Viewmodels
     public class CreateProductViewModel
     {
         [Required]
-        [StringLength(50, MinimumLength = 1)]
+        [StringLength(50, MinimumLength = 2)]
         public string Name { get; set; }
         public string Description { get; set; }
+
+        [Range(1, int.MaxValue, ErrorMessage = "Value for price must be a positive integer!")]
         public int Price { get; set; }
         public ProductCategory ProductCategory { get; set; }
+        [Display(Name = "Product Category")]
         public int CategoryId { get; set; }
         [StringLength(25, MinimumLength = 3)]
         [Display(Name = "Image Title")]

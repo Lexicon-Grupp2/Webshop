@@ -9,8 +9,10 @@ namespace Webshop.Models
     public class Product
     {
         public int Id { get; set; }
+        [StringLength(50, MinimumLength = 2)]
         public string Name { get; set; }
         public string Description { get; set; }
+        [Range(1, int.MaxValue, ErrorMessage = "Value for price must be a positive integer!")]
         public int Price { get; set; }
         public Category Category { get; set; }
         public int? CategoryId { get; set; }

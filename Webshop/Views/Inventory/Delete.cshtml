@@ -1,7 +1,7 @@
 ﻿@model Webshop.Viewmodels.ProductViewModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Delete Product";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -13,7 +13,7 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            <p>@Model.Name<p/>
+            @Model.Name
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Price)
@@ -42,6 +42,6 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="AdminInventory">Back to List</a>
     </form>
 </div>

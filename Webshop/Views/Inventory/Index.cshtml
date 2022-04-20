@@ -2,14 +2,6 @@
 
 <h1>List of products</h1>
 
-@if (User.IsInRole("Admin"))
-{
-    <p>
-        <a asp-action="CreateProduct">Create New</a>
-    </p>
-}
-
-
 <div>
     <h3>List of cupcakes</h3>
     <table class="table table-striped">
@@ -56,8 +48,6 @@
                             <input type="submit" value="Add to cart" />
                         </form>
                     </td>
-
-
 
                     @if (User.IsInRole("Admin"))
                     {

@@ -1,11 +1,13 @@
 ﻿@model Webshop.Viewmodels.CreateProductViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Product";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create Product</h1>
+<partial name="_AdminMenuPartial" />
+
+<h1>Create Product:</h1>
 
 <hr />
 <div class="row">
@@ -32,6 +34,7 @@
                 <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
+            <div><p>Optional image upload:</p></div>
             <div class="form-group">
                 <label asp-for="ImageTitle" class="control-label"></label>
                 <input asp-for="ImageTitle" class="form-control" />
@@ -50,7 +53,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="AdminInventory">Back to List</a>
 </div>
 
 @section Scripts {

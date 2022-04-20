@@ -34,8 +34,7 @@ namespace Webshop.Models
                     await imageModel.ImageFile.CopyToAsync(fileStream);
 
                     //thumb test
-                    int twidth = 200;
-                    int theight = 200;
+                    int thumbHeight = 300;
                     string thumbFilename = Path.GetFileNameWithoutExtension(productImage.ImageName) + "th" + extension;
                     productImage.ImageThumbName = thumbFilename;
 
@@ -44,15 +43,8 @@ namespace Webshop.Models
 
                     //resized
                     Bitmap resizetofit = new Bitmap(image, image.Width, image.Height);
-                    Bitmap bitmapResized = ProportionallyResizeBitmapByHeight(resizetofit, 200);
+                    Bitmap bitmapResized = ProportionallyResizeBitmapByHeight(resizetofit, thumbHeight);
                     bitmapResized.Save(tpath);
-
-                    //old way stretched
-                    //using (var a = Graphics.FromImage(newimage))
-                    //{
-                    //    a.DrawImage(image, 0, 0, twidth, theight);
-                    //    newimage.Save(tpath);
-                    //}
                 }
 
                 //Insert record

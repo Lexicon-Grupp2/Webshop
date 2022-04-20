@@ -16,7 +16,7 @@ namespace Webshop.Viewmodels
         [StringLength(50, MinimumLength = 3)]
         [Display(Name = "Image Name")]
         public string ImageName { get; set; }
-        [Display(Name = "Upload File")]
+        [Display(Name = "Upload Image File")]
         public IFormFile ImageFile { get; set; }
     }
 }

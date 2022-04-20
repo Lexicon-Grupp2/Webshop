@@ -61,7 +61,6 @@ namespace Webshop.Controllers
 
             return View("OrderDetails", details);
         }
-
         
         public IActionResult Receipt(int id)
         {
