@@ -1,0 +1,51 @@
+﻿@model List<Category>
+
+<h1>Existing categories:</h1>
+
+<table class="table table-striped">
+    <thead class="thead-light">
+        <tr>
+            <th>Nr</th>
+            <th>Category name</th>
+            <th>Products</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Category cat in Model)
+        {
+            <tr>
+                <td>
+                    @cat.Id
+                </td>
+                <td>
+                    @cat.CategoryName
+                </td>
+                <td>
+                    @if (cat.Products != null)
+                    {
+                        @cat.Products.Count.ToString();
+                    }
+                    else
+                    {
+                        <p>0</p>
+                    }
+                </td>
+
+            <td>
+
+                <a asp-action="EditCategory" asp-route-id="@cat.Id">Edit</a>
+
+            </td>
+
+            <td>
+
+                <a asp-action="DeleteCategory" asp-route-id="@cat.Id">Delete</a>
+
+            </td>
+
+        </tr>
+        }
+    </tbody>
+</table>

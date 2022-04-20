@@ -11,10 +11,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Webshop.Data;
 using Webshop.Models;
+using Webshop.Viewmodels;
+
 
 namespace Webshop.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class CustomerController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -59,16 +61,39 @@ namespace Webshop.Controllers
 
             return View("OrderDetails", details);
         }
-
-        public IActionResult Receipt()
+        
+        public IActionResult Receipt(int id)
         {
-            return View();
+            Order order = _context.Orders.FirstOrDefault(order => order.OrderId == id);
+
+            _context.OrderDetails.ToList();
+            List<OrderDetail> details = order.OrderDetails.ToList();
+
+            ApplicationUser user = _context.Users.FirstOrDefault(user => user.Id == order.CustomerId);
+
+            ReceiptViewModel receiptViewModel = new ReceiptViewModel()
+            {
+                OrderId = id,
+                OrderDate = order.OrderDate,
+                TotalCost = order.TotalCost,
+                CustomerId = order.CustomerId,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Address = user.Address,
+                PostalCode = user.PostalCode,
+                City = user.City,
+                Country = user.Country,
+                OrderDetails = details
+            };
+
+            return View("Receipt", receiptViewModel);
         }
 
 
         [HttpGet]
         [Obsolete]
-        public async Task<IActionResult> Print()
+        [Authorize(Roles = "Admin, User")]
+        public async Task<IActionResult> Print(int id)
         
         {
             var browserFetcher = new BrowserFetcher();
@@ -76,8 +101,11 @@ namespace Webshop.Controllers
 
             await using var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
 
+            var path = "https://localhost:44341/Customer/Receipt/" + id;
+
             await using var page = await browser.NewPageAsync();
-            await page.GoToAsync("https://localhost:44341/Customer/Receipt");           //Change this to your localhost
+
+            await page.GoToAsync(path);           //Change this to your localhost
 
 
             var pdfContent = await page.PdfStreamAsync(new PdfOptions

@@ -1,58 +1,122 @@
 ﻿@model Webshop.Viewmodels.ShoppingCartViewModel
 
-
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Index2";
 }
 
-@if (@Model.ShoppingCartTotal != 0)
-{
+<div class="container">
 
-    
-        <h2>Shopping Cart</h2>
-    
-    <div>
-        <table class="table table-responsive-sm">
-            <tr>
-                <th>Quantity</th>
-                <th>Product name</th>
-            </tr>
+    @if (@Model.ShoppingCartTotal == 0)
+    {
 
-            <tbody>
-                @foreach (var item in Model.ShoppingCart.CartContents)
-                {
 
+        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+            <div class="col-10 col-sm-8 col-lg-6">
+                <img src="~/Images/cupcakes_checkout.jpg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+            </div>
+            <div class="col-lg-6">
+                <h1 class="display-5 fw-bold lh-1 mb-3">Your shopping cart is empty</h1>
+                <p class="lead">Check out our selection of delicious cupcakes.</p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <form asp-action="Checkout" method="post" class="form-row form-inline" role="form">
+                        <div>
+                            <div>
+                                <a class="btn btn-primary btn-lg px-4 me-md-2" asp-controller="Inventory" asp-action="Index">Shop Now</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (@Model.ShoppingCartTotal != 0)
+    {
+
+
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
                     <tr>
-                        <td>@item.Quantity</td>
-                        <td>@item.Product.Name</td>
-                        <td>
-                            <form asp-controller="ShoppingCart" asp-action="UpdateCart" asp-route-id="@item.Product.Id" method="post">
-                                <label>Amount</label>
-                                <input type="number" value="@item.Quantity" name="Quantity" />
-                                <input type="submit" value="Update" />
-                            </form>
-                        </td>
+                        <th>Product name</th>
+                        <th class="text-center">Quantity</th>
+                        <th class="text-center">Price</th>
+                        <th class="text-center">Total</th>
 
-                        <td>
-                            <a class="btn btn-danger" asp-controller="ShoppingCart" asp-action="RemoveFromCart"
-                               asp-route-id="@item.Product.Id">Remove</a>
-                        </td>
                     </tr>
-                }
+                </thead>
+                <tbody>
 
-            </tbody>
-        </table>
-    </div>
-}
-@if (@Model.ShoppingCartTotal != 0)
-{
-<div>
-    <div>
-        <h5>Subtotal: @Model.ShoppingCartTotal SEK</h5>
-    </div>
-    <div>
-        <a class="btn btn-primary" asp-controller="Order" asp-action="Checkout">Proceed to Checkout</a>
-    </div>
+                    @foreach (var item in Model.ShoppingCart.CartContents)
+                    {
+                        <tr>
+                            <td class="col-sm-5 col-md-5">
+                                <div>
+                                    <div>
+                                        <h5 class="mt-0 text-primary">@item.Product.Name</h5>
+                                        <span>Status: </span><span class="text-success">
+                                            <strong>
+                                                In stock
+                                            </strong>
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+
+
+                            <td class="col-sm-4 col-md-4" style="text-align: center">
+                                <form asp-controller="ShoppingCart" asp-action="UpdateCart" asp-route-id="@item.Product.Id" method="post">
+                                    <input type="number" class="col-md-3" value="@item.Quantity" name="Quantity">
+                                    <input class="btn btn-sm btn-success col-md-3" type="submit" value="Update" />
+                                </form>
+                            </td>
+                            <td class="col-sm-1 col-md-1 text-center"><strong>@item.Product.Price</strong></td>
+                            <td class="col-sm-1 col-md-1 text-center"><strong>@(item.Product.Price * item.Quantity)</strong></td>
+                            <td class="col-sm-1 col-md-1">
+                                <a class="btn btn-danger" asp-controller="ShoppingCart" asp-action="RemoveFromCart"
+                                   asp-route-id="@item.Product.Id">Remove</a>
+                            </td>
+                        </tr>
+
+                    }
+
+                    @if (@Model.ShoppingCartTotal != 0)
+                    {
+                        <tr>
+                            <td colspan="3" class="text-right">
+                                <h5>Subtotal</h5>
+                            </td>
+                            <td class="text-center">
+                                <h5>@Model.ShoppingCartTotal</h5>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-right">
+                                <h5>Shipping</h5>
+                            </td>
+                            <td class="text-center">
+                                <h5><strong>FREE</strong></h5>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-right">
+                                <h3>Total (SEK)</h3>
+                            </td>
+                            <td class="text-center">
+                                <h3><strong>@Model.ShoppingCartTotal</strong></h3>
+                            </td>
+                            <td></td>
+
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <a type="button" class="m-1 btn btn-success" asp-controller="Order" asp-action="Checkout">Proceed to Checkout</a>
+        </div>
+    }
 </div>
-}
-

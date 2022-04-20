@@ -4,26 +4,22 @@
     ViewData["Title"] = "Checkout";
 }
 
-<div class="text-center">
+<div class="container">
 
-
-    <div class="jumbotron">
-        <h2 class="display-4">Checkout</h2>
-        <p class="lead">You are just one click away from your delicious cupcakes.</p>
-        <hr class="my-4">
-        <div class="arrival_bg_box">
-            <img src="/Images/pastryshop.jpg" alt="">
-        </div>
-        <form asp-action="Checkout" method="post" class="form-row form-inline" role="form">
-            <div>
-                <div class="col-md-offset-2 col-md-5">
-                    <input type="submit" class="btn btn-primary text-center" value="Complete order" />
-                </div>
+    <div class="px-4 py-5 my-5 text-center">
+        <img class="d-block mx-auto mb-4" src="~/Images/shoppingcart.png" alt="">
+        <h1 class="display-5 fw-bold">Secure payment</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">CupCakeKing uses the safest payment methods available. You can even pay with your favourite cryptocurrency. All automated.</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <form asp-action="Checkout" method="post" role="form">
+                    <div>
+                        <div class="col-md-offset-2 col-md-5">
+                            <input type="submit" class="btn btn-primary btn-lg px-4 gap-3" value="Pay with secure payment" />
+                        </div>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
-
-
-
-
 </div>

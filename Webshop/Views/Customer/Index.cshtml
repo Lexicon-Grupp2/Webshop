@@ -1,4 +1,4 @@
-﻿@model List<Order>
+@model List<Order>
 
 @{
     ViewData["Title"] = "Index";
@@ -39,14 +39,13 @@
                 <a asp-route-id="@item.OrderId" asp-action="Details" type="button">Details</a>
             </td>
             <td>
-                <a class="btn btn-primary" asp-controller="Customer" asp-action="Receipt">Receipt</a>
+                <a class="btn btn-primary" asp-route-id="@item.OrderId" asp-controller="Customer" asp-action="Receipt">Receipt</a>
             </td>
         </tr>
         }
     </tbody>
 </table>
 
-
 <div>
-    <a class="btn btn-primary" asp-controller="Customer" asp-action="Receipt">Go to receipt for specific order</a>
+    <a class="btn btn-primary" asp-route-id="1" asp-controller="Customer" asp-action="Receipt">Go to receipt for specific order</a>
 </div>

@@ -1,0 +1,18 @@
+﻿@model Webshop.Viewmodels.AdminInventoryViewModel
+
+@{
+    ViewData["Title"] = "Admin Inventory";
+}
+
+<partial name="_AdminMenuPartial" />
+
+<a class="btn btn-primary" asp-area="" asp-controller="Inventory" asp-action="CreateProduct">Create new product</a>
+
+<h1>AdminInventory</h1>
+
+@if (Model.ErrorMessage != null)
+{
+    <partial name="_ErrorMessagePartial" , model="@Model.ErrorMessage" />
+}
+
+<partial name="PartialViews\_inventoryPartial" , model="@Model.InvViewModel" />

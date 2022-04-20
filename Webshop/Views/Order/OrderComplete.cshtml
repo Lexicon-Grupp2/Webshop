@@ -1,25 +1,31 @@
 ﻿
 @{
-    ViewData["Title"] = "OrderComplete";
+    ViewData["Title"] = "Order Complete";
 }
 
-<div class="text-center">
 
-    <div class="jumbotron">
-        <h2 class="display-4">Order Completed</h2>
-        <p class="lead">Our pastry chefs have started baking your cupcakes...</p>
-        <hr class="my-4">
-        <div class="arrival_bg_box">
-            <img src="/Images/cupcakes_checkout.jpg" alt="">
-        </div>
-        <form asp-action="Checkout" method="post" class="form-row form-inline" role="form">
-            <div>
-                <div>
-                    <a class="btn btn-primary btn-lg" asp-controller="Home" asp-action="Index">Home</a>
+    <div class="container col-xxl-8 px-4 py-5">
+        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+            <div class="col-10 col-sm-8 col-lg-6">
+                <img src="~/Images/cupcakes_checkout.jpg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+            </div>
+            <div class="col-lg-6">
+                <h1 class="display-5 fw-bold lh-1 mb-3">Payment Succeeded</h1>
+                <p class="lead">Our pastry chefs are already processing your order. All of your delicious cupcakes will be ready for shipment within the next 24 hours.</p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <form asp-action="Checkout" method="post" class="form-row form-inline" role="form">
+                        <div>
+                            <div>
+                                <a class="btn btn-primary btn-lg px-4 me-md-2" asp-controller="Home" asp-action="Index">Home</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 
-</div>
+
+
+
 

@@ -1,25 +1,24 @@
-﻿@model Webshop.Viewmodels.InventoryViewModel
+﻿@model List<ProductViewModel>
 
-<h1>List of products</h1>
+
+@* not used currently  *@
+
 
 <div>
-    <h3>List of cupcakes</h3>
+    <h3>Cupcakes:</h3>
     <table class="table table-striped">
         <thead class="thead-light">
             <tr>
                 <th>Image</th>
                 <th>Name</th>
-                <th>Description</th>
+                <th>Category</th>
                 <th>Price</th>
-                @if (User.IsInRole("Admin"))
-                {
                 <th>Edit</th>
                 <th>Delete</th>
-                }
             </tr>
         </thead>
         <tbody>
-            @foreach (var product in Model.Inventory)
+            @foreach (var product in Model)
             {
                 <tr>
                     <td>
@@ -37,18 +36,8 @@
                         @Html.DisplayFor(modelItem => product.Category.CategoryName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => product.Description)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => product.Price)
                     </td>
-                    <td>
-                        <form asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@product.Id" method="post">
-                            <input type="number" value="1" name="Quantity" />
-                            <input type="submit" value="Add to cart" />
-                        </form>
-                    </td>
-
                     @if (User.IsInRole("Admin"))
                     {
 
