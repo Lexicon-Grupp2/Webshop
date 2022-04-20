@@ -8,14 +8,15 @@ namespace Webshop.Viewmodels
     public class AdminInventoryViewModel
     {
         public string ErrorMessage { get; set; }
-        public List<ProductViewModel> Inventory { get; set; }
-        public AdminInventoryViewModel(List<ProductViewModel> inventory)
+
+        public InventoryViewModel InvViewModel { get; set; }
+        public AdminInventoryViewModel(InventoryViewModel inventoryViewModel)
         {
-            Inventory = inventory;
+            InvViewModel = inventoryViewModel;
         }
-        public AdminInventoryViewModel(List<ProductViewModel> inventory, string errorMessage)
+        public AdminInventoryViewModel(InventoryViewModel inventoryViewModel, string errorMessage)
         {
-            Inventory = inventory;
+            InvViewModel = inventoryViewModel;
             ErrorMessage = errorMessage;
         }
     }

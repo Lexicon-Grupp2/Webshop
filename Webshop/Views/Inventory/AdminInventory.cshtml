@@ -4,15 +4,15 @@
     ViewData["Title"] = "Admin Inventory";
 }
 
-<h1>AdminInventory</h1>
-
 <partial name="_AdminMenuPartial" />
 
 <a class="btn btn-primary" asp-area="" asp-controller="Inventory" asp-action="CreateProduct">Create new product</a>
+
+<h1>AdminInventory</h1>
 
 @if (Model.ErrorMessage != null)
 {
     <partial name="_ErrorMessagePartial" , model="@Model.ErrorMessage" />
 }
 
-<partial name="_AdminInventoryPArtial" , model="@Model.Inventory" />
+<partial name="PartialViews\_inventoryPartial" , model="@Model.InvViewModel" />
