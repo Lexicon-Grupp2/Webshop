@@ -6,8 +6,6 @@
 
 <div class="container-fluid">
 
-    <partial name="_AdminMenuPartial" />
-
     <h1>Create Category</h1>
 
     <hr />
@@ -34,7 +32,7 @@
     </div>
 
     <div>
-        <a asp-action="Index">Back to admin index</a>
+        <a class="btn btn-primary" asp-action="Index">Back to admin index</a>
     </div>
 
     <partial name="_ListCategoriesPartial" , model="@Model.Categories" />
