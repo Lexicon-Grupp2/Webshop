@@ -4,28 +4,30 @@
     ViewData["Title"] = "Role Index";
 }
 
-<partial name="_AdminMenuPartial" />
+<div class="container-fluid">
 
-<h1>Roles</h1>
+    <h1>Manage Roles</h1>
 
-<a asp-action="AddRoleToUser">Add user to role</a>
+    <a class="btn btn-primary" asp-action="AddRoleToUser">Add user to role</a>
 
-<div class="role-list-container">
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Role Name</th>
-                <th scope="col">Role Id</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+    <div class="role-list-container">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@item.Name</td>
-                    <td>@item.Id</td>
+                    <th scope="col">Role Name</th>
+                    <th scope="col">Role Id</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Id</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
 </div>

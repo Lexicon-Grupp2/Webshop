@@ -4,24 +4,28 @@
     ViewData["Title"] = "Add specific user to role";
 }
 
-<h1>Add role to user: @Model.User.UserName</h1>
+<div class="container-fluid">
 
-@if (Model.Message != null)
-{
-    <p>@Model.Message</p>
-}
+    <h1>Add role to user: @Model.User.UserName</h1>
 
-<form asp-action="AddRoleToUser" method="post">
-    <div class=" form-group">
-        <label class="control-label">Role:</label>
-        <select name="role" class="form-control" asp-items="Model.Roles"></select>
+    @if (Model.Message != null)
+    {
+        <p>@Model.Message</p>
+    }
+
+    <form asp-action="AddRoleToUser" method="post">
+        <div class=" form-group">
+            <label class="control-label">Role:</label>
+            <select name="role" class="form-control" asp-items="Model.Roles"></select>
+        </div>
+        <div class=" form-group">
+            <input type="hidden" name="user" asp-for="User.Id" />
+        </div>
+        <input type="submit" value="Add role to user" class="btn btn-primary" />
+    </form>
+
+    <div>
+        <a class="btn btn-primary" asp-action="Index">Back to role index</a>
     </div>
-    <div class=" form-group">
-        <input type="hidden" name="user" asp-for="User.Id" />
-    </div>
-    <input type="submit" value="Add role to user" class="btn btn-primary" />
-</form>
 
-<div>
-    <a asp-action="Index">Back to role index</a>
 </div>

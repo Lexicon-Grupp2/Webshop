@@ -4,38 +4,47 @@
     ViewData["Title"] = "OrderDetails";
 }
 
-<h1>OrderDetails</h1>
 
-<table class="table table-striped">
-    <thead class="thead-light">
-        <tr>
-            <th>Quantity</th>
-            <th>Product ID</th>
-            <th>Product Name</th>
-            <th>Price</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @item.Quantity
-                </td>
-                <td>
-                    @item.ProductId
-                </td>
-                <td>
-                    @item.ProductName
-                </td>
-                <td>
-                    @item.Price
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="container">
 
-<div>
-    <a class="btn btn-primary" asp-controller="Customer" asp-action="Index">Back</a>
+    <div class="px-4 py-5 my-5 text-center">
+        <h1 class="display-5 fw-bold"> Order content </h1>
+    </div>
+
+    <div class="table-responsive table-striped">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Quantity</th>
+                    <th>Product ID</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="col-sm-3 col-md-3">
+                            <h5 class="mt-0 text-primary">@item.Quantity</h5>
+                        </td>
+                        <td class="col-sm-3 col-md-3">
+                            <h5 class="mt-0 text-primary">@item.ProductId</h5>
+                        </td>
+                        <td class="col-sm-3 col-md-3">
+                            <h5 class="mt-0 text-primary">@item.ProductName</h5>
+                        </td>
+                        <td class="col-sm-3 col-md-3">
+                            <h5 class="mt-0 text-primary">@item.Price SEK</h5>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="container my-5">
+        <a class="btn btn-primary" asp-controller="Customer" asp-action="Index">Back</a>
+    </div>
 </div>

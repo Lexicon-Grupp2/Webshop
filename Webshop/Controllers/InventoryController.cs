@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -32,8 +33,6 @@ namespace Webshop.Controllers
             _shoppingCart = shoppingCart;
         }
 
-
-
         public IActionResult Index()
         {          
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "CategoryName");
@@ -46,6 +45,7 @@ namespace Webshop.Controllers
             )) ;
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult AdminInventory()
         {
             return View(new AdminInventoryViewModel(new InventoryViewModel(_context.Inventory
@@ -59,6 +59,7 @@ namespace Webshop.Controllers
         }
 
         // GET: Inventory/CreateProduct
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateProduct()
         {
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "CategoryName");
@@ -71,6 +72,7 @@ namespace Webshop.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateProduct([Bind("Name,Price,Description,CategoryId,ImageTitle,ImageFile")] CreateProductViewModel model)
         {
             if (ModelState.IsValid)
@@ -117,6 +119,7 @@ namespace Webshop.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int? Id)
         {
             var product = _context.Inventory
@@ -132,6 +135,7 @@ namespace Webshop.Controllers
         // POST: Inventory/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             string errormessage;
@@ -184,6 +188,7 @@ namespace Webshop.Controllers
 
         // GET: Inventory/Edit/5
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? Id)
         {
             if (Id == null)
@@ -205,6 +210,7 @@ namespace Webshop.Controllers
 
         // Post: Inventory/Edit/5
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id, Product product, int? imageId)
         {
             if (id != null)

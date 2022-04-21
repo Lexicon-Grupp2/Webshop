@@ -1,50 +1,52 @@
 ﻿@model IEnumerable<Webshop.Models.ProductImage>
 
 @{
-    ViewData["Title"] = "ProductImage Index";
+    ViewData["Title"] = "Manage Product Images";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<partial name="_AdminMenuPartial" />
+<div class="container-fluid">
 
-<h1>ProductImage Index</h1>
+    <h1>Manage Product Images</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Image
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageTitle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageName)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <p>
+        <a class="btn btn-primary" asp-action="Create">Create new productimage</a>
+    </p>
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    <img height="300px" src="@("~/images/ProductImages/"+item.ImageThumbName)" asp-append-version="true" />
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ImageTitle)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ImageName)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ImageId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ImageId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ImageId">Delete</a>
-                </td>
+                <th>
+                    Image
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ImageTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ImageName)
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img height="300px" src="@("~/images/ProductImages/"+item.ImageThumbName)" asp-append-version="true" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ImageTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ImageName)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ImageId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.ImageId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ImageId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

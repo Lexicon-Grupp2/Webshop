@@ -4,15 +4,15 @@
     ViewData["Title"] = "Edit Product";
 }
 
-<h1>Edit Product</h1>
-
-<div>
-    <a asp-action="AdminInventory">Back to List</a>
-</div>
-
-<hr />
-
 <div class="container-fluid">
+
+    <h1>Edit Product</h1>
+
+    <div>
+        <a class="btn btn-primary" asp-action="AdminInventory">Back to List</a>
+    </div>
+
+    <hr />
 
     <form asp-action="Edit" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>

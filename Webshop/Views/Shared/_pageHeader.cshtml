@@ -3,45 +3,36 @@
     Layout = null;
 }
 
-
-
 <header>
+  
     @if (User.IsInRole("Admin"))
     {
         <div class="admin-box">Admin options</div>
         <div class="admin-box-content">
-            <a asp-controller="Admin" asp-action="ListUsers">Manage Users</a>
-            <a asp-controller="Role" asp-action="Index">Manage Roles</a>
-            <a asp-controller="Image" asp-action="Index">Manage Images</a>
-            <a asp-controller="Inventory" asp-action="AdminInventory">Manage Inventory</a>
-            <a asp-controller="Admin" asp-action="ListCategories">Manage Categories</a>
-            <a asp-controller="Admin" asp-action="Index">Manage Orders</a>
-        </div>
-        
+          <a asp-controller="Inventory" asp-action="AdminInventory">Manage Inventory</a>
+          <a asp-controller="Admin" asp-action="ListCategories">Manage Categories</a>
+          <a asp-controller="Image" asp-action="Index">Manage Images</a>
+          <a asp-controller="Admin" asp-action="ListUsers">Manage Users</a>
+          <a asp-controller="Admin" asp-action="Index">Manage Orders</a>
+          <a asp-controller="Role" asp-action="Index">Manage Roles</a>
+        </div>        
     }
 
     <div class="menu">
         <ul>
-            <a href="https://localhost:44341/#home"><li>Hem</li></a>
-            <a href="https://localhost:44341/#shop"><li>Sortiment</li></a>
-
+            <a href="https://localhost:44341/#home"><li>Home</li></a>
+            <a href="https://localhost:44341/#shop"><li>Shop</li></a>
             <a href="https://localhost:44341/"><img class="logo" src="~/Images/logo.png" alt="logo"></a>
-
-            <a href="https://localhost:44341/#about"><li>Om oss</li></a>
-            
-            <a asp-controller="Customer" asp-action="Index"><li>Kundsida</li></a>
+            <a href="https://localhost:44341/#about"><li>About</li></a>         
+            <a asp-controller="Customer" asp-action="Index"><li>Customer</li></a>
         </ul>
-
-
-        <div class="cart-box">
-            
-            <a asp-area="" asp-controller="ShoppingCart" asp-action="Index"><i class="las la-shopping-cart"></i></a>
-                
+      
+        <div class="cart-box">          
+            <a asp-area="" asp-controller="ShoppingCart" asp-action="Index"><i class="las la-shopping-cart"></i></a>             
         </div>
-
+      
         <div class="login-box"><partial name="_LoginPartial" /></div>
-
+      
     </div>
-
 </header>
 
