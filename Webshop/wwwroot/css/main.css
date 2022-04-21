@@ -1,5 +1,10 @@
 ﻿@charset "utf-8";
 
+* {
+    margin: 0;
+    padding: 0;
+}
+
 html{
     width: 100%;
     height: 100%;
@@ -12,20 +17,27 @@ body{
     height: 100%;
     margin: auto;
     background-color: #feeda8;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    overflow-y: scroll;
+}
+
+#container{
+    min-height: 100%;
+    position: relative;
 }
 
 header{
     width: 100%;
     height: 100px;
     background-color: #f1c34e;
-    /*position: fixed;*/
+    position: fixed;
     z-index: 2;
     color: aliceblue;
 }
 
 .menu{
     text-align: center;
-    margin-left: 200px;
+    margin-left: 23.5%;
 
 }
 
@@ -53,31 +65,28 @@ header li:hover{
     float: left;
 }
 
-.login-box{
-    float: left;
-    margin-top: 50px;
-}
-
 .admin-box{
     height: 30px;
-    width:120px;
-    background-color: #dadd2a;
+    width: 200px;
+    background-color: #9fa10f;
     float: left;
     margin-top: 40px;
-    padding-top: 10px;
-    text-align: right;
-    padding-right: 80px;
+    text-align: center;
     cursor: pointer;
+    padding-top:10px;
+    border-radius: 0px 5px 0px 0px;
+    
 }
 
 .admin-box-content{
     display: none;
     position: absolute;
-    background-color: #dadd2a;
+    background-color: #9fa10f;
     width: 200px;
     z-index: 1;
     margin-top: 80px;
     text-align: center;
+    border-radius: 0px 0px 5px 0px;
 }
 
 .admin-box:hover + .admin-box-content{
@@ -98,13 +107,56 @@ header li:hover{
 }
 
 .admin-box-content a:hover {
+    background-color: #7e8017;
+}
+
+.login-box{
+    float: right;
+    width: 400px;
+    height: 50px;
+    color: aliceblue;
+    padding-top: 50px;
+    color: aliceblue;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-decoration: none;
+}
+
+.login-button{
+    width: 100px;
+    height: 25px;
     background-color: #9fa10f;
+    color: aliceblue;
+    text-align: center;
+    cursor: pointer;
+    margin-right: 15px;
+    float: right;
+    border-radius: 5px;
+    padding-top: 5px;
+
+}
+
+.login-button > a{
+    color: aliceblue;
+    text-decoration: none;
+}
+
+.logout-button{
+    width: 100px;
+    height: 30px;
+    background-color: #9fa10f;
+    border: none;
+    color: aliceblue;
+    text-align: center;
+    cursor: pointer;
+    margin-right: -85px;
+    margin-left: 10px;
+    border-radius: 5px;
 }
 
 .cart-box{
     height: 100px;
     width: 245px;
-    float: right;
+    float: right;   
 }
 
 .la-shopping-cart{
@@ -113,6 +165,7 @@ header li:hover{
     margin-left: 30px;
     float: left;
     cursor: pointer;
+    color: aliceblue;
 }
 
 #home{
@@ -134,6 +187,7 @@ header li:hover{
     position: relative;
     font-size: 150px;
     font-style: italic;
+    font-weight: bold;
     color: aliceblue;
 }
 
@@ -197,6 +251,7 @@ ul > li > img{
     object-fit: cover;
     height: 300px;
     width: 300px;
+    object-position: right bottom;
 }
 
 .category-container > h1{
@@ -308,10 +363,23 @@ footer > p > a{
     color: aliceblue;
 }
 
+.card{
+    object-fit: cover;
+    height: 200px;
+    width: 200px;
+    object-position: right bottom;
+}
+
 @media (max-width: 1920px) {
 
+    .menu{
+        text-align: center;
+        margin-left: 270px;
+
+    }
+    
     .cart-box{
-        width: 242px;
+        width: 100px;
     }
 
     .slogan{
@@ -334,7 +402,7 @@ footer > p > a{
     }
 
     .arrow-box{
-        margin-top: 760px;
+        margin-top: 660px;
     }
 
 }
