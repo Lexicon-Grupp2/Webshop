@@ -101,7 +101,6 @@ namespace Webshop.Controllers
 
         public async Task<IActionResult> ListUsers()
         {
-            //new way for later
             var adminList = await _userManager.GetUsersInRoleAsync("Admin");
             List<UserInListViewModel> adminsViewModels = new List<UserInListViewModel>();
             foreach (ApplicationUser adm in adminList)
@@ -121,7 +120,7 @@ namespace Webshop.Controllers
             var customersList = await _userManager.GetUsersInRoleAsync("User");
 
             List<UserInListViewModel> customerViewModels = new List<UserInListViewModel>();
-            foreach (ApplicationUser cust in customersList)
+            foreach (ApplicationUser cust in customersList.OrderBy(c => c.LastName))
             {
                 UserInListViewModel cvm = new UserInListViewModel();
 

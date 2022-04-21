@@ -4,13 +4,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<partial name="_AdminMenuPartial" />
+<div class="container-fluid">
 
-<a class="btn btn-primary" asp-area="" asp-controller="Admin" asp-action="CreateCategory">Create new category</a>
+    <partial name="_AdminMenuPartial" />
 
-@if (Model.ErrorMessage != null)
-{
-    <partial name="_ErrorMessagePartial" , model="@Model.ErrorMessage" />
-}
+    <a class="btn btn-primary" asp-area="" asp-controller="Admin" asp-action="CreateCategory">Create new category</a>
 
-<partial name="_ListCategoriesPartial" , model="@Model.Categories" />
+    @if (Model.ErrorMessage != null)
+    {
+        <partial name="_ErrorMessagePartial" , model="@Model.ErrorMessage" />
+    }
+
+    <partial name="_ListCategoriesPartial" , model="@Model.Categories" />
+
+</div>

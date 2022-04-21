@@ -5,11 +5,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<div class="container-fluid">
 
-<partial name="_ProductImagePartial" />
+    <h1>Details</h1>
 
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.ImageId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <partial name="_ProductImagePartial" />
+
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.ImageId">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+
 </div>

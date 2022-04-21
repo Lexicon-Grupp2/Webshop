@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Webshop.Migrations
 {
-    public partial class Pictures : Migration
+    public partial class freshstart : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -219,7 +219,7 @@ namespace Webshop.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 50, nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Price = table.Column<int>(nullable: false),
                     CategoryId = table.Column<int>(nullable: true),
@@ -352,8 +352,8 @@ namespace Webshop.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "e22d8a59-9d38-444f-a303-b1a0bfeefb4f", "1d03dd31-4721-4bc3-9cde-9d46025b0472", "Admin", "ADMIN" },
-                    { "d232ed1e-5aad-4a1f-b9f1-373aab437f03", "5914c8a3-c33c-4919-adac-3671b217f22c", "User", "USER" }
+                    { "1e026298-1349-4df0-a0ab-db3776de2466", "32cdf9f1-ebf6-40b3-bf6d-36a2ac597f11", "Admin", "ADMIN" },
+                    { "e1d331a6-be61-4455-937a-8b87c40b27b3", "076ada64-74fd-4880-915e-e28ce5b61201", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -361,11 +361,14 @@ namespace Webshop.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Address", "City", "ConcurrencyStamp", "Country", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "PostalCode", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "e09746eb-f934-4063-942a-bddae45c6e03", 0, "Adminvägen 1", "Admin city", "1272f582-bf22-413d-9ca3-690e1f5cb011", "Admin country", "admin@admin.com", false, "Admin", "Adminsson", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEJ+Z9CYL4whfP1rpvjGO+dnGCQprguOz2WhPLIcjUkj/jdm9UUpkBg/f7uptvfSItA==", "123456578", false, "12345", "c2780eae-a52f-4602-a8f5-097063d7d2a3", false, "admin@admin.com" },
-                    { "1d14cbab-9b4f-47ef-bf51-9053b3981a77", 0, "Kanelgatan 3", "Visby", "2cded2d3-a0b0-4996-9f5a-38cecab917f3", "Sweden", "customer1@seeduser.com", false, "Arne", "Karat", false, null, "CUSTOMER1@SEEDUSER.COM", "CUSTOMER1@SEEDUSER.COM", "AQAAAAEAACcQAAAAEHfwk9hQefPoUKABRn9yygAt5S9LEMIBVDS9bM3ysC4vekc30NTjTL8cJPXB+wpRog==", "043016624", false, "23445", "9e0146ad-77af-4cb1-9d0d-498ae95634c3", false, "customer1@seeduser.com" },
-                    { "8ca1f544-ecc3-4162-8633-ccf7dba0e658", 0, "Rimbo torg 1", "Skövde", "429fd30d-571a-4910-87f9-9cda47e866e2", "Sweden", "customer2@seeduser.com", false, "Kenneth", "Svenzon", false, null, "CUSTOMER2@SEEDUSER.COM", "CUSTOMER2@SEEDUSER.COM", "AQAAAAEAACcQAAAAECEjJv+gnSS03h+h7iKB1a+Jp/rOw4bUA1qXr/AmfG9VK6zbOBYmfdh5rAYn8BYtaA==", "0721453456", false, "44565", "d0f6be0f-cfa7-45c2-a267-b33df875220b", false, "customer2@seeduser.com" },
-                    { "b58689fc-7cd4-4df4-b4d5-15200cdb07d3", 0, "Kungsgatan 4", "Arboga", "72a57e5b-aaa0-43f2-ab83-2b5af1601b6a", "Sweden", "customer3@seeduser.com", false, "Angela", "Melodi", false, null, "CUSTOMER3@SEEDUSER.COM", "CUSTOMER3@SEEDUSER.COM", "AQAAAAEAACcQAAAAELfbci0NtZ401PhdUUIZAtF+m3cJdQQY0lOVB+sAumBB+DTwQKGkawtocMG/RmMwbA==", "0771242424", false, "32344", "b4bf62c1-e0ab-4a79-8a60-2887bdb2ae38", false, "customer3@seeduser.com" },
-                    { "938c838e-b617-4251-ab47-612662096b49", 0, "Royal Carnac Hotel 1", "Cairo", "5e39cb89-7ef1-4a83-8607-cc2fa6804e3f", "Egypt", "seeduser@seeduser.com", false, "Kaj", "Fridell", false, null, "SEEDUSER@SEEDUSER.COM", "SEEDUSER@SEEDUSER.COM", "AQAAAAEAACcQAAAAEIBBwPsjm/Jgtlg/pgiwLDLcAYHHEz9SAJzpKagp6e3xLocn4SxjUsY7o/SWJtc6+w==", "031184698", false, "33467", "49ae4461-6352-46a0-b49e-6c27fb6487eb", false, "seeduser@seeduser.com" }
+                    { "829681d9-960f-4357-9643-c37895f51a30", 0, "Gatgatan 2", "Göteborg", "6c4b2feb-d1bd-4da7-9af2-8f180a43781f", "Sweden", "customer6@seeduser.com", false, "Jan", "Andersson", false, null, "CUSTOMER6@SEEDUSER.COM", "CUSTOMER6@SEEDUSER.COM", "AQAAAAEAACcQAAAAEBB4ENNq57PLMuL1DlvMfXyBnHA+gVd7zzPkLdKTg6dEUWlC9FTtToo5a5oi75c2tA==", "04422723", false, "46723", "57c82a15-d2be-4a7c-aa4a-6a9defcba9df", false, "customer6@seeduser.com" },
+                    { "25297ffc-4948-4554-acb4-bacb814e12cd", 0, "Vedgatan 3", "Oslo", "51c0accd-77a1-4be5-b05d-5a3da446bd18", "Norway", "customer5@seeduser.com", false, "Molly", "Sundkvist", false, null, "CUSTOMER5@SEEDUSER.COM", "CUSTOMER5@SEEDUSER.COM", "AQAAAAEAACcQAAAAEMlDoWtVNcOnFFogHa5M/FO6JzmgvAVZQuacetAR170GG9bRYId96GVUdmOdm18l5w==", "0443346723", false, "46723", "4e23bede-0709-408a-a479-bfcb9f7e5392", false, "customer5@seeduser.com" },
+                    { "58de2905-6534-46f6-baf2-bd4732df92b3", 0, "Royal Carnac Hotel 1", "Cairo", "d73275cd-74ab-478a-955d-bbb7a53ba6f4", "Egypt", "customer4@seeduser.com", false, "Kaj", "Fridell", false, null, "CUSTOMER4@SEEDUSER.COM", "CUSTOMER4@SEEDUSER.COM", "AQAAAAEAACcQAAAAECTQtEE18AX9trLO6Fc1YidW/kSBJyl0e4JrxvyT10TJ2iTym4x17WIsaxCB5D3a8g==", "031184698", false, "33467", "e9dec03f-37fe-4c05-b1a3-0302bef0ee20", false, "customer4@seeduser.com" },
+                    { "4c9cb475-463a-48fb-a46c-206336317809", 0, "Behrenstrasse 2", "Berlin", "70e518e8-a251-414a-a3fd-3720d37ca328", "Germany", "customer7@seeduser.com", false, "Sofia", "Bosch", false, null, "CUSTOMER7@SEEDUSER.COM", "CUSTOMER7@SEEDUSER.COM", "AQAAAAEAACcQAAAAEAX4WxA40V9fytbXPXaS3eShvnSLyUGfckdyn/iXKyT6N4andSZx6+okrC9BZR+AnA==", "0543768798", false, "67823", "0cc6fdbf-b3a0-45b8-9be9-54e9aaf7e232", false, "customer7@seeduser.com" },
+                    { "b1c5efd8-ecbc-484d-bd2b-26ad81690c72", 0, "Rimbo torg 1", "Skövde", "8dbd9e68-fbc3-44e2-addc-d60d820a5094", "Sweden", "customer2@seeduser.com", false, "Kenneth", "Svenzon", false, null, "CUSTOMER2@SEEDUSER.COM", "CUSTOMER2@SEEDUSER.COM", "AQAAAAEAACcQAAAAEKB8MmuMD3W8q0wPTSBJY4ml5QrLf2sChKnEyc9AKCF+fdDlqnkRgmMF4YYDv4VwYA==", "0721453456", false, "44565", "3d22f119-0243-4a3f-a73c-114e5d15b87b", false, "customer2@seeduser.com" },
+                    { "9b4974b6-a7c0-429a-babe-da33b0b597ee", 0, "Kanelgatan 3", "Visby", "90e656d6-a8f3-47c9-bbeb-00ddf561b62a", "Sweden", "customer1@seeduser.com", false, "Arne", "Karat", false, null, "CUSTOMER1@SEEDUSER.COM", "CUSTOMER1@SEEDUSER.COM", "AQAAAAEAACcQAAAAELEtfMjiQl1FMOMG65N/lqHpAQf+TteGw0qTkdlFWXxCqfLKkHAEznDlV+Wx2zhdGg==", "043016624", false, "23445", "d59d6648-841a-4023-880a-8572b5ae2ec0", false, "customer1@seeduser.com" },
+                    { "6b8967b9-ad31-4615-9c7b-7c61fa98fe18", 0, "Adminvägen 1", "Admin city", "e660749c-7180-43a8-b351-4c0ae798bc88", "Admin country", "admin@admin.com", false, "Admin", "Adminsson", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEFff51W/c1TVtIFvU0s2wt0GBDIEAF55d9jUF4MfmzXEOcEv2W3VXpU85ijtb9pAuQ==", "123456578", false, "12345", "5f77815a-4e54-4da1-832b-35b4f4309169", false, "admin@admin.com" },
+                    { "636ee032-d79b-4d01-9bad-085029abf952", 0, "Kungsgatan 4", "Arboga", "d993dcba-e91d-4c11-a352-4863875f704f", "Sweden", "customer3@seeduser.com", false, "Angela", "Melodi", false, null, "CUSTOMER3@SEEDUSER.COM", "CUSTOMER3@SEEDUSER.COM", "AQAAAAEAACcQAAAAEEkgUNaPLjSVxMyD6RlJ0S32tkDGs04a2RMnc0C6rJNX3WZzLKrKl8o0srCfRsdpMg==", "0771242424", false, "32344", "a729868b-62b2-4525-87f9-d07580f65ce8", false, "customer3@seeduser.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -375,7 +378,10 @@ namespace Webshop.Migrations
                 {
                     { 101, "Chocolate" },
                     { 102, "Fruit" },
-                    { 103, "Vegan" }
+                    { 103, "Vegan" },
+                    { 104, "Filler Category 1" },
+                    { 105, "Filler Category 2" },
+                    { 106, "Filler Category 3" }
                 });
 
             migrationBuilder.InsertData(
@@ -383,13 +389,13 @@ namespace Webshop.Migrations
                 columns: new[] { "Id", "Address", "City", "Country", "CustomerId", "Email", "FirstName", "LastName", "PhoneNumber", "PostalCode" },
                 values: new object[,]
                 {
-                    { 7, "Avenyn 1", "Berlin", "Germany", null, "raj@goteborg.se", "Sofia", "Bosch", "0543768798", "67823" },
                     { 6, "Gatgatan 2", "Göteborg", "Sweden", null, "test@gmail.com", "Jan", "Andersson", "04422723", "46723" },
+                    { 7, "Avenyn 1", "Berlin", "Germany", null, "raj@goteborg.se", "Sofia", "Bosch", "0543768798", "67823" },
                     { 5, "Vedgatan 3", "Oslo", "Norway", null, "tavlan@gmail.com", "Molly", "Sundkvist", "0443346723", "46723" },
-                    { 4, "Royal Carnac Hotel 1", "Cairo", "Egypt", null, "kafr@egypt.gov", "Kaj", "Fridell", "031184698", "33467" },
+                    { 1, "Kanelgatan 3", "Visby", "Sweden", null, "bling@gmail.com", "Arne", "Karat", "043016624", "23445" },
                     { 3, "Kungsgatan 4", "Arboga", "Sweden", null, "lucky@hotmail.com", "Angela", "Melodi", "0771242424", "32344" },
                     { 2, "Rimbo torg 1", "Skövde", "Sweden", null, "stekarn@gmail.com", "Kenneth", "Svenzon", "0721453456", "44565" },
-                    { 1, "Kanelgatan 3", "Visby", "Sweden", null, "bling@gmail.com", "Arne", "Karat", "043016624", "23445" }
+                    { 4, "Royal Carnac Hotel 1", "Cairo", "Egypt", null, "kafr@egypt.gov", "Kaj", "Fridell", "031184698", "33467" }
                 });
 
             migrationBuilder.InsertData(
@@ -397,6 +403,7 @@ namespace Webshop.Migrations
                 columns: new[] { "ImageId", "ImageName", "ImageThumbName", "ImageTitle" },
                 values: new object[,]
                 {
+                    { 9, "cupcake-lemon.jpg", "cupcake-lemon.jpg", "Lemon" },
                     { 1, "cupcake-chocolate.jpg", "cupcake-chocolate.jpg", "Chocolate Dream" },
                     { 2, "cupcake-strawberry.jpg", "cupcake-strawberry.jpg", "Pink surprise" },
                     { 3, "cupcake-glutenfree.jpg", "cupcake-glutenfree.jpg", "Plain delight" },
@@ -405,7 +412,6 @@ namespace Webshop.Migrations
                     { 6, "cupcake-mm.jpg", "cupcake-mm.jpg", "M&M don't sue us" },
                     { 7, "cupcake-forest.jpg", "cupcake-forest.jpg", "Forest fruit" },
                     { 8, "cupcakes-oreo.jpg", "cupcakes-oreo.jpg", "Oreo supreme" },
-                    { 9, "cupcake-lemon.jpg", "cupcake-lemon.jpg", "Lemon" },
                     { 10, "cupcake-rainbow.jpg", "cupcake-rainbow.jpg", "Taste the rainbow" }
                 });
 
@@ -414,11 +420,14 @@ namespace Webshop.Migrations
                 columns: new[] { "UserId", "RoleId" },
                 values: new object[,]
                 {
-                    { "e09746eb-f934-4063-942a-bddae45c6e03", "e22d8a59-9d38-444f-a303-b1a0bfeefb4f" },
-                    { "1d14cbab-9b4f-47ef-bf51-9053b3981a77", "d232ed1e-5aad-4a1f-b9f1-373aab437f03" },
-                    { "8ca1f544-ecc3-4162-8633-ccf7dba0e658", "d232ed1e-5aad-4a1f-b9f1-373aab437f03" },
-                    { "b58689fc-7cd4-4df4-b4d5-15200cdb07d3", "d232ed1e-5aad-4a1f-b9f1-373aab437f03" },
-                    { "938c838e-b617-4251-ab47-612662096b49", "d232ed1e-5aad-4a1f-b9f1-373aab437f03" }
+                    { "6b8967b9-ad31-4615-9c7b-7c61fa98fe18", "1e026298-1349-4df0-a0ab-db3776de2466" },
+                    { "4c9cb475-463a-48fb-a46c-206336317809", "e1d331a6-be61-4455-937a-8b87c40b27b3" },
+                    { "25297ffc-4948-4554-acb4-bacb814e12cd", "e1d331a6-be61-4455-937a-8b87c40b27b3" },
+                    { "58de2905-6534-46f6-baf2-bd4732df92b3", "e1d331a6-be61-4455-937a-8b87c40b27b3" },
+                    { "636ee032-d79b-4d01-9bad-085029abf952", "e1d331a6-be61-4455-937a-8b87c40b27b3" },
+                    { "829681d9-960f-4357-9643-c37895f51a30", "e1d331a6-be61-4455-937a-8b87c40b27b3" },
+                    { "b1c5efd8-ecbc-484d-bd2b-26ad81690c72", "e1d331a6-be61-4455-937a-8b87c40b27b3" },
+                    { "9b4974b6-a7c0-429a-babe-da33b0b597ee", "e1d331a6-be61-4455-937a-8b87c40b27b3" }
                 });
 
             migrationBuilder.InsertData(
@@ -426,9 +435,11 @@ namespace Webshop.Migrations
                 columns: new[] { "OrderId", "CustomerId", "CustomerId1", "OrderDate", "Paid", "TotalCost" },
                 values: new object[,]
                 {
-                    { 1, "1d14cbab-9b4f-47ef-bf51-9053b3981a77", null, new DateTime(2022, 4, 19, 9, 17, 8, 651, DateTimeKind.Local).AddTicks(555), true, 87 },
-                    { 2, "8ca1f544-ecc3-4162-8633-ccf7dba0e658", null, new DateTime(2022, 4, 19, 9, 17, 8, 653, DateTimeKind.Local).AddTicks(1665), true, 44 },
-                    { 3, "8ca1f544-ecc3-4162-8633-ccf7dba0e658", null, new DateTime(2022, 4, 19, 9, 17, 8, 653, DateTimeKind.Local).AddTicks(1720), true, 257 }
+                    { 2, "b1c5efd8-ecbc-484d-bd2b-26ad81690c72", null, new DateTime(2022, 4, 21, 13, 31, 53, 27, DateTimeKind.Local).AddTicks(2968), true, 44 },
+                    { 5, "636ee032-d79b-4d01-9bad-085029abf952", null, new DateTime(2022, 4, 21, 13, 31, 53, 27, DateTimeKind.Local).AddTicks(3056), true, 255 },
+                    { 4, "58de2905-6534-46f6-baf2-bd4732df92b3", null, new DateTime(2022, 4, 21, 13, 31, 53, 27, DateTimeKind.Local).AddTicks(3051), true, 255 },
+                    { 1, "9b4974b6-a7c0-429a-babe-da33b0b597ee", null, new DateTime(2022, 4, 21, 13, 31, 53, 24, DateTimeKind.Local).AddTicks(8272), true, 87 },
+                    { 3, "b1c5efd8-ecbc-484d-bd2b-26ad81690c72", null, new DateTime(2022, 4, 21, 13, 31, 53, 27, DateTimeKind.Local).AddTicks(3046), true, 257 }
                 });
 
             migrationBuilder.InsertData(
@@ -436,14 +447,27 @@ namespace Webshop.Migrations
                 columns: new[] { "Id", "CategoryId", "Description", "Name", "Price", "ProductImageId" },
                 values: new object[,]
                 {
+                    { 1001, 101, "A delicious chocolate cupcake with belgian chocolate", "Chocolate Dream", 29, 1 },
+                    { 1002, 102, "A frosted strawberry cupcake, filled with strawberry jam", "Pink surprise", 22, 2 },
+                    { 1003, 103, "A gluten free cupcake packed with flavor", "Plain delight", 34, 3 },
+                    { 1004, 103, "Filled with peanut butter and topped with delicious peanut frosting.", "Peanut butter cup-cake", 34, 4 },
                     { 1007, 102, "Not the tea, instead a cupcake with every kind of berry.", "Forest fruit", 34, 7 },
                     { 1006, 101, "A cupcake made to look like a giant M&M.", "M&M don't sue us", 34, 6 },
-                    { 1005, 101, "This is the cupcake for you if you like all things Nutella.", "Nutella mountain", 34, 5 },
-                    { 1001, 101, "A delicious chocolate cupcake with belgian chocolate", "Chocolate Dream", 29, 1 },
-                    { 1003, 103, "A gluten free cupcake packed with flavor", "Plain delight", 34, 3 },
-                    { 1002, 102, "A frosted strawberry cupcake, filled with strawberry jam", "Pink surprise", 22, 2 },
                     { 1008, 101, "Oreo cookie on top as well as batter and frosting made from oreo's.", "Oreo supreme", 34, 8 },
-                    { 1004, 103, "Filled with peanut butter and topped with delicious peanut frosting.", "Peanut butter cup-cake", 34, 4 },
+                    { 1022, 106, "Filler description", "Filler cupcake 12", 11, null },
+                    { 1005, 101, "This is the cupcake for you if you like all things Nutella.", "Nutella mountain", 34, 5 },
+                    { 1021, 106, "Filler description", "Filler cupcake 11", 11, null },
+                    { 1015, 105, "Filler description", "Filler cupcake 5", 11, null },
+                    { 1019, 106, "Filler description", "Filler cupcake 9", 11, null },
+                    { 1018, 105, "Filler description", "Filler cupcake 8", 11, null },
+                    { 1017, 105, "Filler description", "Filler cupcake 7", 11, null },
+                    { 1016, 105, "Filler description", "Filler cupcake 6", 11, null },
+                    { 1009, 103, "If you like something with a fresher taste, this cupcake is for you.", "Lemon", 34, 9 },
+                    { 1014, 104, "Filler description", "Filler cupcake 4", 11, null },
+                    { 1013, 104, "Filler description", "Filler cupcake 3", 11, null },
+                    { 1012, 104, "Filler description", "Filler cupcake 2", 11, null },
+                    { 1011, 104, "Filler description", "Filler cupcake 1", 11, null },
+                    { 1020, 106, "Filler description", "Filler cupcake 10", 11, null },
                     { 1010, 102, "Every taste of the fruit rainbow you can imagine.", "Taste the rainbow", 34, 10 }
                 });
 
@@ -454,8 +478,14 @@ namespace Webshop.Migrations
                 {
                     { 1, 1, 29, 1001, "Chocolate Dream", 3 },
                     { 4, 3, 29, 1001, "Chocolate Dream", 3 },
+                    { 5, 4, 29, 1001, "Chocolate Dream", 3 },
+                    { 8, 5, 29, 1001, "Chocolate Dream", 3 },
                     { 2, 2, 22, 1002, "Pink surprise", 2 },
-                    { 3, 3, 34, 1003, "Plain delight", 5 }
+                    { 6, 4, 22, 1002, "Pink surprise", 3 },
+                    { 9, 5, 22, 1002, "Pink surprise", 3 },
+                    { 3, 3, 34, 1003, "Plain delight", 5 },
+                    { 7, 4, 34, 1003, "Plain delight", 3 },
+                    { 10, 5, 34, 1003, "Plain delight", 3 }
                 });
 
             migrationBuilder.CreateIndex(
