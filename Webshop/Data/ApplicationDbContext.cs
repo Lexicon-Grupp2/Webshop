@@ -127,9 +127,40 @@ namespace Webshop.Data
             Product tasteTheRainbow = new Product
             { Id = 1010, Name = "Taste the rainbow", Description = "Every taste of the fruit rainbow you can imagine.", CategoryId = 102, Price = 34, ProductImageId = 10 };
 
+            //filler products:
+            Product fillerProduct1 = new Product
+            { Id = 1011, Name = "Filler cupcake 1", Description = "Filler description", CategoryId = 104, Price = 11 };
+            Product fillerProduct2 = new Product
+            { Id = 1012, Name = "Filler cupcake 2", Description = "Filler description", CategoryId = 104, Price = 11 };
+            Product fillerProduct3 = new Product
+            { Id = 1013, Name = "Filler cupcake 3", Description = "Filler description", CategoryId = 104, Price = 11 };
+            Product fillerProduct4 = new Product
+            { Id = 1014, Name = "Filler cupcake 4", Description = "Filler description", CategoryId = 104, Price = 11 };
+
+            Product fillerProduct5 = new Product
+            { Id = 1015, Name = "Filler cupcake 5", Description = "Filler description", CategoryId = 105, Price = 11 };
+            Product fillerProduct6 = new Product
+            { Id = 1016, Name = "Filler cupcake 6", Description = "Filler description", CategoryId = 105, Price = 11 };
+            Product fillerProduct7 = new Product
+            { Id = 1017, Name = "Filler cupcake 7", Description = "Filler description", CategoryId = 105, Price = 11 };
+            Product fillerProduct8 = new Product
+            { Id = 1018, Name = "Filler cupcake 8", Description = "Filler description", CategoryId = 105, Price = 11 };
+
+            Product fillerProduct9 = new Product
+            { Id = 1019, Name = "Filler cupcake 9", Description = "Filler description", CategoryId = 106, Price = 11 };
+            Product fillerProduct10 = new Product
+            { Id = 1020, Name = "Filler cupcake 10", Description = "Filler description", CategoryId = 106, Price = 11 };
+            Product fillerProduct11 = new Product
+            { Id = 1021, Name = "Filler cupcake 11", Description = "Filler description", CategoryId = 106, Price = 11 };
+            Product fillerProduct12 = new Product
+            { Id = 1022, Name = "Filler cupcake 12", Description = "Filler description", CategoryId = 106, Price = 11 };
+
             modelBuilder.Entity<Product>().HasData(new List<Product>
             {
-                chocolateDream, pinkSurprise, plainDelight,peanutButterCupCake,nutellaMountain,mAndM, forestFruit, oreoSupreme, tasteTheRainbow,    
+                chocolateDream, pinkSurprise, plainDelight,peanutButterCupCake,nutellaMountain,mAndM, forestFruit, oreoSupreme, tasteTheRainbow, lemon,
+                fillerProduct1, fillerProduct2, fillerProduct3, fillerProduct4,
+                fillerProduct5, fillerProduct6, fillerProduct7, fillerProduct8,
+                fillerProduct9, fillerProduct10, fillerProduct11, fillerProduct12
             });
 
             modelBuilder.Entity<Category>().HasData(new List<Category>
@@ -140,7 +171,15 @@ namespace Webshop.Data
                     {Id = 102, CategoryName = "Fruit" },
                 new Category
                     {Id = 103, CategoryName = "Vegan" },
+                new Category
+                    {Id = 104, CategoryName = "Filler Category 1" },
+                new Category
+                    {Id = 105, CategoryName = "Filler Category 2" },
+                new Category
+                    {Id = 106, CategoryName = "Filler Category 3" },
             });
+
+            #region oDetails
 
             OrderDetail oDetail1 = new OrderDetail
             {
@@ -179,6 +218,72 @@ namespace Webshop.Data
                 Price = chocolateDream.Price
             };
 
+            #region order 4
+            OrderDetail oDetail5 = new OrderDetail
+            {
+                OrderDetailId = 5,
+                Quantity = 3,
+                ProductId = chocolateDream.Id,
+                ProductName = chocolateDream.Name,
+                OrderId = 4,
+                Price = chocolateDream.Price
+            };
+            OrderDetail oDetail6 = new OrderDetail
+            {
+                OrderDetailId = 6,
+                Quantity = 3,
+                ProductId = pinkSurprise.Id,
+                ProductName = pinkSurprise.Name,
+                OrderId = 4,
+                Price = pinkSurprise.Price
+            };
+            OrderDetail oDetail7 = new OrderDetail
+            {
+                OrderDetailId = 7,
+                Quantity = 3,
+                ProductId = plainDelight.Id,
+                ProductName = plainDelight.Name,
+                OrderId = 4,
+                Price = plainDelight.Price
+            };
+
+            #endregion
+
+            #region Odetails order5
+            OrderDetail oDetail8 = new OrderDetail
+            {
+                OrderDetailId = 8,
+                Quantity = 3,
+                ProductId = chocolateDream.Id,
+                ProductName = chocolateDream.Name,
+                OrderId = 5,
+                Price = chocolateDream.Price
+            };
+
+            OrderDetail oDetail9 = new OrderDetail
+            {
+                OrderDetailId = 9,
+                Quantity = 3,
+                ProductId = pinkSurprise.Id,
+                ProductName = pinkSurprise.Name,
+                OrderId = 5,
+                Price = pinkSurprise.Price
+            };
+
+            OrderDetail oDetail10 = new OrderDetail
+            {
+                OrderDetailId = 10,
+                Quantity = 3,
+                ProductId = plainDelight.Id,
+                ProductName = plainDelight.Name,
+                OrderId = 5,
+                Price = plainDelight.Price
+            };
+
+            #endregion
+
+            #endregion
+
             string roleId = Guid.NewGuid().ToString();
             string userRoleId = Guid.NewGuid().ToString();
             string userId = Guid.NewGuid().ToString();
@@ -188,6 +293,11 @@ namespace Webshop.Data
             string customerId2 = Guid.NewGuid().ToString();
             string customerId3 = Guid.NewGuid().ToString();
             string customerId4 = Guid.NewGuid().ToString();
+
+            //new 
+            string customerId5 = Guid.NewGuid().ToString();
+            string customerId6 = Guid.NewGuid().ToString();
+            string customerId7 = Guid.NewGuid().ToString();
 
             Order order1 = new Order
             {
@@ -214,9 +324,27 @@ namespace Webshop.Data
                 CustomerId = customerId2
             };
 
-            modelBuilder.Entity<OrderDetail>().HasData(oDetail1, oDetail2, oDetail3, oDetail4);
+            Order order4 = new Order
+            {
+                OrderId = 4,
+                Paid = true,
+                OrderDate = DateTime.Now,
+                TotalCost = (oDetail5.Price * oDetail5.Quantity) + (oDetail6.Price * oDetail6.Quantity) + (oDetail7.Price * oDetail7.Quantity),
+                CustomerId = customerId4
+            };
 
-            modelBuilder.Entity<Order>().HasData(order1, order2, order3);
+            Order order5 = new Order
+            {
+                OrderId = 5,
+                Paid = true,
+                OrderDate = DateTime.Now,
+                TotalCost = (oDetail8.Price * oDetail8.Quantity) + (oDetail9.Price * oDetail9.Quantity) + (oDetail10.Price * oDetail10.Quantity),
+                CustomerId = customerId3
+            };
+
+            modelBuilder.Entity<OrderDetail>().HasData(oDetail1, oDetail2, oDetail3, oDetail4, oDetail5, oDetail6, oDetail7, oDetail8, oDetail9, oDetail10);
+
+            modelBuilder.Entity<Order>().HasData(order1, order2, order3, order4, order5);
 
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
             {
@@ -302,10 +430,10 @@ namespace Webshop.Data
                 new ApplicationUser
                 {
                     Id = customerId4,
-                    Email = "seeduser@seeduser.com",
-                    NormalizedEmail = "SEEDUSER@SEEDUSER.COM",
-                    UserName = "seeduser@seeduser.com",
-                    NormalizedUserName = "SEEDUSER@SEEDUSER.COM",
+                    Email = "customer4@seeduser.com",
+                    NormalizedEmail = "CUSTOMER4@SEEDUSER.COM",
+                    UserName = "customer4@seeduser.com",
+                    NormalizedUserName = "CUSTOMER4@SEEDUSER.COM",
                     PasswordHash = hasher.HashPassword(null, "password"),
                     FirstName = "Kaj",
                     LastName = "Fridell",
@@ -314,6 +442,54 @@ namespace Webshop.Data
                     PostalCode = "33467",
                     City = "Cairo",
                     Country = "Egypt"
+                },
+                new ApplicationUser
+                {
+                    Id = customerId5,
+                    Email = "customer5@seeduser.com",
+                    NormalizedEmail = "CUSTOMER5@SEEDUSER.COM",
+                    UserName = "customer5@seeduser.com",
+                    NormalizedUserName = "CUSTOMER5@SEEDUSER.COM",
+                    PasswordHash = hasher.HashPassword(null, "password"),
+                    FirstName = "Molly",
+                    LastName = "Sundkvist",
+                    Address = "Vedgatan 3",
+                    PhoneNumber = "0443346723",
+                    PostalCode = "46723",
+                    City = "Oslo",
+                    Country = "Norway"
+                },
+                new ApplicationUser
+                {
+                    Id = customerId6,
+                    Email = "customer6@seeduser.com",
+                    NormalizedEmail = "CUSTOMER6@SEEDUSER.COM",
+                    UserName = "customer6@seeduser.com",
+                    NormalizedUserName = "CUSTOMER6@SEEDUSER.COM",
+                    PasswordHash = hasher.HashPassword(null, "password"),
+                    FirstName = "Jan",
+                    LastName = "Andersson",
+                    Address = "Gatgatan 2",
+                    PhoneNumber = "04422723",
+                    PostalCode = "46723",
+                    City = "Göteborg",
+                    Country = "Sweden"
+                },
+                new ApplicationUser
+                {
+                    Id = customerId7,
+                    Email = "customer7@seeduser.com",
+                    NormalizedEmail = "CUSTOMER7@SEEDUSER.COM",
+                    UserName = "customer7@seeduser.com",
+                    NormalizedUserName = "CUSTOMER7@SEEDUSER.COM",
+                    PasswordHash = hasher.HashPassword(null, "password"),
+                    FirstName = "Sofia",
+                    LastName = "Bosch",
+                    Address = "Behrenstrasse 2",
+                    PhoneNumber = "0543768798",
+                    PostalCode = "67823",
+                    City = "Berlin",
+                    Country = "Germany"
                 });
 
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(
@@ -344,6 +520,23 @@ namespace Webshop.Data
                 {
                     RoleId = userRoleId,
                     UserId = customerId4
+                },
+                new IdentityUserRole<string>
+                {
+                    RoleId = userRoleId,
+                    UserId = customerId5
+                }
+                ,
+                new IdentityUserRole<string>
+                {
+                    RoleId = userRoleId,
+                    UserId = customerId6
+                }
+                ,
+                new IdentityUserRole<string>
+                {
+                    RoleId = userRoleId,
+                    UserId = customerId7
                 });
         }
     }

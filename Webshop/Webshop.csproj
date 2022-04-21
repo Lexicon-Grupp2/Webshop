@@ -45,6 +45,12 @@
     <Compile Remove="Migrations\20220413103816_seed test orders.Designer.cs" />
     <Compile Remove="Migrations\20220413104051_seed test orders.cs" />
     <Compile Remove="Migrations\20220413104051_seed test orders.Designer.cs" />
+    <Compile Remove="Migrations\20220421084906_Seeded filler products.cs" />
+    <Compile Remove="Migrations\20220421084906_Seeded filler products.Designer.cs" />
+    <Compile Remove="Migrations\20220421090201_Seeded filler products.cs" />
+    <Compile Remove="Migrations\20220421090201_Seeded filler products.Designer.cs" />
+    <Compile Remove="Migrations\20220421095047_fresh start.cs" />
+    <Compile Remove="Migrations\20220421095047_fresh start.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -70,5 +76,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\css\main.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 </Project>
