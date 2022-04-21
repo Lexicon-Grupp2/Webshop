@@ -1,77 +1,38 @@
 ﻿
-@*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-    <div class="container">
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Cupcake King</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-            <ul class="navbar-nav flex-grow-1">
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Inventory" asp-action="Index">Inventory</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="ShoppingCart" asp-action="Index">Shopping Cart</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Image" asp-action="Index">ProductImages</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Index">Customer</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark">
-                        <partial name="_LoginPartial" />
-                    </a>
-                    @await Component.InvokeAsync("CartTotal")
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>*@
+@{
+    Layout = null;
+}
 
 <header>
-    <div class="admin-box">Admin options</div>
-    <div class="admin-box-content">
-        <a asp-controller="Inventory" asp-action="AdminInventory">Manage Inventory</a>
-        <a asp-controller="Admin" asp-action="ListCategories">Manage Categories</a>
-        <a asp-controller="Image" asp-action="Index">Manage Images</a>
-        <a asp-controller="Admin" asp-action="ListUsers">Manage Users</a>
-        <a asp-controller="Admin" asp-action="Index">Manage Orders</a>
-        <a asp-controller="Role" asp-action="Index">Manage Roles</a>
-    </div>
+  
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="admin-box">Admin options</div>
+        <div class="admin-box-content">
+          <a asp-controller="Inventory" asp-action="AdminInventory">Manage Inventory</a>
+          <a asp-controller="Admin" asp-action="ListCategories">Manage Categories</a>
+          <a asp-controller="Image" asp-action="Index">Manage Images</a>
+          <a asp-controller="Admin" asp-action="ListUsers">Manage Users</a>
+          <a asp-controller="Admin" asp-action="Index">Manage Orders</a>
+          <a asp-controller="Role" asp-action="Index">Manage Roles</a>
+        </div>        
+    }
 
     <div class="menu">
         <ul>
-            <a href="#home">
-            <li>Home</li></a>
-            <a href="#shop">
-            <li>Shop</li></a>
-
+            <a href="https://localhost:44341/#home"><li>Home</li></a>
+            <a href="https://localhost:44341/#shop"><li>Shop</li></a>
             <a href="https://localhost:44341/"><img class="logo" src="~/Images/logo.png" alt="logo"></a>
-
-            <a href="#about">
-            <li>About</li></a>
-            <a href="#store">
-            <li>Stores</li></a>
-            <a asp-controller="Customer" asp-action="Index">
-            <li>Customer page</li></a>
+            <a href="https://localhost:44341/#about"><li>About</li></a>         
+            <a asp-controller="Customer" asp-action="Index"><li>Customer</li></a>
         </ul>
-
-        <div class="cart-box">
-            <div class="login-box"><partial name="_LoginPartial" /></div>
-            <a asp-area="" asp-controller="ShoppingCart" asp-action="Index"><i class="las la-shopping-cart"></i></a>
-                
+      
+        <div class="cart-box">          
+            <a asp-area="" asp-controller="ShoppingCart" asp-action="Index"><i class="las la-shopping-cart"></i></a>             
         </div>
-
+      
+        <div class="login-box"><partial name="_LoginPartial" /></div>
+      
     </div>
-
 </header>
 
