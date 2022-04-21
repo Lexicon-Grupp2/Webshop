@@ -1,10 +1,5 @@
 ﻿@charset "utf-8";
 
-* {
-    margin: 0;
-    padding: 0;
-}
-
 html{
     width: 100%;
     height: 100%;
@@ -21,9 +16,11 @@ body{
     overflow-y: scroll;
 }
 
-#container{
-    min-height: 100%;
-    position: relative;
+#content{
+    min-height: 77.2%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 100px;
 }
 
 header{
@@ -66,16 +63,12 @@ header li:hover{
 }
 
 .admin-box{
-    height: 30px;
+    height: 100%;
     width: 200px;
     background-color: #9fa10f;
     float: left;
-    margin-top: 40px;
     text-align: center;
     cursor: pointer;
-    padding-top:10px;
-    border-radius: 0px 5px 0px 0px;
-    
 }
 
 .admin-box-content{
@@ -86,7 +79,6 @@ header li:hover{
     z-index: 1;
     margin-top: 80px;
     text-align: center;
-    border-radius: 0px 0px 5px 0px;
 }
 
 .admin-box:hover + .admin-box-content{
@@ -112,7 +104,7 @@ header li:hover{
 
 .login-box{
     float: right;
-    width: 400px;
+    width: 265px;
     height: 50px;
     color: aliceblue;
     padding-top: 50px;
@@ -148,9 +140,9 @@ header li:hover{
     color: aliceblue;
     text-align: center;
     cursor: pointer;
-    margin-right: -85px;
-    margin-left: 10px;
+    margin-right: 15px;
     border-radius: 5px;
+    float: right;
 }
 
 .cart-box{
@@ -234,7 +226,7 @@ header li:hover{
 
 .category-container > ul > li{
     width: 300px;
-    height: auto;
+    height: 470px;
     float: left;
     margin-left: 7.5%;
     margin-bottom: 100px;
@@ -244,6 +236,7 @@ header li:hover{
 
 ul > li > p{
     font-weight: bold;
+    min-height: 40px;
 
 }
 
@@ -277,8 +270,8 @@ footer{
     width: 100%;
     height: 300px;
     background-color: #f1c34e;
-    bottom: 0;
     float: left;
+    margin-top: auto;
     
 }
 
@@ -321,12 +314,13 @@ footer{
     text-align: center;
 }
 
-.social-circle2{
+.social-circle:last-child{
     height: 50px;
     width: 50px;
     background-color: aliceblue;
     border-radius: 50%;
     float: left;
+    margin-right: 0px;
 }
 
 .social-circle > i{
@@ -337,19 +331,7 @@ footer{
     color: #f1c34e;
 }
 
-.social-circle2 > i{
-    font-size: 40px;
-    display: inline-block;
-    margin-top: 5px;
-    margin-left: 5px;
-    color: #f1c34e;
-}
-
 .social-circle > i:hover{
-    color: aliceblue;
-}
-
-.social-circle2 > i:hover{
     color: aliceblue;
 }
 
@@ -374,7 +356,7 @@ footer > p > a{
 
     .menu{
         text-align: center;
-        margin-left: 270px;
+        margin-left: 21.5%;
 
     }
     

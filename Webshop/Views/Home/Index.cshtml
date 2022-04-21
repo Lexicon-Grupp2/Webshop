@@ -16,23 +16,23 @@
 
         <partial name="_pageHeader" />
 
-        <div id="container">
-            <div id="home">
-            
-                <div class="slogan"><h1>Royal taste!</h1></div>
-                <div class="arrow-box"><a href="#shop"><i class="las la-angle-down"></i></a></div>
-                <img src="~/Images/main-cupcake.jpg" alt="main">
-
-            </div>
-
-            <div id="shop">
-            
-                    <partial name="PartialViews\_inventoryPartial", model="@Model" />                               
         
-            </div>
-            <div id="about"></div>
+        <div id="home">
+            
+            <div class="slogan"><h1>Royal taste!</h1></div>
+            <div class="arrow-box"><a href="#shop"><i class="las la-angle-down"></i></a></div>
+            <img src="~/Images/main-cupcake.jpg" alt="main">
+
+        </div>
+
+        <div id="shop">
+            
+            <partial name="PartialViews\_inventoryPartial", model="@Model" />                               
         
         </div>
+        <div id="about"></div>
+        
+        
 
         <partial name="_pageFooter" />
 
